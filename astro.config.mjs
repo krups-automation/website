@@ -5,7 +5,7 @@ import vercel from '@astrojs/vercel';
 import react from '@astrojs/react';
 import sanity from '@sanity/astro';
 
-const SANITY_PROJECT_ID = '8075qd1e';
+const SANITY_PROJECT_ID = '8075qdie';
 const SANITY_DATASET = 'production';
 
 // https://astro.build/config
