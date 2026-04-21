@@ -1,0 +1,71 @@
+---
+import { toHTML } from '@portabletext/to-html';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Section from '../../../components/Section.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { getPageBySlug } from '../../../sanity/queries';
+
+export const prerender = false;
+
+const draftCookie = Astro.cookies.get('krups-draft');
+if (!draftCookie || draftCookie.value !== '1') {
+  return Astro.redirect('/en/', 307);
+}
+
+const rawSlug = Astro.params.slug ?? '';
+const slug = Array.isArray(rawSlug) ? rawSlug.join('/') : rawSlug;
+const page = await getPageBySlug(slug, 'en', { draft: true });
+
+if (!page) {
+  return new Response('Not found', { status: 404 });
+}
+
+const bodyHtml = page.body ? toHTML(page.body as any) : '';
+---
+
+<BaseLayout title={`[PREVIEW] ${page.title}`} description={page.metaDescription} locale="en">
+  <div class="preview-banner">
+    <span class="preview-label">Preview mode — showing draft</span>
+    <a href="/api/exit-preview" class="preview-exit">Exit preview</a>
+  </div>
+
+  <div class="page-spacer"></div>
+
+  <Section surface="paper" narrow>
+    <Breadcrumbs items={[{ label: 'Home', href: '/en/' }, { label: page.title }]} />
+    <h1 class="page-title">{page.title}</h1>
+    {bodyHtml && <div class="page-body" set:html={bodyHtml} />}
+  </Section>
+</BaseLayout>
+
+<style>
+  .preview-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-accent);
+    color: var(--color-text);
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-label);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 300;
+  }
+
+  .preview-exit {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+
+  .page-spacer { height: 140px; }
+  .page-title { margin-top: var(--space-6); margin-bottom: var(--space-8); }
+  .page-body :global(p) { margin-bottom: var(--space-4); max-width: 65ch; }
+  .page-body :global(h2) { margin: var(--space-8) 0 var(--space-4); }
+  .page-body :global(h3) { margin: var(--space-6) 0 var(--space-2); }
+</style>

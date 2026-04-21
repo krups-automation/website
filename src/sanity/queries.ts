@@ -1,4 +1,9 @@
 import { sanityClient } from 'sanity:client';
+import { draftClient } from './draft-client';
+
+function pickClient(draft = false) {
+  return draft ? draftClient : sanityClient;
+}
 
 export type Locale = 'de' | 'en';
 
@@ -55,9 +60,13 @@ export async function getAllPageSlugs(lang: Locale): Promise<Array<{ slug: strin
   }
 }
 
-export async function getPageBySlug(slug: string, lang: Locale): Promise<PageDoc | null> {
+export async function getPageBySlug(
+  slug: string,
+  lang: Locale,
+  opts: { draft?: boolean } = {}
+): Promise<PageDoc | null> {
   try {
-    return await sanityClient.fetch<PageDoc | null>(
+    return await pickClient(opts.draft).fetch<PageDoc | null>(
       `*[_type == "page" && language == $lang && slug.current == $slug][0]`,
       { slug, lang }
     );
