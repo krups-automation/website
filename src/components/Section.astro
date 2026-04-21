@@ -1,0 +1,60 @@
+---
+interface Props {
+  surface?: 'paper' | 'clay' | 'charcoal';
+  as?: 'section' | 'div';
+  class?: string;
+  id?: string;
+  narrow?: boolean;
+}
+
+const { surface = 'paper', as = 'section', class: className, id, narrow = false, ...rest } = Astro.props;
+const Tag = as;
+const classes = ['section', `section-${surface}`, className].filter(Boolean).join(' ');
+---
+
+<Tag class={classes} id={id} {...rest}>
+  <div class={narrow ? 'inner inner-narrow' : 'inner'}>
+    <slot />
+  </div>
+</Tag>
+
+<style>
+  .section {
+    padding: var(--space-24) 0;
+  }
+
+  .section-paper {
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .section-clay {
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .section-charcoal {
+    background: var(--color-dark-bg);
+    color: var(--color-dark-text);
+  }
+
+  .inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 var(--space-12);
+  }
+
+  .inner-narrow {
+    max-width: 840px;
+  }
+
+  @media (max-width: 900px) {
+    .section {
+      padding: var(--space-16) 0;
+    }
+
+    .inner {
+      padding: 0 var(--space-6);
+    }
+  }
+</style>

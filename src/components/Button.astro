@@ -1,0 +1,92 @@
+---
+type Variant = 'primary' | 'dark' | 'ghost' | 'ghost-light';
+
+interface Props {
+  variant?: Variant;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  disabled?: boolean;
+}
+
+const { variant = 'primary', href, type = 'button', class: className, disabled, ...rest } = Astro.props;
+const Tag = href ? 'a' : 'button';
+const classes = ['btn', `btn-${variant}`, className].filter(Boolean).join(' ');
+---
+
+{Tag === 'a' ? (
+  <a href={href} class={classes} {...rest}><slot /></a>
+) : (
+  <button type={type} class={classes} disabled={disabled} {...rest}><slot /></button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--font-size-button);
+    font-weight: 500;
+    line-height: 1;
+    padding: 12px 22px;
+    min-height: 44px;
+    border-radius: var(--radius-pill);
+    transition: background var(--duration-short), color var(--duration-short), border-color var(--duration-short);
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Primary accent — KRUPS yellow */
+  .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  .btn-primary:hover:not(:disabled),
+  .btn-primary:focus-visible {
+    background: var(--color-accent-hover);
+  }
+
+  /* Primary dark — near-black CTA */
+  .btn-dark {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  .btn-dark:hover:not(:disabled),
+  .btn-dark:focus-visible {
+    background: #000;
+  }
+
+  /* Ghost — transparent with hairline border */
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+
+  .btn-ghost:hover:not(:disabled),
+  .btn-ghost:focus-visible {
+    border-color: var(--color-text);
+  }
+
+  /* Ghost light — for dark sections */
+  .btn-ghost-light {
+    background: transparent;
+    color: var(--color-dark-text);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-ghost-light:hover:not(:disabled),
+  .btn-ghost-light:focus-visible {
+    border-color: var(--color-dark-text);
+  }
+</style>
