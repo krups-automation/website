@@ -1,0 +1,217 @@
+---
+import type { Locale, SiteSettings } from '../sanity/queries';
+
+interface Props {
+  settings: SiteSettings;
+  locale: Locale;
+}
+
+const { settings, locale } = Astro.props;
+
+const labels = locale === 'de'
+  ? {
+      products: 'Produkte',
+      industries: 'Branchen',
+      company: 'Unternehmen',
+      legal: 'Impressum',
+      privacy: 'Datenschutz',
+      cookies: 'Cookie-Einstellungen',
+    }
+  : {
+      products: 'Products',
+      industries: 'Industries',
+      company: 'Company',
+      legal: 'Legal Notice',
+      privacy: 'Privacy Policy',
+      cookies: 'Cookie Settings',
+    };
+
+const description = locale === 'de'
+  ? 'Schienengeführte Fördersysteme für Präzisionsmontage in Automobil- und Industriefertigung. Engineered in Deutschland seit 1985.'
+  : 'Rail-guided conveyor systems for precision automotive and industrial assembly. Engineered in Germany since 1985.';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name">KRUPS <span>Automation</span></div>
+        <p>{description}</p>
+        <address>
+          KRUPS Automation GmbH<br />
+          Karlstraße 21–23 · 40721 Hilden<br />
+          +49 2103 123-0
+        </address>
+      </div>
+
+      <div class="footer-col">
+        <h4>{labels.products}</h4>
+        <ul>
+          <li><a href="#">LOGO!MAT eCart</a></li>
+          <li><a href="#">Friktionsförderer L</a></li>
+          <li><a href="#">Friktionsförderer XL</a></li>
+          <li><a href="#">T-Serie</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>{labels.industries}</h4>
+        <ul>
+          <li><a href="#">Batteriemontage</a></li>
+          <li><a href="#">Antriebsstrang</a></li>
+          <li><a href="#">Prüf- &amp; Testautomation</a></li>
+          <li><a href="#">Nutzfahrzeuge</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>{labels.company}</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="copy">{settings.footerCopyright ?? '© 2026 KRUPS Automation GmbH'}</span>
+      <div class="bottom-links">
+        <a href="#">{labels.legal}</a>
+        <a href="#">{labels.privacy}</a>
+        <a href="#">{labels.cookies}</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-dark-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 56px 0 40px;
+    color: var(--color-dark-text);
+  }
+
+  .container {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--space-12);
+    margin-bottom: 56px;
+  }
+
+  .brand-name {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-dark-text);
+    margin-bottom: var(--space-2);
+  }
+
+  .brand-name span {
+    color: var(--color-accent);
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+    color: var(--color-dark-muted);
+    line-height: 1.65;
+    max-width: 260px;
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-brand address {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-dark-muted);
+    line-height: 1.9;
+  }
+
+  .footer-col h4 {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-dark-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col ul a {
+    font-size: 13px;
+    color: #cbc7c0;
+    padding: 6px 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    transition: color var(--duration-short);
+  }
+
+  .footer-col ul a:hover,
+  .footer-col ul a:focus-visible {
+    color: var(--color-dark-text);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-8);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .copy {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-dark-muted);
+  }
+
+  .bottom-links {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .bottom-links a {
+    font-size: 12px;
+    color: var(--color-dark-muted);
+    transition: color var(--duration-short);
+  }
+
+  .bottom-links a:hover,
+  .bottom-links a:focus-visible {
+    color: var(--color-dark-text);
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

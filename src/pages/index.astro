@@ -1,106 +1,100 @@
 ---
-import { Font } from 'astro:assets';
-import '../styles/tokens.css';
-import '../styles/reset.css';
-import '../styles/base.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <title>KRUPS Automation — Phase 1</title>
+<BaseLayout title="KRUPS Automation — Phase 1" locale="de">
+  <div class="page">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Phase 1 · Block D' }]} />
 
-    <Font cssVariable="--font-oswald" preload />
-    <Font cssVariable="--font-barlow" preload />
-    <Font cssVariable="--font-jetbrains-mono" />
-  </head>
-  <body>
-    <main class="page">
-      <span class="label">Smoke test · Phase 1 · Block B</span>
-      <h1>KRUPS Automation</h1>
-      <h2>Editorial Industrial, precise and warm.</h2>
-      <p>
-        This placeholder page verifies that design tokens and self-hosted
-        fonts are wired correctly. Headings use Oswald at weight 600, body
-        uses Barlow, and the mono specs below use JetBrains Mono.
-      </p>
+    <span class="label">Smoke test · BaseLayout + Header + Footer</span>
+    <h1>KRUPS Automation</h1>
+    <h2>Editorial Industrial, precise and warm.</h2>
+    <p>
+      Base layout in place. The floating header above pulls nav items from
+      Sanity <code>siteSettings</code> (or falls back to hardcoded German defaults
+      if no content exists yet). Footer is dark with 4-column grid and bottom bar.
+    </p>
 
-      <div class="specs">
-        <div class="spec"><span class="spec-k">Payload</span><span class="spec-v">2.000 kg</span></div>
-        <div class="spec"><span class="spec-k">Precision</span><span class="spec-v">±0,1 mm</span></div>
-        <div class="spec"><span class="spec-k">Voltage</span><span class="spec-v">400 V / 50 Hz</span></div>
-      </div>
+    <div class="specs">
+      <div class="spec"><span class="spec-k">Payload</span><span class="spec-v">2.000 kg</span></div>
+      <div class="spec"><span class="spec-k">Precision</span><span class="spec-v">±0,1 mm</span></div>
+      <div class="spec"><span class="spec-k">Voltage</span><span class="spec-v">400 V / 50 Hz</span></div>
+    </div>
 
-      <div class="swatches" aria-label="color swatches">
-        <span class="swatch" style="background: var(--color-bg)">Paper</span>
-        <span class="swatch" style="background: var(--color-surface)">Clay</span>
-        <span class="swatch dark" style="background: var(--color-dark-bg)">Charcoal</span>
-        <span class="swatch dark" style="background: var(--color-accent)">Yellow</span>
-      </div>
-    </main>
+    <div class="swatches" aria-label="color swatches">
+      <span class="swatch" style="background: var(--color-bg)">Paper</span>
+      <span class="swatch" style="background: var(--color-surface)">Clay</span>
+      <span class="swatch dark" style="background: var(--color-dark-bg)">Charcoal</span>
+      <span class="swatch dark" style="background: var(--color-accent)">Yellow</span>
+    </div>
+  </div>
+</BaseLayout>
 
-    <style>
-      .page {
-        max-width: var(--content-max);
-        margin: 0 auto;
-        padding: var(--space-24) var(--space-12);
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-8);
-      }
+<style>
+  .page {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 140px var(--space-12) var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
 
-      .page h2 {
-        color: var(--color-muted);
-        max-width: 20ch;
-      }
+  .page h2 {
+    color: var(--color-muted);
+    max-width: 20ch;
+  }
 
-      .specs {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-2);
-        border-top: var(--border-hairline);
-        border-bottom: var(--border-hairline);
-        padding: var(--space-4) 0;
-        max-width: 480px;
-      }
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-surface);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+  }
 
-      .spec {
-        display: flex;
-        justify-content: space-between;
-        font-family: var(--font-mono);
-        font-size: var(--font-size-specs);
-      }
+  .specs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    border-top: var(--border-hairline);
+    border-bottom: var(--border-hairline);
+    padding: var(--space-4) 0;
+    max-width: 480px;
+  }
 
-      .spec-k {
-        color: var(--color-muted);
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        font-size: var(--font-size-label);
-      }
+  .spec {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-specs);
+  }
 
-      .swatches {
-        display: flex;
-        gap: var(--space-2);
-        margin-top: var(--space-4);
-      }
+  .spec-k {
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: var(--font-size-label);
+  }
 
-      .swatch {
-        padding: var(--space-4) var(--space-6);
-        border-radius: var(--radius-md);
-        font-family: var(--font-mono);
-        font-size: var(--font-size-label);
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        border: var(--border-hairline);
-      }
+  .swatches {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
 
-      .swatch.dark {
-        color: var(--color-dark-text);
-      }
-    </style>
-  </body>
-</html>
+  .swatch {
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-label);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: var(--border-hairline);
+  }
+
+  .swatch.dark {
+    color: var(--color-dark-text);
+  }
+</style>

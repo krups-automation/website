@@ -1,0 +1,161 @@
+---
+import type { Locale, SiteSettings } from '../sanity/queries';
+
+interface Props {
+  settings: SiteSettings;
+  locale: Locale;
+}
+
+const { settings, locale } = Astro.props;
+const otherLocale: Locale = locale === 'de' ? 'en' : 'de';
+const otherLocaleLabel = otherLocale.toUpperCase();
+const currentLocaleLabel = locale.toUpperCase();
+
+// Compute the link to the same page in the other locale.
+// For now, simple root swap; Block F will replace with a proper mapper.
+const otherLocaleHref = otherLocale === 'en' ? '/en/' : '/';
+---
+
+<header class="site-header" aria-label="Primary">
+  <a href={locale === 'en' ? '/en/' : '/'} class="brand">
+    KRUPS <span>Automation</span>
+  </a>
+
+  {settings.primaryNav && settings.primaryNav.length > 0 && (
+    <nav class="nav-links" aria-label="Main navigation">
+      <ul>
+        {settings.primaryNav.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  )}
+
+  <div class="nav-right">
+    <a href={otherLocaleHref} class="lang-switch" aria-label={`Switch to ${otherLocale === 'de' ? 'German' : 'English'}`}>
+      <span class="current">{currentLocaleLabel}</span>
+      <span class="sep">/</span>
+      <span class="other">{otherLocaleLabel}</span>
+    </a>
+
+    {settings.ctaLabel && settings.ctaHref && (
+      <a href={settings.ctaHref} class="cta">{settings.ctaLabel}</a>
+    )}
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    background: rgba(242, 239, 234, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--border-hairline);
+    border-radius: var(--radius-xl);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    box-shadow: 0 1px 12px rgba(26, 26, 24, 0.08);
+  }
+
+  .brand {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: var(--color-text);
+    white-space: nowrap;
+    margin-right: var(--space-8);
+  }
+
+  .brand span {
+    color: var(--color-accent);
+  }
+
+  .nav-links ul {
+    display: flex;
+    gap: 2px;
+    margin-right: var(--space-6);
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-muted);
+    padding: 6px 11px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-md);
+    transition: color var(--duration-short), background var(--duration-short);
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: var(--color-text);
+    background: rgba(26, 26, 24, 0.06);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+  }
+
+  .lang-switch {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--color-muted);
+    padding: 6px 4px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .lang-switch .current {
+    color: var(--color-text);
+  }
+
+  .lang-switch .sep {
+    opacity: 0.5;
+  }
+
+  .lang-switch:hover .other {
+    color: var(--color-text);
+  }
+
+  .cta {
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 7px 18px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 600;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    transition: background var(--duration-short);
+  }
+
+  .cta:hover,
+  .cta:focus-visible {
+    background: #000;
+  }
+
+  @media (max-width: 900px) {
+    .nav-links {
+      display: none;
+    }
+  }
+</style>

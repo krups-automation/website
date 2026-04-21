@@ -1,0 +1,68 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/tokens.css';
+import '../styles/reset.css';
+import '../styles/base.css';
+
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { getSiteSettings, SITE_SETTINGS_FALLBACK, type Locale } from '../sanity/queries';
+
+interface Props {
+  title: string;
+  description?: string;
+  locale?: Locale;
+}
+
+const { title, description, locale = 'de' } = Astro.props;
+
+const fetched = await getSiteSettings(locale);
+const settings = fetched ?? SITE_SETTINGS_FALLBACK[locale];
+const metaDescription = description ?? settings.siteTagline ?? '';
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {metaDescription && <meta name="description" content={metaDescription} />}
+
+    <Font cssVariable="--font-oswald" preload />
+    <Font cssVariable="--font-barlow" preload />
+    <Font cssVariable="--font-jetbrains-mono" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <SiteHeader settings={settings} locale={locale} />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter settings={settings} locale={locale} />
+
+    <style>
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--color-text);
+        color: var(--color-bg);
+        padding: var(--space-2) var(--space-4);
+        z-index: 300;
+      }
+
+      .skip-link:focus {
+        left: var(--space-4);
+        top: var(--space-4);
+      }
+
+      main {
+        min-height: 60vh;
+      }
+    </style>
+  </body>
+</html>
