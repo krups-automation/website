@@ -1,0 +1,101 @@
+/*
+ * Design tokens — KRUPS Automation
+ * Source: /home/ckrups/projekte/website/DESIGN.md
+ */
+
+:root {
+  /* — Color ———————————————————————————————————————————————————— */
+
+  /* Light surfaces */
+  --color-bg: #F2EFEA;              /* Warm Paper */
+  --color-surface: #E8E4DD;         /* Clay */
+  --color-border: #D5D0C8;          /* Hairline */
+  --color-muted: #8A8680;           /* Stone */
+  --color-text: #1A1A18;            /* Near-black */
+
+  /* Dark surfaces */
+  --color-dark-bg: #1C1C1A;         /* Warm Charcoal */
+  --color-dark-surface: #2A2A27;    /* Elevated Charcoal */
+  --color-dark-text: #E8E4DD;       /* Clay inverted */
+  --color-dark-muted: #9A9690;
+
+  /* Accent */
+  --color-accent: #E8B500;          /* KRUPS Yellow */
+  --color-accent-hover: #CC9F00;
+
+  /* Status */
+  --color-success: #2D7A4F;
+  --color-warning: #E8B500;
+  --color-error: #C4432A;
+
+  /* — Typography ——————————————————————————————————————————————— */
+
+  --font-heading: var(--font-oswald);
+  --font-body: var(--font-barlow);
+  --font-mono: var(--font-jetbrains-mono);
+
+  /* Sizes (desktop; override via clamps where marked) */
+  --font-size-h1: 88px;
+  --font-size-h2: clamp(36px, 3.5vw, 52px);
+  --font-size-h3: 40px;
+  --font-size-h4: 28px;
+  --font-size-body: 18px;
+  --font-size-body-sm: 15px;
+  --font-size-specs: 14px;
+  --font-size-label: 13px;
+  --font-size-nav: 14px;
+  --font-size-button: 15px;
+
+  --line-height-h1: 1.0;
+  --line-height-h2: 1.05;
+  --line-height-h3: 1.1;
+  --line-height-h4: 1.15;
+  --line-height-body: 1.6;
+  --line-height-body-sm: 1.5;
+  --line-height-specs: 1.4;
+
+  /* — Spacing (base 8px) ———————————————————————————————————————— */
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* — Radius —————————————————————————————————————————————————— */
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+
+  /* — Layout ————————————————————————————————————————————————— */
+
+  --content-max: 1280px;
+  --content-gutter: 80px;   /* desktop viewport edge min */
+  --grid-gap: 24px;
+
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 900px;
+  --breakpoint-desktop: 1280px;
+
+  /* — Motion ————————————————————————————————————————————————— */
+
+  --duration-micro: 100ms;
+  --duration-short: 200ms;
+  --duration-medium: 350ms;
+  --duration-long: 700ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* — Borders ———————————————————————————————————————————————— */
+
+  --border-hairline: 1px solid var(--color-border);
+}
