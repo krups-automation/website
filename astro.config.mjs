@@ -2,10 +2,16 @@
 import { defineConfig, fontProviders } from 'astro/config';
 
 import vercel from '@astrojs/vercel';
+import react from '@astrojs/react';
+import sanity from '@sanity/astro';
+
+const SANITY_PROJECT_ID = '8075qd1e';
+const SANITY_DATASET = 'production';
 
 // https://astro.build/config
 export default defineConfig({
   adapter: vercel(),
+
   fonts: [
     {
       provider: fontProviders.google(),
@@ -34,5 +40,17 @@ export default defineConfig({
       subsets: ['latin', 'latin-ext'],
       fallbacks: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
     },
+  ],
+
+  integrations: [
+    sanity({
+      projectId: SANITY_PROJECT_ID,
+      dataset: SANITY_DATASET,
+      useCdn: false,
+      studioBasePath: '/admin',
+      studioRouterHistory: 'hash',
+      logClientRequests: 'dev',
+    }),
+    react(),
   ],
 });
