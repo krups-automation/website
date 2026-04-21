@@ -19,6 +19,7 @@ const { title, description, locale = 'de' } = Astro.props;
 const fetched = await getSiteSettings(locale);
 const settings = fetched ?? SITE_SETTINGS_FALLBACK[locale];
 const metaDescription = description ?? settings.siteTagline ?? '';
+const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -38,7 +39,7 @@ const metaDescription = description ?? settings.siteTagline ?? '';
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <SiteHeader settings={settings} locale={locale} />
+    <SiteHeader settings={settings} locale={locale} currentPath={currentPath} />
     <main id="main">
       <slot />
     </main>

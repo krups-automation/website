@@ -35,6 +35,37 @@ export async function getSiteSettings(lang: Locale): Promise<SiteSettings | null
   }
 }
 
+export interface PageDoc {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  metaDescription?: string;
+  body?: unknown[];
+  language: Locale;
+}
+
+export async function getAllPageSlugs(lang: Locale): Promise<Array<{ slug: string }>> {
+  try {
+    return await sanityClient.fetch<Array<{ slug: string }>>(
+      `*[_type == "page" && language == $lang && defined(slug.current)] { "slug": slug.current }`,
+      { lang }
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function getPageBySlug(slug: string, lang: Locale): Promise<PageDoc | null> {
+  try {
+    return await sanityClient.fetch<PageDoc | null>(
+      `*[_type == "page" && language == $lang && slug.current == $slug][0]`,
+      { slug, lang }
+    );
+  } catch {
+    return null;
+  }
+}
+
 export const SITE_SETTINGS_FALLBACK: Record<Locale, SiteSettings> = {
   de: {
     siteTitle: 'KRUPS Automation',

@@ -4,20 +4,35 @@ import type { Locale, SiteSettings } from '../sanity/queries';
 interface Props {
   settings: SiteSettings;
   locale: Locale;
+  currentPath: string;
 }
 
-const { settings, locale } = Astro.props;
+const { settings, locale, currentPath } = Astro.props;
 const otherLocale: Locale = locale === 'de' ? 'en' : 'de';
 const otherLocaleLabel = otherLocale.toUpperCase();
 const currentLocaleLabel = locale.toUpperCase();
 
-// Compute the link to the same page in the other locale.
-// For now, simple root swap; Block F will replace with a proper mapper.
-const otherLocaleHref = otherLocale === 'en' ? '/en/' : '/';
+// Path-based locale swap. If current has `/en/` prefix, strip it. Otherwise prepend.
+// Translation mapping (if slug differs across locales) is a Phase 2 concern.
+function swapLocale(path: string, from: Locale, to: Locale): string {
+  if (from === 'en' && path.startsWith('/en/')) {
+    const stripped = path.replace(/^\/en/, '') || '/';
+    return stripped;
+  }
+  if (from === 'en' && path === '/en') return '/';
+  if (from === 'de' && to === 'en') {
+    if (path === '/') return '/en/';
+    return `/en${path.startsWith('/') ? path : `/${path}`}`;
+  }
+  return path;
+}
+
+const otherLocaleHref = swapLocale(currentPath, locale, otherLocale);
+const homeHref = locale === 'en' ? '/en/' : '/';
 ---
 
 <header class="site-header" aria-label="Primary">
-  <a href={locale === 'en' ? '/en/' : '/'} class="brand">
+  <a href={homeHref} class="brand">
     KRUPS <span>Automation</span>
   </a>
 
@@ -75,9 +90,7 @@ const otherLocaleHref = otherLocale === 'en' ? '/en/' : '/';
     margin-right: var(--space-8);
   }
 
-  .brand span {
-    color: var(--color-accent);
-  }
+  .brand span { color: var(--color-accent); }
 
   .nav-links ul {
     display: flex;
@@ -123,17 +136,9 @@ const otherLocaleHref = otherLocale === 'en' ? '/en/' : '/';
     gap: 3px;
   }
 
-  .lang-switch .current {
-    color: var(--color-text);
-  }
-
-  .lang-switch .sep {
-    opacity: 0.5;
-  }
-
-  .lang-switch:hover .other {
-    color: var(--color-text);
-  }
+  .lang-switch .current { color: var(--color-text); }
+  .lang-switch .sep { opacity: 0.5; }
+  .lang-switch:hover .other { color: var(--color-text); }
 
   .cta {
     background: var(--color-text);
@@ -149,13 +154,9 @@ const otherLocaleHref = otherLocale === 'en' ? '/en/' : '/';
   }
 
   .cta:hover,
-  .cta:focus-visible {
-    background: #000;
-  }
+  .cta:focus-visible { background: #000; }
 
   @media (max-width: 900px) {
-    .nav-links {
-      display: none;
-    }
+    .nav-links { display: none; }
   }
 </style>

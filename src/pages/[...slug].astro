@@ -1,0 +1,63 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { toHTML } from '@portabletext/to-html';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getAllPageSlugs, getPageBySlug } from '../sanity/queries';
+
+export const getStaticPaths = (async () => {
+  const pages = await getAllPageSlugs('de');
+  return pages.map(({ slug }) => ({ params: { slug } }));
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const page = slug ? await getPageBySlug(slug, 'de') : null;
+
+if (!page) {
+  return Astro.redirect('/404');
+}
+
+const bodyHtml = page.body ? toHTML(page.body as any) : '';
+---
+
+<BaseLayout title={`${page.title} — KRUPS Automation`} description={page.metaDescription} locale="de">
+  <div class="page-spacer"></div>
+
+  <Section surface="paper" narrow>
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: page.title }]} />
+    <h1 class="page-title">{page.title}</h1>
+    {bodyHtml && <div class="page-body" set:html={bodyHtml} />}
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer {
+    height: 100px;
+  }
+
+  .page-title {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  .page-body :global(p) {
+    margin-bottom: var(--space-4);
+    max-width: 65ch;
+  }
+
+  .page-body :global(a) {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--color-accent);
+  }
+
+  .page-body :global(h2) {
+    margin: var(--space-8) 0 var(--space-4);
+  }
+
+  .page-body :global(h3) {
+    margin: var(--space-6) 0 var(--space-2);
+  }
+</style>
