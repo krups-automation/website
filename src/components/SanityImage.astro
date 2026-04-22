@@ -1,0 +1,53 @@
+---
+import { imageSrcSet, imageUrl, lqipUrl, assetLqip } from '../sanity/image';
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+
+interface Props {
+  source: SanityImageSource;
+  alt: string;
+  /** Target display width in px. Used to cap srcset and choose the default `src`. */
+  width: number;
+  /** Optional target height for aspect-ratio lock. */
+  height?: number;
+  /** Layout hint for the browser. Defaults to `(min-width: 900px) 50vw, 100vw`. */
+  sizes?: string;
+  /** Loading strategy — 'eager' for LCP, 'lazy' otherwise. */
+  loading?: 'eager' | 'lazy';
+  /** Fetch priority — 'high' for LCP hero images. */
+  fetchpriority?: 'high' | 'low' | 'auto';
+  /** Optional className passthrough. */
+  class?: string;
+  /** Format for the rendered <img> srcset. */
+  format?: 'webp' | 'jpg' | 'avif';
+}
+
+const {
+  source,
+  alt,
+  width,
+  height,
+  sizes = '(min-width: 900px) 50vw, 100vw',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  class: className,
+  format = 'webp',
+} = Astro.props;
+
+const srcset = imageSrcSet(source, { format, maxWidth: width * 2 });
+const src = imageUrl(source, width, format);
+const placeholder = assetLqip(source as any) ?? lqipUrl(source);
+---
+
+<img
+  src={src}
+  srcset={srcset}
+  sizes={sizes}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  fetchpriority={fetchpriority}
+  decoding="async"
+  class={className}
+  style={`background-image:url('${placeholder}');background-size:cover;background-position:center;`}
+/>
