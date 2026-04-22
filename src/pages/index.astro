@@ -1,130 +1,981 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-import Section from '../components/Section.astro';
-import Card from '../components/Card.astro';
-import Button from '../components/Button.astro';
-import Badge from '../components/Badge.astro';
 ---
 
-<BaseLayout title="KRUPS Automation — Phase 1" locale="de">
-  <div class="hero-spacer"></div>
-
-  <Section surface="paper">
-    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Phase 1 · Block E' }]} />
-
-    <div class="hero-head">
-      <Badge>Smoke test · UI primitives</Badge>
-      <h1>KRUPS Automation</h1>
-      <h2>Editorial Industrial, precise and warm.</h2>
-      <p>
-        Phase 1 foundation — BaseLayout, floating nav, dark footer, design tokens,
-        self-hosted fonts, embedded Sanity Studio, and now shared UI primitives
-        (Button, Card, Badge, Section).
+<BaseLayout title="KRUPS Automation — LOGO!MAT eCart" locale="de">
+  <!-- ════ 1. HERO ════ -->
+  <section class="hero">
+    <div class="hero-fade"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">LOGO!MAT eCart — Engineered in Hilden, Germany</div>
+      <h1>Built for <em>the line</em> that never stops.</h1>
+      <p class="hero-sub">
+        Rail-guided conveyor systems for precision automotive assembly —
+        from battery modules to drivetrains, trusted by the world's leading manufacturers.
       </p>
-      <div class="cta-row">
-        <Button variant="primary" href="/admin">Open Studio</Button>
-        <Button variant="dark" href="#systems">See Systems</Button>
-        <Button variant="ghost" href="#contact">Talk to an Engineer</Button>
+      <div class="hero-ctas">
+        <a href="#systems" class="btn btn-dark">See Our Systems →</a>
+        <a href="#contact" class="btn btn-ghost">Talk to an Engineer</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="val">500+</span><span class="lbl">Installations</span></div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat"><span class="val">300 – 2.000 kg</span><span class="lbl">Payload Range</span></div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat"><span class="val">±0,1 mm</span><span class="lbl">Stop Accuracy</span></div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat"><span class="val">40+</span><span class="lbl">Years</span></div>
       </div>
     </div>
-  </Section>
+  </section>
 
-  <Section surface="clay" id="systems">
-    <h3>Card primitive</h3>
-    <div class="card-grid">
-      <Card href="#">
-        <Badge variant="accent">Flagship</Badge>
-        <h4>LOGO!MAT eCart</h4>
-        <p>Self-driving rail-guided carts for flexible assembly lines.</p>
-      </Card>
-      <Card href="#">
-        <Badge>Proven</Badge>
-        <h4>Friktionsförderer L/XL</h4>
-        <p>Friction roller conveyors for up to 2.000 kg payload.</p>
-      </Card>
-      <Card href="#">
-        <Badge>Precision</Badge>
-        <h4>T-Serie Taktförderer</h4>
-        <p>Indexing conveyors with ±0,1 mm stop accuracy.</p>
-      </Card>
-    </div>
-  </Section>
-
-  <Section surface="charcoal" id="contact">
-    <div class="dark-cta">
-      <Badge variant="accent">Ready</Badge>
-      <h2>Start a conversation.</h2>
-      <p>Tell us about your production line — we'll reply with an engineer, not a salesperson.</p>
-      <div class="cta-row">
-        <Button variant="primary" href="#">Request a Project</Button>
-        <Button variant="ghost-light" href="#">Download Brochure</Button>
+  <!-- ════ 2. TRUST BAR ════ -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <span class="trust-bar-label">Trusted by</span>
+      <div class="trust-sep"></div>
+      <div class="trust-logos">
+        <span class="trust-logo">BMW</span>
+        <span class="trust-logo">Volkswagen</span>
+        <span class="trust-logo">Mercedes-Benz</span>
+        <span class="trust-logo">Tesla</span>
+        <span class="trust-logo">Porsche</span>
+        <span class="trust-logo">Audi</span>
+        <span class="trust-logo">Lamborghini</span>
+        <span class="trust-logo">ZF</span>
+        <span class="trust-logo">Kärcher</span>
       </div>
     </div>
-  </Section>
+  </div>
+
+  <!-- ════ 3. PROOF STATS ════ -->
+  <section class="proof-alt">
+    <div class="container">
+      <div class="proof-alt-strip">
+        <div class="proof-alt-item">
+          <span class="proof-alt-num">500+</span>
+          <span class="proof-alt-label">Systems installed<br>worldwide</span>
+        </div>
+        <div class="proof-alt-item">
+          <span class="proof-alt-num">40+</span>
+          <span class="proof-alt-label">Years of engineering<br>experience</span>
+        </div>
+        <div class="proof-alt-item">
+          <span class="proof-alt-num">2.000 kg</span>
+          <span class="proof-alt-label">Maximum<br>payload capacity</span>
+        </div>
+        <div class="proof-alt-item">
+          <span class="proof-alt-num">14</span>
+          <span class="proof-alt-label">Countries with<br>active installations</span>
+        </div>
+      </div>
+
+      <div class="proof-alt-bottom">
+        <h2 class="proof-headline">Forty years of assembly line engineering.</h2>
+        <p class="proof-body">
+          Since 1985, KRUPS Automation has designed, built, and commissioned
+          conveyor systems for the most demanding assembly environments in
+          automotive and industrial manufacturing.
+        </p>
+        <a href="/unternehmen" class="btn btn-ghost">About the company <span class="card-arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 4. PRODUCTS ════ -->
+  <section class="products" id="systems">
+    <div class="container">
+      <div class="products-header">
+        <div>
+          <div class="products-eyebrow">Product systems</div>
+          <h2>Two platforms.<br>Every assembly challenge.</h2>
+        </div>
+        <p class="products-header-right">
+          From lightweight components to heavy battery packs —
+          a complete conveyor portfolio from a single manufacturer.
+        </p>
+      </div>
+
+      <div class="products-grid">
+        <a class="product-card featured" href="/produkte/ecart">
+          <div class="card-tag">Flagship System</div>
+          <h3>LOGO!MAT eCart</h3>
+          <p>
+            Electrically driven, rail-guided workpiece carriers for precision
+            assembly automation. Each cart carries its own drive, controls, and
+            power — eliminating the central drive chains that make conventional
+            conveyors complex and failure-prone.
+          </p>
+          <div class="card-specs">
+            <span class="spec-chip">300 – 2.000 kg</span>
+            <span class="spec-chip">±0,1 mm</span>
+            <span class="spec-chip">ESD-safe</span>
+            <span class="spec-chip">No WiFi</span>
+            <span class="spec-chip">Active braking</span>
+          </div>
+          <div class="card-visual">
+            <svg class="card-track-svg" viewBox="0 0 600 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="40" y1="76" x2="560" y2="76" stroke="#E8B500" stroke-width="1.5"/>
+              <line x1="40" y1="184" x2="560" y2="184" stroke="#E8B500" stroke-width="1.5"/>
+              <rect x="78" y="96" width="104" height="72" rx="5" stroke="#1A1A18" stroke-width="1.5" fill="none"/>
+              <rect x="83" y="101" width="94" height="62" rx="3" stroke="#8A8680" stroke-width="1" fill="none"/>
+              <circle cx="98" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
+              <circle cx="164" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
+              <rect x="244" y="96" width="104" height="72" rx="5" stroke="#1A1A18" stroke-width="1.5" fill="none"/>
+              <rect x="249" y="101" width="94" height="62" rx="3" stroke="#8A8680" stroke-width="1" fill="none"/>
+              <circle cx="264" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
+              <circle cx="330" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
+              <rect x="410" y="96" width="104" height="72" rx="5" stroke="#1A1A18" stroke-width="1.5" fill="none"/>
+              <rect x="415" y="101" width="94" height="62" rx="3" stroke="#8A8680" stroke-width="1" fill="none"/>
+              <circle cx="430" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
+              <circle cx="496" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
+              <line x1="204" y1="64" x2="204" y2="196" stroke="#8A8680" stroke-width="1" stroke-dasharray="3 4"/>
+              <line x1="370" y1="64" x2="370" y2="196" stroke="#8A8680" stroke-width="1" stroke-dasharray="3 4"/>
+              <path d="M544 130 L558 130 L551 123 M558 130 L551 137" stroke="#E8B500" stroke-width="1.5" stroke-linecap="round"/>
+              <text x="204" y="56" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, 'Courier New', monospace" font-size="9" fill="#8A8680" letter-spacing="0.5">STA 01</text>
+              <text x="370" y="56" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, 'Courier New', monospace" font-size="9" fill="#8A8680" letter-spacing="0.5">STA 02</text>
+            </svg>
+            <span class="card-visual-label">eCart V3 — Rail system schematic</span>
+          </div>
+          <span class="card-link">Explore LOGO!MAT eCart <span class="card-arrow">→</span></span>
+        </a>
+
+        <a class="product-card" href="/produkte/friktionsrollenfoerderer">
+          <div class="card-tag">Proven Platform</div>
+          <h3>Friktionsrollen&shy;förderer</h3>
+          <p>
+            Friction roller conveyors for continuous material flow in assembly
+            and test lines. Simple, robust, field-proven across decades. Available
+            in L, XL, and T-Serie.
+          </p>
+          <div class="card-specs">
+            <span class="spec-chip">50 – 600 kg</span>
+            <span class="spec-chip">L / XL / T-Serie</span>
+            <span class="spec-chip">Oil-resistant</span>
+          </div>
+          <span class="card-link">Explore Friktionsförderer <span class="card-arrow">→</span></span>
+        </a>
+
+        <a class="product-card" href="/kontakt">
+          <div class="card-tag">Custom Engineering</div>
+          <h3>Sonder&shy;entwicklungen</h3>
+          <p>
+            When standard systems don't fit — we engineer from scratch.
+            100% in-house manufacturing means every custom requirement
+            is realized with full KRUPS quality and support.
+          </p>
+          <div class="card-specs">
+            <span class="spec-chip">Project-specific</span>
+            <span class="spec-chip">Full lifecycle</span>
+          </div>
+          <span class="card-link">Discuss your project <span class="card-arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 5. WHY ════ -->
+  <section class="why">
+    <div class="container">
+      <div class="why-header">
+        <h2>Six reasons plant engineers<br>specify <em>LOGO!MAT.</em></h2>
+        <p class="why-header-right">
+          Every claim comes from a customer project report.
+          Not marketing copy — engineering decisions made by
+          production planners who ran the numbers.
+        </p>
+      </div>
+
+      <div class="why-rows">
+        <div class="why-row">
+          <div class="why-claim">Commissioning in days, not weeks.</div>
+          <div class="why-detail">UDP interfaces and pre-wired modules reduce electrical engineering to a fraction of conventional systems. <strong>Customers report setup teams completing installations their engineers expected to take weeks — in days.</strong></div>
+        </div>
+        <div class="why-row">
+          <div class="why-claim">Active braking — real safety.</div>
+          <div class="why-detail">The cart absorbs kinetic energy on E-stop. A friction clutch limits drive force; it doesn't stop a moving load. <strong>eCart can decelerate safely at a station even with the station's safety circuit open.</strong></div>
+        </div>
+        <div class="why-row">
+          <div class="why-claim">30% of conventional conveyor energy.</div>
+          <div class="why-detail">Measured by customers in operational plants. Short motor-on cycles and no continuous chain drive make the difference. <strong>Less running time on moving parts means lower wear and longer service intervals.</strong></div>
+        </div>
+        <div class="why-row">
+          <div class="why-claim">No WiFi dependency.</div>
+          <div class="why-detail">Rail-guided, cable-tethered control eliminates transmission errors from WiFi interference, construction activity, or neighbouring networks. <strong>No startup delays after E-stops that affect AGV fleets on WiFi.</strong></div>
+        </div>
+        <div class="why-row">
+          <div class="why-claim">±0,1 mm stop accuracy, every cycle.</div>
+          <div class="why-detail">Servo-driven positioning on rail with integrated stopper units. AGVs vary by millimetres depending on floor flatness, load distribution, and battery charge. <strong>Consistent stop position is not optional in battery assembly.</strong></div>
+        </div>
+        <div class="why-row">
+          <div class="why-claim">Reconfigured in hours.</div>
+          <div class="why-detail">Track layout changes — adding stations, reversing loops, splitting lines — require hours of mechanical work and minimal PLC reprogramming. <strong>Changes can be pre-tested in a digital twin before touching the live line.</strong></div>
+        </div>
+      </div>
+
+      <div class="why-footer">
+        <a href="/ressourcen/ecart-vs-agv" class="btn btn-ghost-light">Read the full eCart vs. AGV comparison →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 6. INDUSTRIES ════ -->
+  <section class="industries">
+    <div class="container">
+      <div class="industries-header">
+        <h2>Where KRUPS systems run.</h2>
+        <p class="sub">
+          From battery module assembly at giga-scale to precision drivetrain
+          test benches — the load range and flexibility of LOGO!MAT covers
+          the most demanding applications in industry.
+        </p>
+      </div>
+
+      <div class="industry-list">
+        <a class="industry-row featured" href="/branchen/batteriemontage">
+          <div class="industry-num">01</div>
+          <div class="industry-body">
+            <h3>E-Mobilität &amp; Batteriemontage</h3>
+            <p>Battery module and pack assembly for 48V to 800V platforms. Precise positioning for cell-to-module and module-to-pack processes, with ESD-safe cart construction throughout.</p>
+          </div>
+          <div class="industry-meta">
+            <span class="payload">300 – 800 kg</span>
+            <span class="clients">BMW · Volkswagen<br>Tesla · Porsche</span>
+          </div>
+        </a>
+        <a class="industry-row" href="/branchen/antriebsstrang">
+          <div class="industry-num">02</div>
+          <div class="industry-body">
+            <h3>Automotive Antriebsstrang</h3>
+            <p>Engine, gearbox, and axle assembly lines where precision and cycle time consistency are non-negotiable production parameters.</p>
+          </div>
+          <div class="industry-meta">
+            <span class="payload">200 – 1.500 kg</span>
+            <span class="clients">Porsche · Audi · ZF</span>
+          </div>
+        </a>
+        <a class="industry-row" href="/branchen/pruef-testautomation">
+          <div class="industry-num">03</div>
+          <div class="industry-body">
+            <h3>Prüf- &amp; Testautomation</h3>
+            <p>Conveyor integration with test benches and measurement stations. Repeatable positioning critical for automated test logging and traceability.</p>
+          </div>
+          <div class="industry-meta">
+            <span class="payload">100 – 600 kg</span>
+            <span class="clients">ZF · Bosch</span>
+          </div>
+        </a>
+        <a class="industry-row" href="/branchen/nutzfahrzeuge-schwermontage">
+          <div class="industry-num">04</div>
+          <div class="industry-body">
+            <h3>Nutzfahrzeuge &amp; Schwermontage</h3>
+            <p>Commercial vehicle frames, large sub-assemblies, and industrial machinery — where payload requirements exceed what standard conveyor systems can handle.</p>
+          </div>
+          <div class="industry-meta">
+            <span class="payload">Up to 2.000 kg</span>
+            <span class="clients">Custom frames</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 7. TECH COMPARISON ════ -->
+  <section class="tech-band">
+    <div class="container">
+      <div class="tech-band-inner">
+        <div class="tech-band-text">
+          <div class="tech-eyebrow">Technology comparison</div>
+          <h2>eCart vs. AGV vs. Chain Conveyor.</h2>
+          <p class="intro">
+            Three technologies compete for the same assembly floor space.
+            The right choice depends on your payload, takt time, and
+            infrastructure constraints.
+          </p>
+          <a href="/ressourcen/technologievergleich" class="btn btn-ghost">Full comparison guide →</a>
+        </div>
+
+        <div class="tech-comparison">
+          <div class="comparison-header">
+            <span>Criterion</span>
+            <span>eCart</span>
+            <span>AGV</span>
+            <span>Chain</span>
+          </div>
+          <div class="comparison-row"><span class="attr">Stop accuracy</span><span class="val val-accent">±0,1 mm</span><span class="val val-neutral">±5–30 mm</span><span class="val val-neutral">±1–5 mm</span></div>
+          <div class="comparison-row"><span class="attr">Commissioning</span><span class="val val-accent">Days</span><span class="val val-neutral">Weeks</span><span class="val val-neutral">Weeks</span></div>
+          <div class="comparison-row"><span class="attr">Energy use</span><span class="val val-accent">Low</span><span class="val val-neutral">Medium</span><span class="val val-no">High</span></div>
+          <div class="comparison-row"><span class="attr">Network required</span><span class="val val-yes">None</span><span class="val val-no">WiFi</span><span class="val val-yes">None</span></div>
+          <div class="comparison-row"><span class="attr">Active braking</span><span class="val val-yes">Yes</span><span class="val val-yes">Yes</span><span class="val val-no">No</span></div>
+          <div class="comparison-row"><span class="attr">Reconfiguration</span><span class="val val-accent">Hours</span><span class="val val-neutral">Days</span><span class="val val-no">Weeks</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 8. FOOTER CTA ════ -->
+  <section class="footer-cta" id="contact">
+    <div class="footer-cta-bg"></div>
+    <div class="container footer-cta-content">
+      <div class="footer-cta-eyebrow">Start a conversation</div>
+      <h2>Let's engineer<br><em>your next line.</em></h2>
+      <p>
+        From concept to commissioning. Tell us about your project
+        and we'll show you what's possible.
+      </p>
+      <div class="footer-cta-btns">
+        <a href="/kontakt" class="btn btn-accent">Request a Project →</a>
+        <a href="/downloads/ecart-broschuere" class="btn btn-ghost-light">Download product brochure</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .hero-spacer {
-    height: 100px;
+  /* ───── Local tokens ───── */
+  :root {
+    --dark-text-strong: color-mix(in srgb, var(--color-dark-text) 70%, transparent);
+    --dark-text-subtle: color-mix(in srgb, var(--color-dark-text) 42%, transparent);
+    --dark-border: rgba(255, 255, 255, 0.07);
   }
 
-  .hero-head {
+  /* ───── Layout helper ───── */
+  .container {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  /* ───── Button variants (page-scoped) ───── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 26px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+    white-space: nowrap;
+    border: none;
+    letter-spacing: 0.1px;
+  }
+  .btn-dark { background: var(--color-text); color: var(--color-bg); }
+  .btn-dark:hover { background: #333; }
+  .btn-accent { background: var(--color-accent); color: var(--color-text); }
+  .btn-accent:hover { background: var(--color-accent-hover); }
+  .btn-ghost { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+  .btn-ghost:hover { border-color: var(--color-text); }
+  .btn-ghost-light { background: transparent; color: var(--color-dark-text); border: 1px solid rgba(232, 228, 221, 0.25); }
+  .btn-ghost-light:hover { border-color: rgba(232, 228, 221, 0.6); }
+
+  /* ───── 1. HERO ───── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-6);
-    padding-top: var(--space-6);
+    align-items: center;
+    overflow: hidden;
+    background: var(--color-bg);
   }
-
-  .hero-head h2 {
+  .hero-fade {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 30%, rgba(232, 181, 0, 0.05) 0%, transparent 50%),
+      linear-gradient(180deg, rgba(242, 239, 234, 0.6) 0%, transparent 20%, transparent 80%, rgba(242, 239, 234, 0.4) 100%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 160px 64px 96px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(56px, 6.5vw, 88px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0;
+    color: var(--color-text);
+    max-width: 620px;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: italic; color: var(--color-muted); }
+  .hero-sub {
+    font-size: 18px;
     color: var(--color-muted);
-    max-width: 20ch;
+    max-width: 420px;
+    line-height: 1.65;
+    margin-bottom: 36px;
   }
-
-  .hero-head p {
-    max-width: 56ch;
-  }
-
-  .cta-row {
+  .hero-ctas { display: flex; gap: 12px; margin-bottom: 56px; flex-wrap: wrap; }
+  .hero-stats {
     display: flex;
-    gap: var(--space-4);
+    gap: 28px;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+    max-width: 520px;
     flex-wrap: wrap;
-    margin-top: var(--space-4);
   }
-
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
-    margin-top: var(--space-8);
+  .hero-stat { display: flex; flex-direction: column; gap: 3px; }
+  .hero-stat .val {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
   }
-
-  .card-grid h4 {
-    margin-top: var(--space-4);
-  }
-
-  .card-grid p {
-    margin-top: var(--space-2);
+  .hero-stat .lbl {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
     color: var(--color-muted);
-    font-size: var(--font-size-body-sm);
   }
+  .hero-stat-sep { width: 1px; height: 28px; background: var(--color-border); flex-shrink: 0; }
 
-  .dark-cta {
+  /* ───── 2. TRUST BAR ───── */
+  .trust-bar {
+    background: var(--color-dark-bg);
+    padding: 32px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+  }
+  .trust-bar-inner {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-4);
+    align-items: center;
+    gap: 48px;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 64px;
+    flex-wrap: wrap;
   }
-
-  .dark-cta p {
-    max-width: 56ch;
+  .trust-bar-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
     color: var(--color-dark-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .trust-sep { width: 1px; height: 16px; background: rgba(255, 255, 255, 0.08); flex-shrink: 0; }
+  .trust-logos { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+  .trust-logo {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--color-dark-text);
+    opacity: 0.3;
+    transition: opacity 200ms;
+    white-space: nowrap;
+  }
+  .trust-logo:hover { opacity: 0.65; }
+
+  /* ───── 3. PROOF ───── */
+  .proof-alt { background: var(--color-bg); padding: 120px 0; }
+  .proof-alt-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-bottom: 56px;
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .proof-alt-item {
+    padding-right: 32px;
+    border-right: 1px solid var(--color-border);
+  }
+  .proof-alt-item:last-child { border-right: none; }
+  .proof-alt-item + .proof-alt-item { padding-left: 32px; }
+  .proof-alt-num {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: clamp(52px, 5.5vw, 80px);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+    white-space: nowrap;
+  }
+  .proof-alt-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+  .proof-alt-bottom { max-width: 760px; }
+  .proof-headline {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 3.5vw, 52px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .proof-body {
+    font-size: 16px;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 32px;
   }
 
-  @media (max-width: 900px) {
-    .card-grid {
-      grid-template-columns: 1fr;
+  /* ───── 4. PRODUCTS ───── */
+  .products { background: var(--color-surface); padding: 120px 0; }
+  .products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+    gap: 48px;
+  }
+  .products-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 16px;
+  }
+  .products-header h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 3.5vw, 52px);
+    font-weight: 600;
+    line-height: 1.05;
+  }
+  .products-header-right {
+    font-size: 15px;
+    color: var(--color-muted);
+    max-width: 300px;
+    text-align: right;
+    line-height: 1.6;
+    flex-shrink: 0;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    grid-template-rows: auto auto;
+    gap: 16px;
+  }
+  .product-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 44px;
+    transition: border-color 220ms ease;
+    color: var(--color-text);
+  }
+  .product-card:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .product-card.featured { grid-row: span 2; display: flex; flex-direction: column; }
+  .card-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-tag::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+  .product-card h3 {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .product-card.featured h3 { font-size: 44px; font-weight: 600; }
+  .product-card p {
+    font-size: 15px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .card-specs {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-muted);
+    padding: 18px 0;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .spec-chip {
+    background: var(--color-surface);
+    padding: 3px 9px;
+    border-radius: var(--radius-sm);
+  }
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: auto;
+    padding-top: 20px;
+  }
+  .card-arrow { transition: transform 150ms ease; display: inline-block; }
+  .product-card:hover .card-arrow { transform: translateX(4px); }
+  .card-visual {
+    flex: 1;
+    min-height: 180px;
+    margin: 24px -44px -44px;
+    background: linear-gradient(160deg, var(--color-surface) 0%, var(--color-border) 100%);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-visual-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    opacity: 0.45;
+    position: relative;
+    z-index: 1;
+  }
+  .card-track-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.45;
+  }
+
+  /* ───── 5. WHY ───── */
+  .why { background: var(--color-dark-bg); padding: 120px 0; color: var(--color-dark-text); }
+  .why-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--dark-border);
+  }
+  .why-header h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 3.8vw, 56px);
+    font-weight: 600;
+    line-height: 1.05;
+    color: var(--color-dark-text);
+    max-width: 540px;
+  }
+  .why-header h2 em { font-style: italic; color: var(--color-dark-muted); }
+  .why-header-right {
+    font-size: 15px;
+    color: var(--color-dark-muted);
+    max-width: 300px;
+    text-align: right;
+    line-height: 1.65;
+    flex-shrink: 0;
+  }
+  .why-rows { display: flex; flex-direction: column; }
+  .why-row {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 64px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--dark-border);
+    align-items: baseline;
+    transition: background 150ms;
+  }
+  .why-row:first-child { border-top: none; }
+  .why-row:hover { background: rgba(255, 255, 255, 0.015); }
+  .why-claim {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--color-dark-text);
+  }
+  .why-detail {
+    font-size: 15px;
+    color: var(--color-dark-muted);
+    line-height: 1.65;
+  }
+  .why-detail strong { color: var(--dark-text-strong); font-weight: 600; }
+  .why-footer { margin-top: 48px; }
+
+  /* ───── 6. INDUSTRIES ───── */
+  .industries { background: var(--color-bg); padding: 120px 0; }
+  .industries-header { margin-bottom: 64px; }
+  .industries-header h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 3.5vw, 52px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  .industries-header .sub {
+    font-size: 16px;
+    color: var(--color-muted);
+    max-width: 480px;
+    line-height: 1.65;
+  }
+  .industry-list { display: flex; flex-direction: column; }
+  .industry-row {
+    display: grid;
+    grid-template-columns: 72px 1fr 200px;
+    gap: 0 48px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--color-border);
+    align-items: start;
+    transition: background 150ms;
+    color: var(--color-text);
+  }
+  .industry-row:first-child { border-top: 1px solid var(--color-border); }
+  .industry-row:hover { background: rgba(26, 26, 24, 0.02); }
+  .industry-num {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--color-border);
+    line-height: 1.1;
+    padding-top: 4px;
+    transition: color 200ms;
+  }
+  .industry-row:hover .industry-num { color: var(--color-accent); }
+  .industry-body h3 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .industry-body p {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.6;
+    max-width: 540px;
+  }
+  .industry-meta { text-align: right; padding-top: 6px; }
+  .industry-meta .payload {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .industry-meta .clients {
+    font-size: 12px;
+    color: var(--color-muted);
+    display: block;
+    line-height: 1.5;
+  }
+  .industry-row.featured .industry-num { color: rgba(232, 181, 0, 0.4); }
+  .industry-row.featured .industry-body h3 { font-size: 30px; font-weight: 600; }
+  .industry-row.featured:hover .industry-num { color: var(--color-accent); }
+
+  /* ───── 7. TECH ───── */
+  .tech-band { background: var(--color-surface); padding: 120px 0; }
+  .tech-band-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .tech-band-text h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 3.5vw, 48px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .tech-band-text .intro {
+    font-size: 15px;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    max-width: 400px;
+  }
+  .tech-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 20px;
+  }
+  .tech-comparison {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .comparison-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    background: var(--color-dark-bg);
+    padding: 14px 24px;
+  }
+  .comparison-header span {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-dark-muted);
+    text-align: center;
+  }
+  .comparison-header span:first-child { text-align: left; color: rgba(232, 228, 221, 0.3); }
+  .comparison-header span:nth-child(2) { color: var(--color-accent); }
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    background: var(--color-bg);
+    padding: 15px 24px;
+    border-top: 1px solid var(--color-border);
+    align-items: center;
+  }
+  .comparison-row .attr { font-size: 14px; font-weight: 500; color: var(--color-text); }
+  .comparison-row .val { font-family: var(--font-mono); font-size: 14px; font-weight: 500; text-align: center; }
+  .val-yes { color: var(--color-success); }
+  .val-no { color: var(--color-error); opacity: 0.65; }
+  .val-accent { color: var(--color-accent); font-weight: 600; }
+  .val-neutral { color: var(--color-muted); }
+
+  /* ───── 8. FOOTER CTA ───── */
+  .footer-cta {
+    background: var(--color-dark-bg);
+    padding: 140px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .footer-cta-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    background-image:
+      linear-gradient(rgba(232, 181, 0, 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232, 181, 0, 0.5) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .footer-cta-content { position: relative; z-index: 1; }
+  .footer-cta-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 28px;
+  }
+  .footer-cta h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-dark-text);
+    margin-bottom: 24px;
+  }
+  .footer-cta h2 em { font-style: italic; color: var(--color-dark-muted); }
+  .footer-cta p {
+    font-size: 17px;
+    color: var(--color-dark-muted);
+    max-width: 420px;
+    margin: 0 auto 40px;
+    line-height: 1.65;
+  }
+  .footer-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ───── Responsive ───── */
+  @media (max-width: 1024px) {
+    .container,
+    .hero-content,
+    .trust-bar-inner { padding-left: 40px; padding-right: 40px; }
+    .tech-band-inner { grid-template-columns: 1fr; }
+    .tech-comparison { overflow-x: auto; }
+    .comparison-header, .comparison-row { min-width: 460px; }
+    .proof-alt-strip { grid-template-columns: 1fr 1fr; gap: 40px 0; }
+    .proof-alt-item:nth-child(2) { border-right: none; }
+    .proof-alt-item:nth-child(3),
+    .proof-alt-item:nth-child(4) { border-top: 1px solid var(--color-border); padding-top: 32px; }
+    .proof-alt-item:nth-child(3) { border-right: none; padding-left: 0; }
+    .industry-row {
+      grid-template-columns: 56px 1fr;
+      grid-template-rows: auto auto;
+      gap: 0 32px;
     }
+    .industry-meta {
+      grid-column: 2;
+      text-align: left;
+      padding-top: 8px;
+    }
+    .industry-meta .payload { display: inline; margin-bottom: 0; margin-right: 12px; }
+    .industry-meta .clients { display: inline; }
+  }
+
+  @media (max-width: 768px) {
+    .container,
+    .hero-content,
+    .trust-bar-inner { padding-left: 24px; padding-right: 24px; }
+    .hero-content { padding-top: 120px; padding-bottom: 72px; }
+    .hero h1 { font-size: 52px; }
+    .hero-sub { font-size: 16px; max-width: 100%; }
+    .hero-stats { gap: 20px; }
+    .hero-stat-sep { display: none; }
+    .products-header { flex-direction: column; align-items: flex-start; }
+    .products-header-right { text-align: left; max-width: 100%; }
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card.featured { grid-row: span 1; }
+    .why-header { flex-direction: column; align-items: flex-start; }
+    .why-header-right { text-align: left; max-width: 100%; }
+    .why-row { grid-template-columns: 1fr; gap: 12px; }
+    .industries-header h2 { font-size: 36px; }
+    .industry-row { grid-template-columns: 48px 1fr; gap: 0 24px; }
+    .footer-cta-btns { flex-direction: column; align-items: center; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-ctas { flex-direction: column; align-items: stretch; }
+    .proof-alt-strip { grid-template-columns: 1fr; }
+    .proof-alt-item { border-right: none; border-top: 1px solid var(--color-border); padding: 32px 0 0; }
+    .proof-alt-item:first-child { border-top: none; padding-top: 0; }
   }
 </style>
