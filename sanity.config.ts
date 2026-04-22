@@ -29,6 +29,7 @@ export default defineConfig({
         'download',
         'industry',
         'service',
+        'caseStudy',
       ],
     }),
   ],
