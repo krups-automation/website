@@ -11,6 +11,7 @@ import { industry } from './industry';
 import { service } from './service';
 import { customer } from './customer';
 import { caseStudy } from './caseStudy';
+import { article } from './article';
 
 export const schemaTypes = [
   siteSettings,
@@ -26,4 +27,5 @@ export const schemaTypes = [
   service,
   customer,
   caseStudy,
+  article,
 ];

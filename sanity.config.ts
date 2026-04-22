@@ -30,6 +30,7 @@ export default defineConfig({
         'industry',
         'service',
         'caseStudy',
+        'article',
       ],
     }),
   ],

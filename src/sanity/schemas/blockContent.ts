@@ -55,5 +55,81 @@ export const blockContent = defineType({
         { name: 'caption', type: 'string', title: 'Caption' },
       ],
     }),
+    defineArrayMember({
+      type: 'object',
+      name: 'callout',
+      title: 'Callout',
+      fields: [
+        {
+          name: 'tone',
+          type: 'string',
+          title: 'Tone',
+          options: {
+            list: [
+              { title: 'Info', value: 'info' },
+              { title: 'Note', value: 'note' },
+              { title: 'Warning', value: 'warning' },
+              { title: 'Success', value: 'success' },
+            ],
+            layout: 'radio',
+          },
+          initialValue: 'info',
+        },
+        { name: 'title', type: 'string', title: 'Title' },
+        { name: 'body', type: 'text', title: 'Body', rows: 3 },
+      ],
+      preview: {
+        select: { title: 'title', subtitle: 'body', tone: 'tone' },
+        prepare({ title, subtitle, tone }) {
+          return {
+            title: `[${tone ?? 'info'}] ${title ?? 'Callout'}`,
+            subtitle,
+          };
+        },
+      },
+    }),
+    defineArrayMember({
+      type: 'object',
+      name: 'pullQuote',
+      title: 'Pull quote',
+      fields: [
+        { name: 'quote', type: 'text', title: 'Quote', rows: 3 },
+        { name: 'attribution', type: 'string', title: 'Attribution' },
+      ],
+      preview: {
+        select: { title: 'quote', subtitle: 'attribution' },
+      },
+    }),
+    defineArrayMember({
+      type: 'object',
+      name: 'codeBlock',
+      title: 'Code block',
+      fields: [
+        {
+          name: 'language',
+          type: 'string',
+          title: 'Language',
+          options: {
+            list: [
+              'text',
+              'bash',
+              'js',
+              'ts',
+              'json',
+              'html',
+              'css',
+              'python',
+              'yaml',
+              'sql',
+            ].map((l) => ({ title: l, value: l })),
+          },
+          initialValue: 'text',
+        },
+        { name: 'code', type: 'text', title: 'Code', rows: 6 },
+      ],
+      preview: {
+        select: { title: 'language', subtitle: 'code' },
+      },
+    }),
   ],
 });
