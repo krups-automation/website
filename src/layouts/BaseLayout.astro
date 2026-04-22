@@ -7,6 +7,7 @@ import '../styles/base.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import JsonLd from '../components/JsonLd.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import { getSiteSettings, SITE_SETTINGS_FALLBACK, type Locale } from '../sanity/queries';
 import {
   organizationSchema,
@@ -68,6 +69,7 @@ if (jsonLd && jsonLd.length > 0) {
       <slot />
     </main>
     <SiteFooter settings={settings} locale={locale} />
+    <CookieConsent />
 
     <style>
       .skip-link {
