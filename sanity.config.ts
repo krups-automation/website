@@ -4,6 +4,7 @@ import { visionTool } from '@sanity/vision';
 import { documentInternationalization } from '@sanity/document-internationalization';
 import { sanityClient } from 'sanity:client';
 import { schemaTypes } from './src/sanity/schemas';
+import { deskStructure } from './src/sanity/structure';
 
 const { projectId, dataset } = sanityClient.config();
 
@@ -14,7 +15,7 @@ export default defineConfig({
   dataset: dataset!,
   basePath: '/admin',
   plugins: [
-    structureTool(),
+    structureTool({ structure: deskStructure }),
     visionTool(),
     documentInternationalization({
       supportedLanguages: [
