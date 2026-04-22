@@ -27,6 +27,7 @@ export default defineConfig({
         'product',
         'productFamily',
         'download',
+        'industry',
       ],
     }),
   ],

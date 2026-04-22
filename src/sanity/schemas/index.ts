@@ -7,6 +7,7 @@ import { pillar } from './pillar';
 import { download } from './download';
 import { productFamily } from './productFamily';
 import { product } from './product';
+import { industry } from './industry';
 
 export const schemaTypes = [
   siteSettings,
@@ -18,4 +19,5 @@ export const schemaTypes = [
   download,
   productFamily,
   product,
+  industry,
 ];
