@@ -21,7 +21,13 @@ export default defineConfig({
         { id: 'de', title: 'Deutsch' },
         { id: 'en', title: 'English' },
       ],
-      schemaTypes: ['page', 'siteSettings'],
+      schemaTypes: [
+        'page',
+        'siteSettings',
+        'product',
+        'productFamily',
+        'download',
+      ],
     }),
   ],
   schema: {

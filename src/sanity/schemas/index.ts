@@ -4,6 +4,9 @@ import { blockContent } from './blockContent';
 import { author } from './author';
 import { tag } from './tag';
 import { pillar } from './pillar';
+import { download } from './download';
+import { productFamily } from './productFamily';
+import { product } from './product';
 
 export const schemaTypes = [
   siteSettings,
@@ -12,4 +15,7 @@ export const schemaTypes = [
   author,
   tag,
   pillar,
+  download,
+  productFamily,
+  product,
 ];
