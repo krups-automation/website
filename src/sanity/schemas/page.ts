@@ -27,8 +27,7 @@ export const page = defineType({
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'array',
-      of: [{ type: 'block' }],
+      type: 'blockContent',
     }),
   ],
   preview: {
