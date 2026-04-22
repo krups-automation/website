@@ -1,0 +1,15 @@
+---
+interface Props {
+  /** A single JSON-LD object or an array of them. */
+  data: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const { data } = Astro.props;
+const payload = Array.isArray(data) ? data : [data];
+---
+
+{
+  payload.map((entry) => (
+    <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+  ))
+}

@@ -6,20 +6,42 @@ import '../styles/base.css';
 
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import JsonLd from '../components/JsonLd.astro';
 import { getSiteSettings, SITE_SETTINGS_FALLBACK, type Locale } from '../sanity/queries';
+import {
+  organizationSchema,
+  websiteSchema,
+  breadcrumbSchema,
+  type Crumb,
+} from '../lib/schema-org';
 
 interface Props {
   title: string;
   description?: string;
   locale?: Locale;
+  /** Optional breadcrumb trail — emits a BreadcrumbList JSON-LD block. */
+  breadcrumbs?: Crumb[];
+  /** Additional JSON-LD entries for this page (Product, FAQPage, Article, etc). */
+  jsonLd?: Array<Record<string, unknown>>;
 }
 
-const { title, description, locale = 'de' } = Astro.props;
+const { title, description, locale = 'de', breadcrumbs, jsonLd } = Astro.props;
 
 const fetched = await getSiteSettings(locale);
 const settings = fetched ?? SITE_SETTINGS_FALLBACK[locale];
 const metaDescription = description ?? settings.siteTagline ?? '';
 const currentPath = Astro.url.pathname;
+
+const structuredData: Array<Record<string, unknown>> = [
+  organizationSchema(),
+  websiteSchema(locale),
+];
+if (breadcrumbs && breadcrumbs.length > 0) {
+  structuredData.push(breadcrumbSchema(breadcrumbs));
+}
+if (jsonLd && jsonLd.length > 0) {
+  structuredData.push(...jsonLd);
+}
 ---
 
 <!doctype html>
@@ -36,6 +58,8 @@ const currentPath = Astro.url.pathname;
     <Font cssVariable="--font-oswald" preload />
     <Font cssVariable="--font-barlow" preload />
     <Font cssVariable="--font-jetbrains-mono" />
+
+    <JsonLd data={structuredData} />
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
