@@ -28,6 +28,7 @@ export default defineConfig({
         'productFamily',
         'download',
         'industry',
+        'service',
       ],
     }),
   ],

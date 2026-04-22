@@ -8,6 +8,7 @@ import { download } from './download';
 import { productFamily } from './productFamily';
 import { product } from './product';
 import { industry } from './industry';
+import { service } from './service';
 
 export const schemaTypes = [
   siteSettings,
@@ -20,4 +21,5 @@ export const schemaTypes = [
   productFamily,
   product,
   industry,
+  service,
 ];
