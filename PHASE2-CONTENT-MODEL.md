@@ -253,3 +253,83 @@ Commit per step (9 commits). Each verifiable in Studio before moving on.
 - Footer column content schema (footer currently reads from `siteSettings` — extend when needed)
 - Forms / lead-capture schema (gated downloads flag is declared but the form itself comes later)
 - Redirects table (Joomla-to-new-site redirects — separate concern, handled at Vercel rewrite level)
+
+---
+
+## Phase 2 item 3 — Content migration decisions (2026-04-23 interview)
+
+**Narrative frame:** Plan · Build · Run (three-stage lifecycle). Top nav becomes
+`Planung · Produkte · Leistungen · Branchen · Unternehmen`.
+
+### Product structure (Q1)
+- **2 families:** `eCart`, `Friktionsrollenförderer`.
+- **4 products:** eCart V3, L-Serie, XL-Serie, T-Serie. eCart family has 1 product today; symmetry with Friktionsrollen is deliberate + future-proofs for variants.
+- **Sonderentwicklungen** is NOT a product or service doc — integrated as a section inside each family's landing page ("need something custom?" → contact deeplink). No schema of its own.
+
+### Consulting offer (Q1 follow-up)
+- **New `Planung` page** at top of nav for production-line-planning consulting. Reuse `service` schema now; promote to `consultingOffer` if content outgrows it.
+- Launch with placeholder/teaser content until Philipp green-lights; nav item + URL exist from day one for SEO.
+- Plan · Build · Run section added to homepage between Products and Industries to tie the narrative.
+
+### Product copy (Q2)
+- **Hybrid (C):** port specs + feature lists verbatim (Philipp-approved factual content); rewrite hero/intro/FAQ to match homepage voice + style guide.
+
+### Industry pages (Q3)
+- **Source:** content-ops v3 mockups (content-complete, Variant C locked, FAQPage schema ready).
+- **Workflow:** enter in Sanity as drafts (C). Tighten to public-approved customers only (BMW, Ford, ŠKODA, VW, MINI, Tesla, ZF, EATON). Philipp review unblocks publish.
+
+### Leistungen — schema routing (Q4)
+- **One `service` schema, two routes:**
+  - `/planung` renders the single "Plan" doc (Produktionsplanung).
+  - `/leistungen/<slug>` renders the 6 "Run" docs (Beratung, Projektierung, Fertigung, Montage, Steuerungsintegration, Service).
+- Schema gets a `tier: 'plan' | 'run'` field to drive the routing.
+- **Copy:** fresh rewrite for all 7 (old Joomla copy is thin/generic; nothing worth porting verbatim).
+
+### Journal / blog (Q5)
+- **Start fresh** with content-ops pillar model post-launch.
+- Old Joomla blog posts NOT migrated. First journal article lands post-launch.
+- Backlink audit on old blog URLs: optional, later (skip if no high-value territory).
+
+### Redirects (Q6)
+- **URL strategy:** clean slugs (already decided in Phase 1 — DE at root, EN under `/en/`).
+- **When:** build the map at cutover, not per-page.
+- **Orphans:** redirect to most relevant category when obvious, homepage as fallback, 404 only when honest.
+
+### Language (Q7)
+- **DE-first launch.** EN rendered with "translation pending, view German" banner until second pass.
+- **EN translation pathway:** Claude drafts → Philipp/Viktor review. Second pass after DE is stable (~2-3 weeks post-launch).
+
+### Entry method (Q8)
+- **Manual in Studio** for products (4), industries (5), services (7), customers (8) — gives us a free QC pass.
+- **Scripted** for downloads (13 PDFs in `website/downloads/`) — upload to Sanity Asset CDN + create `download` docs programmatically.
+
+### Customer whitelist (confirmed public)
+BMW, Ford, ŠKODA, VW, MINI, Tesla, ZF, EATON. Everything else waits for Philipp confirmation.
+
+---
+
+## Execution order — Phase 2 item 3
+
+1. **Schema tweaks**
+   - Add `tier` field to `service` schema (values: `plan`, `run`).
+   - Small schema updates driven by interview decisions, if any surface during entry.
+2. **Three-stage homepage section** (Plan · Build · Run teaser band between Products and Industries).
+3. **Top nav** — add "Planung" item, rename "Leistungen" section in nav to reflect the Run tier (or leave as "Leistungen" since it's the more familiar label).
+4. **Astro routes**
+   - `/produkte` — family overview (2 families)
+   - `/produkte/[familySlug]` — family landing page (eCart, friktionsrollen)
+   - `/produkte/[familySlug]/[productSlug]` — product detail (V3, L-Serie, XL, T)
+   - `/planung` — single Plan-tier service page
+   - `/leistungen` — overview of 6 Run services
+   - `/leistungen/[slug]` — Run service detail
+   - `/branchen` — overview of 5 industries
+   - `/branchen/[slug]` — industry detail
+5. **Content entry** (manual in Studio)
+   - 8 customer docs (tiny)
+   - 2 product family docs
+   - 4 product docs (hybrid copy)
+   - 7 service docs (fresh copy — 6 Run + 1 Plan placeholder)
+   - 5 industry docs as drafts (from content-ops v3)
+6. **Downloads script** — upload 13 PDFs to Sanity + create download docs
+7. **JSON-LD for Product / Service / FAQPage** (completes Phase 2 item 5b)
+8. **Deploy, QC, iterate**
