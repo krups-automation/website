@@ -19,6 +19,22 @@ export const service = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'tier',
+      title: 'Tier',
+      type: 'string',
+      description:
+        'Drives routing. "plan" renders at /planung (single Produktionsplanung doc). "run" renders at /leistungen/[slug].',
+      options: {
+        list: [
+          { title: 'Plan (Produktionsplanung)', value: 'plan' },
+          { title: 'Run (Leistungen)', value: 'run' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'run',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'metaTitle',
       title: 'Meta title',
       type: 'string',
@@ -103,6 +119,14 @@ export const service = defineType({
     }),
   ],
   preview: {
-    select: { title: 'name', subtitle: 'summary', media: 'heroImage' },
+    select: { title: 'name', summary: 'summary', tier: 'tier', media: 'heroImage' },
+    prepare({ title, summary, tier, media }) {
+      const tierLabel = tier === 'plan' ? 'Plan' : tier === 'run' ? 'Run' : null;
+      return {
+        title: tierLabel ? `${title} · ${tierLabel}` : title,
+        subtitle: summary,
+        media,
+      };
+    },
   },
 });

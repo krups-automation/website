@@ -1,0 +1,165 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { toHTML } from '@portabletext/to-html';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Section from '../../../components/Section.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { getAllProductFamilies, getProductFamilyBySlug } from '../../../sanity/queries';
+
+export const getStaticPaths = (async () => {
+  const families = await getAllProductFamilies('de');
+  return families.map((f) => ({ params: { familySlug: f.slug.current } }));
+}) satisfies GetStaticPaths;
+
+const { familySlug } = Astro.params;
+const family = familySlug ? await getProductFamilyBySlug(familySlug, 'de') : null;
+
+if (!family) {
+  return Astro.redirect('/404');
+}
+
+const introHtml = family.intro ? toHTML(family.intro as any) : '';
+const bodyHtml = family.body ? toHTML(family.body as any) : '';
+---
+
+<BaseLayout
+  title={`${family.name} — KRUPS Automation`}
+  description={family.metaDescription ?? family.tagline}
+  locale="de"
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Produkte', href: '/produkte' },
+    { label: family.name },
+  ]}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Produkte', href: '/produkte' },
+        { label: family.name },
+      ]}
+    />
+
+    <header class="family-header">
+      <h1>{family.name}</h1>
+      {family.tagline && <p class="tagline">{family.tagline}</p>}
+      {introHtml && <div class="intro" set:html={introHtml} />}
+    </header>
+
+    {family.members && family.members.length > 0 && (
+      <div class="member-grid">
+        {family.members.map((m) => (
+          <a class="member-card" href={`/produkte/${family.slug.current}/${m.slug.current}`}>
+            <h2>{m.name}</h2>
+            {m.tagline && <p>{m.tagline}</p>}
+            <span class="card-link">Details <span class="card-arrow">→</span></span>
+          </a>
+        ))}
+      </div>
+    )}
+
+    {bodyHtml && <div class="family-body" set:html={bodyHtml} />}
+
+    <aside class="sonder-cta">
+      <h2>Sonderentwicklung gefragt?</h2>
+      <p>
+        Passt nichts vollständig zu Ihrer Aufgabe? Wir entwickeln aus dem Standard
+        heraus — mit voller Eigenfertigung in Hilden.
+      </p>
+      <a href="/kontakt" class="btn-inline">Projekt besprechen →</a>
+    </aside>
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer { height: 100px; }
+  .family-header { margin: var(--space-6) 0 var(--space-12); max-width: 760px; }
+  .family-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 600;
+    line-height: 1.02;
+    margin-bottom: var(--space-4);
+  }
+  .tagline {
+    font-size: 19px;
+    color: var(--color-muted);
+    line-height: 1.55;
+    margin-bottom: var(--space-6);
+  }
+  .intro :global(p) { font-size: 16px; line-height: 1.7; color: var(--color-muted); margin-bottom: var(--space-4); max-width: 65ch; }
+  .member-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: var(--space-12);
+  }
+  .member-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 220ms ease;
+  }
+  .member-card:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .member-card h2 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: var(--space-2);
+    line-height: 1.15;
+  }
+  .member-card p {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+  }
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: auto;
+  }
+  .card-arrow { display: inline-block; transition: transform 150ms ease; }
+  .member-card:hover .card-arrow { transform: translateX(4px); }
+  .family-body :global(p) { max-width: 65ch; margin-bottom: var(--space-4); line-height: 1.7; }
+  .family-body :global(h2) { margin: var(--space-8) 0 var(--space-3); font-family: var(--font-heading); }
+  .sonder-cta {
+    margin-top: var(--space-16);
+    padding: 40px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+  .sonder-cta h2 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: var(--space-3);
+  }
+  .sonder-cta p {
+    font-size: 15px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin-bottom: var(--space-4);
+    max-width: 540px;
+  }
+  .btn-inline {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 4px;
+  }
+</style>

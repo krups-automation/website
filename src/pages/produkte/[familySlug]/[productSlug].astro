@@ -1,0 +1,218 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { toHTML } from '@portabletext/to-html';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Section from '../../../components/Section.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { getAllProducts, getProductBySlug } from '../../../sanity/queries';
+
+export const getStaticPaths = (async () => {
+  const products = await getAllProducts('de');
+  return products
+    .filter((p) => p.productFamily?.slug?.current && p.slug?.current)
+    .map((p) => ({
+      params: {
+        familySlug: p.productFamily!.slug!.current,
+        productSlug: p.slug.current,
+      },
+    }));
+}) satisfies GetStaticPaths;
+
+const { familySlug, productSlug } = Astro.params;
+const product = productSlug ? await getProductBySlug(productSlug, 'de') : null;
+
+if (!product || product.productFamily?.slug?.current !== familySlug) {
+  return Astro.redirect('/404');
+}
+
+const introHtml = product.intro ? toHTML(product.intro as any) : '';
+const bodyHtml = product.body ? toHTML(product.body as any) : '';
+---
+
+<BaseLayout
+  title={`${product.name} — KRUPS Automation`}
+  description={product.metaDescription ?? product.tagline}
+  locale="de"
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Produkte', href: '/produkte' },
+    { label: product.productFamily?.name ?? '', href: `/produkte/${familySlug}` },
+    { label: product.name },
+  ]}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Produkte', href: '/produkte' },
+        { label: product.productFamily?.name ?? '', href: `/produkte/${familySlug}` },
+        { label: product.name },
+      ]}
+    />
+
+    <header class="product-header">
+      <h1>{product.name}</h1>
+      {product.tagline && <p class="tagline">{product.tagline}</p>}
+      {introHtml && <div class="intro" set:html={introHtml} />}
+    </header>
+
+    {product.specs && product.specs.length > 0 && (
+      <div class="specs">
+        <h2>Technische Daten</h2>
+        <dl class="spec-list">
+          {product.specs.map((s) => (
+            <div class="spec-row">
+              <dt>{s.label}</dt>
+              <dd>
+                {s.value}
+                {s.unit && <span class="unit"> {s.unit}</span>}
+                {s.notes && <span class="notes"> · {s.notes}</span>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    )}
+
+    {product.keyFeatures && product.keyFeatures.length > 0 && (
+      <div class="features">
+        <h2>Merkmale</h2>
+        <ul class="feature-list">
+          {product.keyFeatures.map((f) => (
+            <li>
+              <h3>{f.title}</h3>
+              {f.description && <p>{f.description}</p>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {bodyHtml && <div class="product-body" set:html={bodyHtml} />}
+
+    {product.faq && product.faq.length > 0 && (
+      <div class="faq">
+        <h2>Häufige Fragen</h2>
+        {product.faq.map((q) => (
+          <details class="faq-item">
+            <summary>{q.question}</summary>
+            <p>{q.answer}</p>
+          </details>
+        ))}
+      </div>
+    )}
+
+    {product.downloads && product.downloads.length > 0 && (
+      <div class="downloads">
+        <h2>Downloads</h2>
+        <ul>
+          {product.downloads.map((d: any) => (
+            <li>
+              <a href={d.file?.asset?.url ?? '#'}>
+                {d.title}
+                {d.fileType && <span class="type"> · {d.fileType.toUpperCase()}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer { height: 100px; }
+  .product-header { margin: var(--space-6) 0 var(--space-12); max-width: 760px; }
+  .product-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 600;
+    line-height: 1.02;
+    margin-bottom: var(--space-4);
+  }
+  .tagline {
+    font-size: 19px;
+    color: var(--color-muted);
+    line-height: 1.55;
+    margin-bottom: var(--space-6);
+  }
+  .intro :global(p) { font-size: 16px; line-height: 1.7; color: var(--color-muted); margin-bottom: var(--space-4); max-width: 65ch; }
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 500;
+    margin: var(--space-10) 0 var(--space-4);
+  }
+  .spec-list {
+    border-top: 1px solid var(--color-border);
+  }
+  .spec-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 32px;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .spec-row dt {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .spec-row dd {
+    font-size: 15px;
+    color: var(--color-text);
+  }
+  .spec-row .unit { color: var(--color-muted); }
+  .spec-row .notes { color: var(--color-muted); font-size: 13px; }
+  .feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+  }
+  .feature-list li {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+  }
+  .feature-list h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: var(--space-2);
+  }
+  .feature-list p {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+  .product-body :global(p) { max-width: 65ch; line-height: 1.7; margin-bottom: var(--space-4); }
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-4) 0;
+  }
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .faq-item p {
+    margin-top: var(--space-3);
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 65ch;
+  }
+  .downloads ul { list-style: none; padding: 0; }
+  .downloads li { padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border); }
+  .downloads a { color: var(--color-text); font-weight: 500; }
+  .downloads .type { color: var(--color-muted); font-family: var(--font-mono); font-size: 12px; }
+  @media (max-width: 768px) {
+    .spec-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>

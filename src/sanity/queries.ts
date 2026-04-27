@@ -300,10 +300,13 @@ export async function getIndustryBySlug(
 // Services
 // ---------------------------------------------------------------------------
 
+export type ServiceTier = 'plan' | 'run';
+
 export interface Service {
   _id: string;
   name: string;
   slug: { current: string };
+  tier?: ServiceTier;
   metaTitle?: string;
   metaDescription?: string;
   summary?: string;
@@ -315,7 +318,7 @@ export interface Service {
 }
 
 const SERVICE_PROJECTION = `{
-  _id, name, slug, metaTitle, metaDescription, summary, heroImage,
+  _id, name, slug, tier, metaTitle, metaDescription, summary, heroImage,
   processSteps, deliverables, body, faq
 }`;
 
@@ -346,6 +349,31 @@ export async function getServiceBySlug(
     pickClient(opts.draft),
     `*[_type == "service" && language == $lang && slug.current == $slug][0] ${SERVICE_PROJECTION}`,
     { slug, lang },
+    null
+  );
+}
+
+export async function getServicesByTier(
+  tier: ServiceTier,
+  lang: Locale,
+  opts: { draft?: boolean } = {}
+) {
+  return safeFetch<Service[]>(
+    pickClient(opts.draft),
+    `*[_type == "service" && language == $lang && tier == $tier] | order(name asc) ${SERVICE_PROJECTION}`,
+    { tier, lang },
+    []
+  );
+}
+
+export async function getPlanService(
+  lang: Locale,
+  opts: { draft?: boolean } = {}
+): Promise<Service | null> {
+  return safeFetch(
+    pickClient(opts.draft),
+    `*[_type == "service" && language == $lang && tier == "plan"] | order(_updatedAt desc)[0] ${SERVICE_PROJECTION}`,
+    { lang },
     null
   );
 }
@@ -531,10 +559,10 @@ export const SITE_SETTINGS_FALLBACK: Record<Locale, SiteSettings> = {
     siteTitle: 'KRUPS Automation',
     siteTagline: 'Schienengeführte Fördersysteme für Präzisionsmontage.',
     primaryNav: [
+      { label: 'Planung', href: '/planung' },
       { label: 'Produkte', href: '/produkte' },
-      { label: 'Branchen', href: '/branchen' },
       { label: 'Leistungen', href: '/leistungen' },
-      { label: 'Ressourcen', href: '/ressourcen' },
+      { label: 'Branchen', href: '/branchen' },
       { label: 'Unternehmen', href: '/unternehmen' },
     ],
     ctaLabel: 'Projekt anfragen',
@@ -545,10 +573,10 @@ export const SITE_SETTINGS_FALLBACK: Record<Locale, SiteSettings> = {
     siteTitle: 'KRUPS Automation',
     siteTagline: 'Rail-guided conveyor systems for precision assembly.',
     primaryNav: [
+      { label: 'Planning', href: '/en/planning' },
       { label: 'Products', href: '/en/products' },
-      { label: 'Industries', href: '/en/industries' },
       { label: 'Services', href: '/en/services' },
-      { label: 'Resources', href: '/en/resources' },
+      { label: 'Industries', href: '/en/industries' },
       { label: 'Company', href: '/en/company' },
     ],
     ctaLabel: 'Request a Project',

@@ -1,0 +1,277 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { toHTML } from '@portabletext/to-html';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getAllIndustrySlugs, getIndustryBySlug } from '../../sanity/queries';
+
+export const getStaticPaths = (async () => {
+  const industries = await getAllIndustrySlugs('de');
+  return industries.map(({ slug }) => ({ params: { slug } }));
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const industry = slug ? await getIndustryBySlug(slug, 'de') : null;
+
+if (!industry) {
+  return Astro.redirect('/404');
+}
+
+const whatMovesHtml = industry.whatMoves ? toHTML(industry.whatMoves as any) : '';
+const bottleneckHtml = industry.bottleneck ? toHTML(industry.bottleneck as any) : '';
+const alternativesHtml = industry.alternatives ? toHTML(industry.alternatives as any) : '';
+const solutionHtml = industry.solutionRouting ? toHTML(industry.solutionRouting as any) : '';
+---
+
+<BaseLayout
+  title={industry.metaTitle ?? `${industry.name} — KRUPS Automation`}
+  description={industry.metaDescription ?? industry.tagline}
+  locale="de"
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Branchen', href: '/branchen' },
+    { label: industry.name },
+  ]}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Branchen', href: '/branchen' },
+        { label: industry.name },
+      ]}
+    />
+
+    <header class="page-header">
+      <h1>{industry.name}</h1>
+      {industry.tagline && <p class="lede">{industry.tagline}</p>}
+    </header>
+
+    {industry.characterBar && industry.characterBar.length > 0 && (
+      <ul class="char-bar">
+        {industry.characterBar.map((c) => (
+          <li>
+            <span class="lbl">{c.label}</span>
+            <span class="val">{c.value}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {whatMovesHtml && (
+      <section class="prose">
+        <h2>Was transportiert wird</h2>
+        <div set:html={whatMovesHtml} />
+      </section>
+    )}
+
+    {bottleneckHtml && (
+      <section class="prose">
+        <h2>Warum das heute Engpass ist</h2>
+        <div set:html={bottleneckHtml} />
+      </section>
+    )}
+
+    {industry.requirements && industry.requirements.length > 0 && (
+      <section>
+        <h2>Anforderungen</h2>
+        <dl class="req-list">
+          {industry.requirements.map((r) => (
+            <div class="req-row">
+              <dt>{r.label}</dt>
+              <dd>
+                {r.value && <span class="val">{r.value}</span>}
+                {r.notes && <span class="notes"> — {r.notes}</span>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
+
+    {alternativesHtml && (
+      <section class="prose">
+        <h2>Alternativen</h2>
+        <div set:html={alternativesHtml} />
+      </section>
+    )}
+
+    {solutionHtml && (
+      <section class="prose">
+        <h2>KRUPS-Lösung</h2>
+        <div set:html={solutionHtml} />
+      </section>
+    )}
+
+    {industry.recommendedProducts && industry.recommendedProducts.length > 0 && (
+      <section>
+        <h2>Empfohlene Systeme</h2>
+        <div class="product-list">
+          {industry.recommendedProducts.map((p: any) => (
+            <a class="product-card" href={`/produkte/${p.productFamily?.slug?.current ?? ''}/${p.slug?.current ?? ''}`}>
+              <h3>{p.name}</h3>
+              {p.tagline && <p>{p.tagline}</p>}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {industry.faq && industry.faq.length > 0 && (
+      <section>
+        <h2>Häufige Fragen</h2>
+        {industry.faq.map((q) => (
+          <details class="faq-item">
+            <summary>{q.question}</summary>
+            <p>{q.answer}</p>
+          </details>
+        ))}
+      </section>
+    )}
+
+    {industry.cta?.headline && (
+      <section class="industry-cta">
+        <h2>{industry.cta.headline}</h2>
+        {industry.cta.description && <p>{industry.cta.description}</p>}
+        {industry.cta.buttonLabel && (
+          <a href={industry.cta.buttonUrl ?? '/kontakt'} class="cta-btn">
+            {industry.cta.buttonLabel} →
+          </a>
+        )}
+      </section>
+    )}
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer { height: 100px; }
+  .page-header { margin: var(--space-6) 0 var(--space-8); max-width: 760px; }
+  .page-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 600;
+    line-height: 1.02;
+    margin-bottom: var(--space-4);
+  }
+  .lede {
+    font-size: 19px;
+    color: var(--color-muted);
+    line-height: 1.55;
+  }
+  .char-bar {
+    list-style: none;
+    padding: 24px 0;
+    margin: 0 0 var(--space-12);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 24px;
+  }
+  .char-bar .lbl {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: var(--space-1);
+  }
+  .char-bar .val {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 500;
+    margin: var(--space-10) 0 var(--space-4);
+  }
+  .prose :global(p) {
+    max-width: 65ch;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin-bottom: var(--space-4);
+  }
+  .req-list { border-top: 1px solid var(--color-border); }
+  .req-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 32px;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .req-row dt {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .req-row .val { color: var(--color-text); font-weight: 500; }
+  .req-row .notes { color: var(--color-muted); }
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .product-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    color: var(--color-text);
+    transition: border-color 220ms ease;
+  }
+  .product-card:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .product-card h3 {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: var(--space-2);
+  }
+  .product-card p {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+  .faq-item { border-bottom: 1px solid var(--color-border); padding: var(--space-4) 0; }
+  .faq-item summary { cursor: pointer; font-weight: 600; font-size: 16px; }
+  .faq-item p { margin-top: var(--space-3); color: var(--color-muted); line-height: 1.65; max-width: 65ch; }
+  .industry-cta {
+    margin-top: var(--space-16);
+    padding: 48px;
+    background: var(--color-dark-bg);
+    color: var(--color-dark-text);
+    border-radius: var(--radius-lg);
+  }
+  .industry-cta h2 {
+    color: var(--color-dark-text);
+    margin-top: 0;
+  }
+  .industry-cta p {
+    color: var(--color-dark-muted);
+    line-height: 1.65;
+    max-width: 540px;
+    margin-bottom: var(--space-6);
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 13px 24px;
+    background: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .cta-btn:hover { background: var(--color-accent-hover); }
+  @media (max-width: 768px) {
+    .req-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>

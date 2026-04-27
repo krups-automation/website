@@ -13,7 +13,7 @@ export function siteOrigin(): string {
 
 export interface Crumb {
   label: string;
-  href: string;
+  href?: string;
 }
 
 export function organizationSchema() {
@@ -65,12 +65,19 @@ export function breadcrumbSchema(crumbs: Crumb[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: crumbs.map((crumb, idx) => ({
-      '@type': 'ListItem',
-      position: idx + 1,
-      name: crumb.label,
-      item: crumb.href.startsWith('http') ? crumb.href : `${CANONICAL_URL}${crumb.href}`,
-    })),
+    itemListElement: crumbs.map((crumb, idx) => {
+      const entry: Record<string, unknown> = {
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: crumb.label,
+      };
+      if (crumb.href) {
+        entry.item = crumb.href.startsWith('http')
+          ? crumb.href
+          : `${CANONICAL_URL}${crumb.href}`;
+      }
+      return entry;
+    }),
   };
 }
 

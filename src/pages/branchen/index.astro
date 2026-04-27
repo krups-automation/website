@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getAllIndustries } from '../../sanity/queries';
+
+const industries = await getAllIndustries('de');
+---
+
+<BaseLayout
+  title="Branchen — KRUPS Automation"
+  description="Wo KRUPS-Systeme laufen: Batteriemontage, Antriebsstrang, Prüfautomation, Nutzfahrzeuge, Schwermontage."
+  locale="de"
+  breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Branchen' }]}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Branchen' }]} />
+
+    <header class="page-header">
+      <h1>Wo KRUPS-Systeme laufen.</h1>
+      <p class="lede">
+        Von der Batteriemontage in Giga-Scale bis zum Präzisions-Prüfstand für Antriebsstränge —
+        die Traglastspanne und Flexibilität von LOGO!MAT deckt die anspruchsvollsten
+        Anwendungen in der Industrie ab.
+      </p>
+    </header>
+
+    {industries.length === 0 ? (
+      <div class="empty-state">
+        <p>Branchenseiten werden derzeit im Studio vorbereitet. <a href="/kontakt">Kontakt</a></p>
+      </div>
+    ) : (
+      <div class="industry-list">
+        {industries.map((ind, i) => (
+          <a class="industry-row" href={`/branchen/${ind.slug.current}`}>
+            <div class="industry-num">{String(i + 1).padStart(2, '0')}</div>
+            <div class="industry-body">
+              <h2>{ind.name}</h2>
+              {ind.tagline && <p>{ind.tagline}</p>}
+            </div>
+            <div class="industry-meta">
+              {ind.characterBar && ind.characterBar.length > 0 && (
+                <ul class="char-bar">
+                  {ind.characterBar.slice(0, 2).map((c) => (
+                    <li><span class="lbl">{c.label}</span><span class="val">{c.value}</span></li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer { height: 100px; }
+  .page-header { margin: var(--space-6) 0 var(--space-12); max-width: 720px; }
+  .page-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(40px, 4.5vw, 64px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: var(--space-4);
+  }
+  .lede {
+    font-size: 17px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 560px;
+  }
+  .industry-list { display: flex; flex-direction: column; }
+  .industry-row {
+    display: grid;
+    grid-template-columns: 72px 1fr 220px;
+    gap: 48px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--color-border);
+    align-items: start;
+    color: var(--color-text);
+    transition: background 150ms;
+  }
+  .industry-row:first-child { border-top: 1px solid var(--color-border); }
+  .industry-row:hover { background: rgba(26, 26, 24, 0.02); }
+  .industry-num {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--color-border);
+    line-height: 1.1;
+    transition: color 200ms;
+  }
+  .industry-row:hover .industry-num { color: var(--color-accent); }
+  .industry-body h2 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: var(--space-2);
+  }
+  .industry-body p {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.6;
+    max-width: 540px;
+  }
+  .industry-meta { padding-top: 6px; }
+  .char-bar {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .char-bar li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .char-bar .lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .char-bar .val {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .empty-state {
+    padding: 48px;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-muted);
+    text-align: center;
+  }
+  .empty-state a { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 4px; }
+  @media (max-width: 900px) {
+    .industry-row { grid-template-columns: 56px 1fr; gap: 24px; }
+    .industry-meta { grid-column: 2; padding-top: 8px; }
+    .char-bar { flex-direction: row; gap: 24px; }
+  }
+</style>

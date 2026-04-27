@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getAllProductFamilies } from '../../sanity/queries';
+
+const families = await getAllProductFamilies('de');
+---
+
+<BaseLayout
+  title="Produkte — KRUPS Automation"
+  description="Schienengeführte Fördersysteme von KRUPS: LOGO!MAT eCart und Friktionsrollenförderer."
+  locale="de"
+  breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Produkte' }]}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Produkte' }]} />
+    <header class="page-header">
+      <div class="eyebrow">Build</div>
+      <h1>Zwei Plattformen. Jede Montageaufgabe.</h1>
+      <p class="lede">
+        Von leichten Komponenten bis zum schweren Batteriepack — ein vollständiges
+        Förderportfolio von einem Hersteller. Entwickelt, gefertigt und in Betrieb
+        genommen in Hilden.
+      </p>
+    </header>
+
+    {families.length === 0 ? (
+      <div class="empty-state">
+        <p>
+          Produktinhalte werden derzeit im Studio vorbereitet. Kommen Sie in Kürze
+          zurück oder schreiben Sie uns an <a href="/kontakt">kontakt</a>.
+        </p>
+      </div>
+    ) : (
+      <div class="family-grid">
+        {families.map((family) => (
+          <a class="family-card" href={`/produkte/${family.slug.current}`}>
+            <h2>{family.name}</h2>
+            {family.tagline && <p class="tagline">{family.tagline}</p>}
+            <span class="card-link">Zur Familie <span class="card-arrow">→</span></span>
+          </a>
+        ))}
+      </div>
+    )}
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer { height: 100px; }
+  .page-header { margin: var(--space-6) 0 var(--space-12); max-width: 720px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+  .page-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(40px, 4.5vw, 64px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: var(--space-4);
+  }
+  .lede {
+    font-size: 17px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 560px;
+  }
+  .family-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .family-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 44px;
+    color: var(--color-text);
+    transition: border-color 220ms ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .family-card:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .family-card h2 {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: var(--space-3);
+  }
+  .tagline {
+    font-size: 15px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin-bottom: var(--space-6);
+  }
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: auto;
+  }
+  .card-arrow { transition: transform 150ms ease; display: inline-block; }
+  .family-card:hover .card-arrow { transform: translateX(4px); }
+  .empty-state {
+    padding: 64px 32px;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    color: var(--color-muted);
+  }
+  .empty-state a { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 4px; }
+  @media (max-width: 768px) {
+    .family-grid { grid-template-columns: 1fr; }
+  }
+</style>

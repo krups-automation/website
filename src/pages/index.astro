@@ -174,6 +174,62 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- ════ 4b. PLAN · BUILD · RUN ════ -->
+  <section class="lifecycle">
+    <div class="container">
+      <div class="lifecycle-header">
+        <div class="lifecycle-eyebrow">End-to-end</div>
+        <h2><em>Plan.</em> Build. <em>Run.</em></h2>
+        <p class="lifecycle-sub">
+          A conveyor line is a fifteen-year decision. We take responsibility
+          for the whole lifecycle — from the first production-line sketch
+          to the service call a decade later.
+        </p>
+      </div>
+
+      <div class="lifecycle-grid">
+        <a class="lifecycle-card" href="/planung">
+          <div class="lifecycle-step">
+            <span class="lifecycle-num">01</span>
+            <span class="lifecycle-label">Plan</span>
+          </div>
+          <h3>Produktions&shy;planung</h3>
+          <p>
+            Line layout, takt, material flow, payload profiles.
+            We engineer the production concept before a single rail is bent.
+          </p>
+          <span class="lifecycle-link">Explore planning services <span class="card-arrow">→</span></span>
+        </a>
+
+        <a class="lifecycle-card" href="/produkte">
+          <div class="lifecycle-step">
+            <span class="lifecycle-num">02</span>
+            <span class="lifecycle-label">Build</span>
+          </div>
+          <h3>Produkte &amp; Fertigung</h3>
+          <p>
+            LOGO!MAT eCart and Friktionsrollen — manufactured 100% in-house in Hilden.
+            Specced, assembled, commissioned by the team that designed them.
+          </p>
+          <span class="lifecycle-link">See the portfolio <span class="card-arrow">→</span></span>
+        </a>
+
+        <a class="lifecycle-card" href="/leistungen">
+          <div class="lifecycle-step">
+            <span class="lifecycle-num">03</span>
+            <span class="lifecycle-label">Run</span>
+          </div>
+          <h3>Leistungen &amp; Service</h3>
+          <p>
+            Projektierung, Montage, Steuerungsintegration, and long-term service.
+            The line runs — we keep it running.
+          </p>
+          <span class="lifecycle-link">See our services <span class="card-arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ 5. WHY ════ -->
   <section class="why">
     <div class="container">
@@ -687,6 +743,106 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     opacity: 0.45;
   }
 
+  /* ───── 4b. PLAN · BUILD · RUN ───── */
+  .lifecycle { background: var(--color-bg); padding: 120px 0; }
+  .lifecycle-header { margin-bottom: 64px; max-width: 720px; }
+  .lifecycle-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .lifecycle-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+  .lifecycle-header h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 3.5vw, 52px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .lifecycle-header h2 em { font-style: italic; color: var(--color-muted); }
+  .lifecycle-sub {
+    font-size: 16px;
+    color: var(--color-muted);
+    max-width: 560px;
+    line-height: 1.65;
+  }
+  .lifecycle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .lifecycle-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    color: var(--color-text);
+    transition: border-color 220ms ease, transform 220ms ease;
+  }
+  .lifecycle-card:hover { border-color: rgba(232, 181, 0, 0.5); transform: translateY(-2px); }
+  .lifecycle-step {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .lifecycle-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--color-muted);
+  }
+  .lifecycle-label {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-accent);
+    letter-spacing: 0.5px;
+  }
+  .lifecycle-card h3 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .lifecycle-card p {
+    font-size: 15px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+  .lifecycle-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: auto;
+  }
+  .lifecycle-card:hover .card-arrow { transform: translateX(4px); }
+
   /* ───── 5. WHY ───── */
   .why { background: var(--color-dark-bg); padding: 120px 0; color: var(--color-dark-text); }
   .why-header {
@@ -964,6 +1120,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .products-header-right { text-align: left; max-width: 100%; }
     .products-grid { grid-template-columns: 1fr; }
     .product-card.featured { grid-row: span 1; }
+    .lifecycle-grid { grid-template-columns: 1fr; }
     .why-header { flex-direction: column; align-items: flex-start; }
     .why-header-right { text-align: left; max-width: 100%; }
     .why-row { grid-template-columns: 1fr; gap: 12px; }

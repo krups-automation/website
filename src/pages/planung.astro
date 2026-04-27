@@ -1,0 +1,178 @@
+---
+import { toHTML } from '@portabletext/to-html';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getPlanService } from '../sanity/queries';
+
+const service = await getPlanService('de');
+const bodyHtml = service?.body ? toHTML(service.body as any) : '';
+---
+
+<BaseLayout
+  title={service?.metaTitle ?? 'Produktionsplanung — KRUPS Automation'}
+  description={service?.metaDescription ?? 'Produktionsplanung für Montagelinien: Layout, Takt, Materialfluss, Payload-Profile.'}
+  locale="de"
+  breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Planung' }]}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Planung' }]} />
+
+    <header class="page-header">
+      <div class="eyebrow">Plan</div>
+      <h1>{service?.name ?? 'Produktionsplanung'}</h1>
+      {service?.summary && <p class="lede">{service.summary}</p>}
+      {!service && (
+        <p class="lede">
+          Wir planen Montagelinien von der Skizze bis zum Lastenheft: Layout,
+          Takt, Materialfluss und Payload-Profile. Bevor die erste Schiene gebogen wird.
+        </p>
+      )}
+    </header>
+
+    {service?.processSteps && service.processSteps.length > 0 && (
+      <div class="steps">
+        <h2>Vorgehen</h2>
+        <ol class="step-list">
+          {service.processSteps.map((s) => (
+            <li>
+              <span class="step-num">{s.stepNumber ?? ''}</span>
+              <div>
+                <h3>{s.title}</h3>
+                {s.description && <p>{s.description}</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )}
+
+    {service?.deliverables && service.deliverables.length > 0 && (
+      <div class="deliverables">
+        <h2>Ergebnisse</h2>
+        <ul>
+          {service.deliverables.map((d) => <li>{d}</li>)}
+        </ul>
+      </div>
+    )}
+
+    {bodyHtml && <div class="service-body" set:html={bodyHtml} />}
+
+    {service?.faq && service.faq.length > 0 && (
+      <div class="faq">
+        <h2>Häufige Fragen</h2>
+        {service.faq.map((q) => (
+          <details class="faq-item">
+            <summary>{q.question}</summary>
+            <p>{q.answer}</p>
+          </details>
+        ))}
+      </div>
+    )}
+
+    {!service && (
+      <div class="empty-state">
+        <p>
+          Wir bereiten die Detailseite gerade vor. Schreiben Sie uns an
+          <a href="/kontakt"> kontakt</a> — wir besprechen Ihr Projekt gerne persönlich.
+        </p>
+      </div>
+    )}
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer { height: 100px; }
+  .page-header { margin: var(--space-6) 0 var(--space-12); max-width: 760px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+  .page-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 600;
+    line-height: 1.02;
+    margin-bottom: var(--space-4);
+  }
+  .lede {
+    font-size: 18px;
+    color: var(--color-muted);
+    line-height: 1.6;
+    max-width: 560px;
+  }
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 500;
+    margin: var(--space-10) 0 var(--space-4);
+  }
+  .step-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 16px;
+  }
+  .step-list li {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    padding: 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+  .step-num {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+  .step-list h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: var(--space-2);
+  }
+  .step-list p {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+  .deliverables ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .deliverables li {
+    padding: 16px 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+  }
+  .service-body :global(p) { max-width: 65ch; line-height: 1.7; margin-bottom: var(--space-4); }
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-4) 0;
+  }
+  .faq-item summary { cursor: pointer; font-weight: 600; font-size: 16px; }
+  .faq-item p { margin-top: var(--space-3); color: var(--color-muted); line-height: 1.65; max-width: 65ch; }
+  .empty-state {
+    padding: 48px;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-muted);
+  }
+  .empty-state a { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 4px; }
+</style>
