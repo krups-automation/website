@@ -572,13 +572,7 @@ export const SITE_SETTINGS_FALLBACK: Record<Locale, SiteSettings> = {
   en: {
     siteTitle: 'KRUPS Automation',
     siteTagline: 'Rail-guided conveyor systems for precision assembly.',
-    primaryNav: [
-      { label: 'Planning', href: '/en/planning' },
-      { label: 'Products', href: '/en/products' },
-      { label: 'Services', href: '/en/services' },
-      { label: 'Industries', href: '/en/industries' },
-      { label: 'Company', href: '/en/company' },
-    ],
+    primaryNav: [],
     ctaLabel: 'Request a Project',
     ctaHref: '/en/contact',
     footerCopyright: '© 2026 KRUPS Automation GmbH · Hilden, Germany',
