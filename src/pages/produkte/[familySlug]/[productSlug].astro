@@ -27,30 +27,27 @@ if (!product || product.productFamily?.slug?.current !== familySlug) {
 
 const introHtml = product.intro ? toHTML(product.intro as any) : '';
 const bodyHtml = product.body ? toHTML(product.body as any) : '';
+
+const familyName = product.productFamily?.name ?? '';
+const showFamilyCrumb = familyName.toLowerCase() !== product.name.toLowerCase();
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Produkte', href: '/produkte' },
+  ...(showFamilyCrumb ? [{ label: familyName, href: `/produkte/${familySlug}` }] : []),
+  { label: product.name },
+];
 ---
 
 <BaseLayout
   title={`${product.name} — KRUPS Automation`}
   description={product.metaDescription ?? product.tagline}
   locale="de"
-  breadcrumbs={[
-    { label: 'Home', href: '/' },
-    { label: 'Produkte', href: '/produkte' },
-    { label: product.productFamily?.name ?? '', href: `/produkte/${familySlug}` },
-    { label: product.name },
-  ]}
+  breadcrumbs={breadcrumbs}
 >
   <div class="page-spacer"></div>
 
   <Section surface="paper">
-    <Breadcrumbs
-      items={[
-        { label: 'Home', href: '/' },
-        { label: 'Produkte', href: '/produkte' },
-        { label: product.productFamily?.name ?? '', href: `/produkte/${familySlug}` },
-        { label: product.name },
-      ]}
-    />
+    <Breadcrumbs items={breadcrumbs} />
 
     <header class="product-header">
       <h1>{product.name}</h1>
