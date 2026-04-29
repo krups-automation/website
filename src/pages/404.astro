@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+---
+
+<BaseLayout
+  title="Seite nicht gefunden — KRUPS Automation"
+  description="Die gesuchte Seite existiert nicht."
+  locale="de"
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <div class="not-found">
+      <div class="code">404</div>
+      <h1>Seite nicht gefunden</h1>
+      <p>
+        Die gesuchte Seite existiert nicht oder wurde verschoben.
+      </p>
+      <div class="links">
+        <a href="/" class="btn-primary">Zur Startseite</a>
+        <a href="/produkte" class="btn-secondary">Produkte ansehen</a>
+        <a href="/kontakt" class="btn-secondary">Kontakt</a>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer { height: 100px; }
+  .not-found {
+    padding: var(--space-16) 0 var(--space-20);
+    max-width: 560px;
+  }
+  .code {
+    font-family: var(--font-mono);
+    font-size: 80px;
+    font-weight: 600;
+    color: var(--color-accent);
+    line-height: 1;
+    margin-bottom: var(--space-6);
+    letter-spacing: -2px;
+  }
+  h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: var(--space-4);
+  }
+  p {
+    font-size: 17px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin-bottom: var(--space-10);
+  }
+  .links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.8; }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 600;
+    transition: border-color 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--color-text); }
+</style>

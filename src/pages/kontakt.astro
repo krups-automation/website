@@ -1,0 +1,277 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
+---
+
+<BaseLayout
+  title="Kontakt — KRUPS Automation"
+  description="Sprechen Sie mit unseren Anlagenexperten. Wir beraten Sie zu Fördersystemen für Ihre Montagelinie."
+  locale="de"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="kontakt-grid">
+      <div class="kontakt-left">
+        <div class="eyebrow">Kontakt</div>
+        <h1>Sprechen Sie mit uns</h1>
+        <p class="lede">
+          Schildern Sie uns Ihr Projekt — Last, Takt, Linienstruktur. Wir melden
+          uns innerhalb eines Werktages.
+        </p>
+
+        <div class="contact-info">
+          <div class="info-block">
+            <span class="info-label">Hauptniederlassung</span>
+            <address>
+              KRUPS Automation GmbH<br />
+              Daimlerstraße 4<br />
+              74172 Neckarsulm<br />
+              Deutschland
+            </address>
+          </div>
+          <div class="info-block">
+            <span class="info-label">E-Mail</span>
+            <a href="mailto:info@krups-automation.com">info@krups-automation.com</a>
+          </div>
+          <div class="info-block">
+            <span class="info-label">Telefon</span>
+            <a href="tel:+497132989250">+49 7132 98 92 50</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="kontakt-right">
+        <form id="contact-form" class="form" novalidate>
+          <div class="field">
+            <label for="name">Name <span class="req">*</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">E-Mail <span class="req">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="company">Unternehmen</label>
+              <input id="company" name="company" type="text" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="phone">Telefon</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="message">Nachricht <span class="req">*</span></label>
+            <textarea id="message" name="message" rows="5" required placeholder="Produkt, Last, Takt, Menge ..."></textarea>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="btn-submit">
+              <span class="btn-label">Anfrage senden</span>
+              <span class="btn-loading" hidden>Wird gesendet…</span>
+            </button>
+          </div>
+          <div id="form-success" class="form-message success" hidden>
+            Vielen Dank — wir melden uns innerhalb eines Werktages.
+          </div>
+          <div id="form-error" class="form-message error" hidden>
+            Etwas ist schiefgelaufen. Bitte schreiben Sie uns direkt an
+            <a href="mailto:info@krups-automation.com">info@krups-automation.com</a>.
+          </div>
+        </form>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const btnLabel = form?.querySelector('.btn-label') as HTMLElement;
+  const btnLoading = form?.querySelector('.btn-loading') as HTMLElement;
+  const successBox = document.getElementById('form-success') as HTMLElement;
+  const errorBox = document.getElementById('form-error') as HTMLElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    btnLabel.hidden = true;
+    btnLoading.hidden = false;
+    successBox.hidden = true;
+    errorBox.hidden = true;
+
+    const data = {
+      name: (form.elements.namedItem('name') as HTMLInputElement).value,
+      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+      company: (form.elements.namedItem('company') as HTMLInputElement).value,
+      phone: (form.elements.namedItem('phone') as HTMLInputElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        form.reset();
+        successBox.hidden = false;
+      } else {
+        errorBox.hidden = false;
+      }
+    } catch {
+      errorBox.hidden = false;
+    } finally {
+      btnLabel.hidden = false;
+      btnLoading.hidden = true;
+    }
+  });
+</script>
+
+<style>
+  .page-spacer { height: 100px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+  .kontakt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding: var(--space-10) 0 var(--space-16);
+    align-items: start;
+  }
+  .kontakt-left h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 4vw, 60px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: var(--space-4);
+  }
+  .lede {
+    font-size: 17px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 420px;
+    margin-bottom: var(--space-10);
+  }
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .info-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: var(--space-1);
+  }
+  address {
+    font-style: normal;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .contact-info a {
+    font-size: 15px;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  .contact-info a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Form */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .req { color: var(--color-accent); }
+  input, textarea {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  input:focus, textarea:focus {
+    border-color: var(--color-accent);
+  }
+  textarea { resize: vertical; min-height: 120px; }
+  .form-footer { margin-top: var(--space-2); }
+  .btn-submit {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--color-text);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-submit:hover { opacity: 0.8; }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .form-message {
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .form-message.success {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+    color: var(--color-text);
+  }
+  .form-message.error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+  }
+  .form-message.error a { color: inherit; font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .kontakt-grid { grid-template-columns: 1fr; gap: 48px; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
