@@ -1,0 +1,500 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { organizationSchema } from '../lib/schema-org';
+
+const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Unternehmen' }];
+---
+
+<BaseLayout
+  title="Unternehmen — KRUPS Automation"
+  description="Seit 1985 entwickelt und fertigt KRUPS Automation schienengeführte Fördersysteme für die Automobilindustrie. 500+ Anlagen, 14 Länder, 100 % Eigenfertigung."
+  locale="de"
+  breadcrumbs={breadcrumbs}
+  jsonLd={[organizationSchema()]}
+>
+  <div class="page-spacer"></div>
+
+  <!-- ── HEADER ── -->
+  <Section surface="paper">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="page-header">
+      <div class="eyebrow">Seit 1985</div>
+      <h1>Fördertechnik.<br>Made in Hilden.</h1>
+      <p class="lede">
+        KRUPS Automation entwickelt, fertigt und inbetriebnimmt schienengeführte
+        Fördersysteme für die Präzisionsmontage — seit vierzig Jahren, 100 % in
+        eigener Fertigung.
+      </p>
+    </header>
+
+    <!-- STATS -->
+    <div class="stat-strip">
+      <div class="stat-item">
+        <span class="stat-num">500+</span>
+        <span class="stat-lbl">Anlagen im Einsatz</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <span class="stat-num">40+</span>
+        <span class="stat-lbl">Jahre Erfahrung</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <span class="stat-num">14</span>
+        <span class="stat-lbl">Länder</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-lbl">Standorte</span>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── HISTORY ── -->
+  <Section surface="clay">
+    <div class="text-block">
+      <div class="section-eyebrow">Geschichte</div>
+      <h2>Vier Jahrzehnte Montagelinientechnik</h2>
+      <div class="text-cols">
+        <p>
+          KRUPS Automation wurde 1985 in Hilden gegründet. Was als mittelständischer
+          Maschinenbauer begann, ist heute ein spezialisierter Hersteller von
+          schienengeführten Fördersystemen — mit Referenzen bei den größten
+          Automobilherstellern der Welt.
+        </p>
+        <p>
+          Die Kernentwicklung, die Fertigung aller mechanischen und elektrischen
+          Komponenten sowie die Inbetriebnahme erfolgen ausnahmslos am Stammsitz
+          in Hilden. Diese Eigenfertigung ist kein Prinzip aus Tradition — sie ist
+          die Grundlage für die Qualität und die kurzen Reaktionszeiten, für die
+          KRUPS bekannt ist.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── PRODUCTS ── -->
+  <Section surface="paper">
+    <div class="section-eyebrow">Produktportfolio</div>
+    <h2>Zwei Systeme. Jede Montageaufgabe.</h2>
+
+    <div class="product-cols">
+      <a class="product-block" href="/produkte/ecart">
+        <div class="product-block-tag">Flaggschiff</div>
+        <h3>LOGO!MAT eCart</h3>
+        <p>
+          Elektrisch angetriebene, schienengeführte Werkstückträger für die
+          Präzisionsmontage. Jeder eCart trägt Antrieb, Steuerung und
+          Energieversorgung selbst — ohne zentrale Antriebskette. Traglast
+          300–2.000 kg, Stoppgenauigkeit ±0,1 mm.
+        </p>
+        <span class="product-link">Zum LOGO!MAT eCart →</span>
+      </a>
+
+      <a class="product-block" href="/produkte/friktionsrollenfoerderer">
+        <div class="product-block-tag">Bewährte Plattform</div>
+        <h3>Friktionsrollen&shy;förderer</h3>
+        <p>
+          Reibrollenangetriebene Förderer für den kontinuierlichen Materialfluss
+          in Montage- und Prüflinien. Verfügbar als L-, XL- und T-Serie,
+          ölbeständig, über Jahrzehnte erprobt in der Automobilproduktion.
+        </p>
+        <span class="product-link">Zum Friktionsrollenförderer →</span>
+      </a>
+    </div>
+  </Section>
+
+  <!-- ── MANUFACTURING ── -->
+  <Section surface="charcoal">
+    <div class="mfg-grid">
+      <div class="mfg-text">
+        <div class="section-eyebrow section-eyebrow--light">Fertigung</div>
+        <h2>100 % Eigenfertigung in Hilden</h2>
+        <p>
+          Konstruktion, Blechbearbeitung, Schweißen, Lackieren, Montage,
+          Elektroinstallation, Softwareentwicklung und Inbetriebnahme —
+          alles unter einem Dach. Keine Fremdfertigung, keine ausgelagerten
+          Kernprozesse.
+        </p>
+        <p>
+          Das bedeutet: volle Kontrolle über Qualität und Lieferzeit, direkte
+          Ansprechpartner für technische Fragen, und ein Serviceteam, das die
+          Anlage kennt — weil es sie gebaut hat.
+        </p>
+      </div>
+      <div class="mfg-facts">
+        <div class="mfg-fact">
+          <span class="fact-label">Konstruktion</span>
+          <span class="fact-val">In-house CAD & Simulation</span>
+        </div>
+        <div class="mfg-fact">
+          <span class="fact-label">Mechanik</span>
+          <span class="fact-val">Eigene Blechbearbeitung & Schweißerei</span>
+        </div>
+        <div class="mfg-fact">
+          <span class="fact-label">Elektrik</span>
+          <span class="fact-val">Schaltschrankbau & Verkabelung</span>
+        </div>
+        <div class="mfg-fact">
+          <span class="fact-label">Software</span>
+          <span class="fact-val">Eigene SPS-Entwicklung</span>
+        </div>
+        <div class="mfg-fact">
+          <span class="fact-label">IBN</span>
+          <span class="fact-val">Inbetriebnahme weltweit</span>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── LOCATIONS ── -->
+  <Section surface="paper">
+    <div class="section-eyebrow">Standorte</div>
+    <h2>Global präsent, lokal verankert</h2>
+
+    <div class="location-grid">
+      <div class="location-card location-card--hq">
+        <div class="location-flag">DE</div>
+        <h3>Hilden, Deutschland</h3>
+        <p class="location-role">Hauptsitz &amp; Fertigung</p>
+        <p>
+          Entwicklung, Fertigung, Projektleitung und Vertrieb. Alle
+          Kernprozesse sind hier konzentriert — für kurze Wege und
+          direkte Kommunikation.
+        </p>
+      </div>
+      <div class="location-card">
+        <div class="location-flag">US</div>
+        <h3>Kentucky, USA</h3>
+        <p class="location-role">KRUPS Automation Americas</p>
+        <p>
+          Eigenständige Tochtergesellschaft für den nordamerikanischen
+          Markt. Lokale Projektabwicklung und Service für US-Kunden.
+        </p>
+      </div>
+      <div class="location-card">
+        <div class="location-flag">CN</div>
+        <h3>Qingdao, China</h3>
+        <p class="location-role">KRUPS Automation Asia</p>
+        <p>
+          Präsenz im größten Automobilmarkt der Welt. Betreuung
+          chinesischer Werke internationaler OEMs und Zulieferer.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── CUSTOMERS ── -->
+  <Section surface="clay">
+    <div class="customers-block">
+      <div class="section-eyebrow">Referenzkunden</div>
+      <h2>Vertrauen der Branchenführer</h2>
+      <p class="customers-sub">
+        KRUPS-Systeme laufen in den Montagewerken der führenden Automobilhersteller
+        und Zulieferer — von der Batteriemodul-Linie bis zur Achsmontage.
+      </p>
+      <div class="customer-logos">
+        <span>BMW</span>
+        <span>Volkswagen</span>
+        <span>Tesla</span>
+        <span>Ford</span>
+        <span>ŠKODA</span>
+        <span>ZF</span>
+        <span>Eaton</span>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── CTA ── -->
+  <Section surface="paper">
+    <div class="cta-block">
+      <h2>Ihr nächstes Projekt</h2>
+      <p>
+        Schildern Sie uns Ihre Montageaufgabe — Last, Takt, Linienstruktur.
+        Wir melden uns innerhalb eines Werktages.
+      </p>
+      <div class="cta-btns">
+        <a href="/kontakt" class="btn-primary">Kontakt aufnehmen</a>
+        <a href="/produkte" class="btn-secondary">Produktportfolio ansehen</a>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer { height: 100px; }
+
+  .eyebrow, .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+  .section-eyebrow--light { color: var(--color-accent); }
+
+  /* ── Header ── */
+  .page-header { margin: var(--space-6) 0 var(--space-10); max-width: 720px; }
+  .page-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 600;
+    line-height: 1.02;
+    margin-bottom: var(--space-4);
+  }
+  .lede {
+    font-size: 18px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 560px;
+  }
+
+  /* ── Stats ── */
+  .stat-strip {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: var(--space-8) 0 var(--space-6);
+    border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num {
+    font-family: var(--font-heading);
+    font-size: clamp(40px, 4vw, 56px);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+  .stat-lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .stat-sep { width: 1px; height: 48px; background: var(--color-border); flex-shrink: 0; }
+
+  /* ── History ── */
+  h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: var(--space-6);
+  }
+  .text-block { max-width: 880px; }
+  .text-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .text-cols p {
+    font-size: 16px;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  /* ── Products ── */
+  .product-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: var(--space-8);
+  }
+  .product-block {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 220ms;
+  }
+  .product-block:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .product-block-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-3);
+  }
+  .product-block h3 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: var(--space-3);
+  }
+  .product-block p {
+    font-size: 15px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin-bottom: var(--space-4);
+    flex: 1;
+  }
+  .product-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: auto;
+  }
+
+  /* ── Manufacturing (dark section) ── */
+  :global(.section-charcoal) h2 { color: var(--color-dark-text); }
+  .mfg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .mfg-text h2 { color: var(--color-dark-text); }
+  .mfg-text p {
+    font-size: 16px;
+    color: var(--color-dark-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-4);
+    max-width: 420px;
+  }
+  .mfg-facts { display: flex; flex-direction: column; gap: 0; }
+  .mfg-fact {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .mfg-fact:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+  .fact-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-dark-muted);
+    white-space: nowrap;
+  }
+  .fact-val {
+    font-size: 14px;
+    color: var(--color-dark-text);
+    text-align: right;
+  }
+
+  /* ── Locations ── */
+  .location-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: var(--space-8);
+  }
+  .location-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+  }
+  .location-card--hq { border-color: rgba(232, 181, 0, 0.3); }
+  .location-flag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--color-accent);
+    margin-bottom: var(--space-3);
+  }
+  .location-card h3 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: var(--space-1);
+  }
+  .location-role {
+    font-size: 12px;
+    color: var(--color-muted);
+    margin-bottom: var(--space-4);
+    font-style: italic;
+  }
+  .location-card p {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.65;
+  }
+
+  /* ── Customers ── */
+  .customers-block { max-width: 800px; }
+  .customers-sub {
+    font-size: 16px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin-bottom: var(--space-8);
+    max-width: 560px;
+  }
+  .customer-logos {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .customer-logos span {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    opacity: 0.5;
+  }
+
+  /* ── CTA ── */
+  .cta-block { max-width: 560px; padding: var(--space-8) 0; }
+  .cta-block h2 { margin-bottom: var(--space-3); }
+  .cta-block p {
+    font-size: 17px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin-bottom: var(--space-6);
+  }
+  .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 13px 26px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.8; }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    padding: 13px 26px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 600;
+    transition: border-color 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--color-text); }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .text-cols { grid-template-columns: 1fr; gap: 20px; }
+    .product-cols { grid-template-columns: 1fr; }
+    .mfg-grid { grid-template-columns: 1fr; gap: 40px; }
+    .location-grid { grid-template-columns: 1fr; }
+    .stat-strip { gap: 20px; }
+    .stat-sep { display: none; }
+  }
+</style>
