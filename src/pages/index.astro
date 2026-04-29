@@ -14,8 +14,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         von Batteriemodulen bis Antriebsstrang, bewährt bei den führenden Herstellern weltweit.
       </p>
       <div class="hero-ctas">
-        <a href="#systems" class="btn btn-dark">Unsere Systeme →</a>
-        <a href="#contact" class="btn btn-ghost">Experten kontaktieren</a>
+        <a href="#systems" class="btn btn-accent">Unsere Systeme →</a>
+        <a href="/kontakt" class="btn btn-ghost-light">Experten kontaktieren</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><span class="val">500+</span><span class="lbl">Anlagen</span></div>
@@ -433,14 +433,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: var(--color-bg);
+    background: var(--color-dark-bg);
   }
   .hero-fade {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse at 80% 30%, rgba(232, 181, 0, 0.05) 0%, transparent 50%),
-      linear-gradient(180deg, rgba(242, 239, 234, 0.6) 0%, transparent 20%, transparent 80%, rgba(242, 239, 234, 0.4) 100%);
+      radial-gradient(ellipse at 70% 50%, rgba(232, 181, 0, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 10% 80%, rgba(232, 181, 0, 0.025) 0%, transparent 50%);
     pointer-events: none;
   }
   .hero-content {
@@ -458,7 +458,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--color-accent);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -473,53 +473,58 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   .hero h1 {
     font-family: var(--font-heading);
-    font-size: clamp(56px, 6.5vw, 88px);
+    font-size: clamp(64px, 7.5vw, 104px);
     font-weight: 600;
-    line-height: 1;
+    line-height: 0.97;
     letter-spacing: 0;
-    color: var(--color-text);
-    max-width: 620px;
-    margin-bottom: 28px;
+    color: var(--color-dark-text);
+    max-width: 700px;
+    margin-bottom: 32px;
   }
-  .hero h1 em { font-style: italic; color: var(--color-muted); }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
   .hero-sub {
     font-size: 18px;
-    color: var(--color-muted);
-    max-width: 420px;
+    color: var(--color-dark-muted);
+    max-width: 400px;
     line-height: 1.65;
-    margin-bottom: 36px;
+    margin-bottom: 40px;
   }
-  .hero-ctas { display: flex; gap: 12px; margin-bottom: 56px; flex-wrap: wrap; }
+  .hero-ctas { display: flex; gap: 12px; margin-bottom: 64px; flex-wrap: wrap; }
   .hero-stats {
     display: flex;
-    gap: 28px;
+    gap: 32px;
     align-items: center;
     padding-top: 32px;
-    border-top: 1px solid var(--color-border);
-    max-width: 520px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    max-width: 560px;
     flex-wrap: wrap;
   }
-  .hero-stat { display: flex; flex-direction: column; gap: 3px; }
+  .hero-stat { display: flex; flex-direction: column; gap: 4px; }
   .hero-stat .val {
     font-family: var(--font-mono);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    color: var(--color-text);
+    color: var(--color-dark-text);
+    letter-spacing: 0.3px;
   }
   .hero-stat .lbl {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--color-dark-muted);
   }
-  .hero-stat-sep { width: 1px; height: 28px; background: var(--color-border); flex-shrink: 0; }
+  .hero-stat-sep { width: 1px; height: 28px; background: rgba(255, 255, 255, 0.08); flex-shrink: 0; }
 
   /* ───── 2. TRUST BAR ───── */
   .trust-bar {
-    background: var(--color-dark-bg);
-    padding: 32px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    background: var(--color-dark-surface);
+    padding: 28px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   }
   .trust-bar-inner {
     display: flex;
