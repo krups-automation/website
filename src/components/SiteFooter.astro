@@ -16,6 +16,9 @@ const labels = locale === 'de'
       legal: 'Impressum',
       privacy: 'Datenschutz',
       cookies: 'Cookie-Einstellungen',
+      about: 'Unternehmen',
+      careers: 'Karriere',
+      contact: 'Kontakt',
     }
   : {
       products: 'Products',
@@ -24,6 +27,9 @@ const labels = locale === 'de'
       legal: 'Legal Notice',
       privacy: 'Privacy Policy',
       cookies: 'Cookie Settings',
+      about: 'About',
+      careers: 'Careers',
+      contact: 'Contact',
     };
 
 const description = locale === 'de'
@@ -47,10 +53,10 @@ const description = locale === 'de'
       <div class="footer-col">
         <h4>{labels.products}</h4>
         <ul>
-          <li><a href="#">LOGO!MAT eCart</a></li>
-          <li><a href="#">Friktionsförderer L</a></li>
-          <li><a href="#">Friktionsförderer XL</a></li>
-          <li><a href="#">T-Serie</a></li>
+          <li><a href="/produkte/ecart">LOGO!MAT eCart</a></li>
+          <li><a href="/produkte/friktionsrollenfoerderer">Friktionsförderer L</a></li>
+          <li><a href="/produkte/friktionsrollenfoerderer">Friktionsförderer XL</a></li>
+          <li><a href="/produkte/friktionsrollenfoerderer">T-Serie</a></li>
         </ul>
       </div>
 
@@ -67,10 +73,10 @@ const description = locale === 'de'
       <div class="footer-col">
         <h4>{labels.company}</h4>
         <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="/unternehmen">{labels.about}</a></li>
+          <li><a href="#">{labels.careers}</a></li>
+          <li><a href="https://www.linkedin.com/company/krups-automation" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="/kontakt">{labels.contact}</a></li>
         </ul>
       </div>
     </div>
