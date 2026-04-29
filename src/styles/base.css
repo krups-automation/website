@@ -66,6 +66,12 @@ p {
   border-radius: var(--radius-sm);
 }
 
+/* Nav offset — all pages use .page-spacer to clear the fixed header */
+.page-spacer,
+.hero-spacer {
+  height: var(--nav-height);
+}
+
 /* Mono utility class for specs/labels */
 .mono {
   font-family: var(--font-mono);
