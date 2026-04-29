@@ -567,7 +567,7 @@ export const SITE_SETTINGS_FALLBACK: Record<Locale, SiteSettings> = {
     ],
     ctaLabel: 'Projekt anfragen',
     ctaHref: '/kontakt',
-    footerCopyright: '© 2026 KRUPS Automation GmbH · Hilden, Deutschland',
+    footerCopyright: '© 2026 KRUPS Automation GmbH · Dernbach, Deutschland',
   },
   en: {
     siteTitle: 'KRUPS Automation',
@@ -575,6 +575,6 @@ export const SITE_SETTINGS_FALLBACK: Record<Locale, SiteSettings> = {
     primaryNav: [],
     ctaLabel: 'Request a Project',
     ctaHref: '/en/contact',
-    footerCopyright: '© 2026 KRUPS Automation GmbH · Hilden, Germany',
+    footerCopyright: '© 2026 KRUPS Automation GmbH · Dernbach, Germany',
   },
 };
