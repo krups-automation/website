@@ -261,7 +261,7 @@ const INDUSTRY_PROJECTION = `{
   _id, name, slug, tagline, metaTitle, metaDescription, heroImage,
   characterBar, whatMoves, bottleneck, requirements, alternatives, solutionRouting,
   faq, cta,
-  "recommendedProducts": recommendedProducts[]->{_id, name, slug, tagline, heroImage},
+  "recommendedProducts": recommendedProducts[]->{_id, name, slug, tagline, heroImage, "productFamily": productFamily->{slug}},
   "proof": proof[]->{_id, title, slug, heroImage, anonymizedName, "customer": customer->{name, logo}}
 }`;
 
