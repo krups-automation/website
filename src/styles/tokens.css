@@ -80,7 +80,7 @@
 
   /* — Layout ————————————————————————————————————————————————— */
 
-  --nav-height: 60px;
+  --nav-height: 72px;
   --content-max: 1280px;
   --content-gutter: 80px;   /* desktop viewport edge min */
   --grid-gap: 24px;
