@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getServicesByTier, getServiceBySlug } from '../../sanity/queries';
+import { serviceSchema, faqSchema } from '../../lib/schema-org';
 
 export const getStaticPaths = (async () => {
   const services = await getServicesByTier('run', 'de');
@@ -19,28 +20,33 @@ if (!service || service.tier !== 'run') {
 }
 
 const bodyHtml = service.body ? toHTML(service.body as any) : '';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Leistungen', href: '/leistungen' },
+  { label: service.name },
+];
+const jsonLd = [
+  serviceSchema({
+    name: service.name,
+    description: service.metaDescription ?? service.summary,
+    url: `/leistungen/${slug}`,
+  }),
+  ...(service.faq && service.faq.length > 0 ? [faqSchema(service.faq)] : []),
+];
 ---
 
 <BaseLayout
   title={service.metaTitle ?? `${service.name} — KRUPS Automation`}
   description={service.metaDescription ?? service.summary}
   locale="de"
-  breadcrumbs={[
-    { label: 'Home', href: '/' },
-    { label: 'Leistungen', href: '/leistungen' },
-    { label: service.name },
-  ]}
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
 >
   <div class="page-spacer"></div>
 
   <Section surface="paper">
-    <Breadcrumbs
-      items={[
-        { label: 'Home', href: '/' },
-        { label: 'Leistungen', href: '/leistungen' },
-        { label: service.name },
-      ]}
-    />
+    <Breadcrumbs items={breadcrumbs} />
 
     <header class="page-header">
       <h1>{service.name}</h1>

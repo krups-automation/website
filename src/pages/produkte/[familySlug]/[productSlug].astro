@@ -5,6 +5,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Section from '../../../components/Section.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import { getAllProducts, getProductBySlug } from '../../../sanity/queries';
+import { productSchema, faqSchema } from '../../../lib/schema-org';
 
 export const getStaticPaths = (async () => {
   const products = await getAllProducts('de');
@@ -36,6 +37,18 @@ const breadcrumbs = [
   ...(showFamilyCrumb ? [{ label: familyName, href: `/produkte/${familySlug}` }] : []),
   { label: product.name },
 ];
+
+const pageUrl = `/produkte/${familySlug}/${productSlug}`;
+const jsonLd = [
+  productSchema({
+    name: product.name,
+    description: product.metaDescription ?? product.tagline,
+    url: pageUrl,
+    category: 'Fördersystem',
+    specs: product.specs?.map((s) => ({ label: s.label, value: s.value, unit: s.unit })),
+  }),
+  ...(product.faq && product.faq.length > 0 ? [faqSchema(product.faq)] : []),
+];
 ---
 
 <BaseLayout
@@ -43,6 +56,7 @@ const breadcrumbs = [
   description={product.metaDescription ?? product.tagline}
   locale="de"
   breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
 >
   <div class="page-spacer"></div>
 

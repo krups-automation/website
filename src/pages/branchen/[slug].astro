@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getAllIndustrySlugs, getIndustryBySlug } from '../../sanity/queries';
+import { faqSchema } from '../../lib/schema-org';
 
 export const getStaticPaths = (async () => {
   const industries = await getAllIndustrySlugs('de');
@@ -22,28 +23,26 @@ const whatMovesHtml = industry.whatMoves ? toHTML(industry.whatMoves as any) : '
 const bottleneckHtml = industry.bottleneck ? toHTML(industry.bottleneck as any) : '';
 const alternativesHtml = industry.alternatives ? toHTML(industry.alternatives as any) : '';
 const solutionHtml = industry.solutionRouting ? toHTML(industry.solutionRouting as any) : '';
+
+const jsonLd = industry.faq && industry.faq.length > 0 ? [faqSchema(industry.faq)] : [];
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Branchen', href: '/branchen' },
+  { label: industry.name },
+];
 ---
 
 <BaseLayout
   title={industry.metaTitle ?? `${industry.name} — KRUPS Automation`}
   description={industry.metaDescription ?? industry.tagline}
   locale="de"
-  breadcrumbs={[
-    { label: 'Home', href: '/' },
-    { label: 'Branchen', href: '/branchen' },
-    { label: industry.name },
-  ]}
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
 >
   <div class="page-spacer"></div>
 
   <Section surface="paper">
-    <Breadcrumbs
-      items={[
-        { label: 'Home', href: '/' },
-        { label: 'Branchen', href: '/branchen' },
-        { label: industry.name },
-      ]}
-    />
+    <Breadcrumbs items={breadcrumbs} />
 
     <header class="page-header">
       <h1>{industry.name}</h1>

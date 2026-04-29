@@ -81,6 +81,52 @@ export function breadcrumbSchema(crumbs: Crumb[]) {
   };
 }
 
+export interface ProductSchemaInput {
+  name: string;
+  description?: string;
+  url: string;
+  category?: string;
+  specs?: Array<{ label: string; value: string; unit?: string }>;
+}
+
+export function productSchema(input: ProductSchemaInput) {
+  const schema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: input.name,
+    url: input.url.startsWith('http') ? input.url : `${CANONICAL_URL}${input.url}`,
+    brand: { '@type': 'Brand', name: 'KRUPS Automation' },
+    manufacturer: { '@id': `${CANONICAL_URL}/#organization` },
+  };
+  if (input.description) schema.description = input.description;
+  if (input.category) schema.category = input.category;
+  if (input.specs && input.specs.length > 0) {
+    schema.additionalProperty = input.specs.map((s) => ({
+      '@type': 'PropertyValue',
+      name: s.label,
+      value: s.unit ? `${s.value} ${s.unit}` : s.value,
+    }));
+  }
+  return schema;
+}
+
+export interface ServiceSchemaInput {
+  name: string;
+  description?: string;
+  url: string;
+}
+
+export function serviceSchema(input: ServiceSchemaInput) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: input.name,
+    url: input.url.startsWith('http') ? input.url : `${CANONICAL_URL}${input.url}`,
+    provider: { '@id': `${CANONICAL_URL}/#organization` },
+    ...(input.description ? { description: input.description } : {}),
+  };
+}
+
 export interface FAQ {
   question: string;
   answer: string;

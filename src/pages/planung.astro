@@ -4,9 +4,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { getPlanService } from '../sanity/queries';
+import { serviceSchema, faqSchema } from '../lib/schema-org';
 
 const service = await getPlanService('de');
 const bodyHtml = service?.body ? toHTML(service.body as any) : '';
+
+const jsonLd = [
+  serviceSchema({
+    name: service?.name ?? 'Produktionsplanung',
+    description: service?.metaDescription ?? service?.summary,
+    url: '/planung',
+  }),
+  ...(service?.faq && service.faq.length > 0 ? [faqSchema(service.faq)] : []),
+];
 ---
 
 <BaseLayout
@@ -14,6 +24,7 @@ const bodyHtml = service?.body ? toHTML(service.body as any) : '';
   description={service?.metaDescription ?? 'Produktionsplanung für Montagelinien: Layout, Takt, Materialfluss, Payload-Profile.'}
   locale="de"
   breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Planung' }]}
+  jsonLd={jsonLd}
 >
   <div class="page-spacer"></div>
 
