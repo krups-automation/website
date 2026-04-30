@@ -32,31 +32,52 @@ const homeHref = locale === 'en' ? '/en/' : '/';
 ---
 
 <header class="site-header" aria-label="Primary">
-  <a href={homeHref} class="brand">
-    KRUPS <span>Automation</span>
-  </a>
+  <!-- checkbox powers the CSS-only mobile drawer toggle -->
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-hidden="true" />
 
-  {settings.primaryNav && settings.primaryNav.length > 0 && (
-    <nav class="nav-links" aria-label="Main navigation">
-      <ul>
-        {settings.primaryNav.map((item) => (
-          <li><a href={item.href}>{item.label}</a></li>
-        ))}
-      </ul>
-    </nav>
-  )}
-
-  <div class="nav-right">
-    <a href={otherLocaleHref} class="lang-switch" aria-label={`Switch to ${otherLocale === 'de' ? 'German' : 'English'}`}>
-      <span class="current">{currentLocaleLabel}</span>
-      <span class="sep">/</span>
-      <span class="other">{otherLocaleLabel}</span>
+  <div class="header-inner">
+    <a href={homeHref} class="brand">
+      KRUPS <span>Automation</span>
     </a>
 
-    {settings.ctaLabel && settings.ctaHref && (
-      <a href={settings.ctaHref} class="cta">{settings.ctaLabel}</a>
+    {settings.primaryNav && settings.primaryNav.length > 0 && (
+      <nav class="nav-links" aria-label="Main navigation">
+        <ul>
+          {settings.primaryNav.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
     )}
+
+    <div class="nav-right">
+      <a href={otherLocaleHref} class="lang-switch" aria-label={`Switch to ${otherLocale === 'de' ? 'German' : 'English'}`}>
+        <span class="current">{currentLocaleLabel}</span>
+        <span class="sep">/</span>
+        <span class="other">{otherLocaleLabel}</span>
+      </a>
+
+      {settings.ctaLabel && settings.ctaHref && (
+        <a href={settings.ctaHref} class="cta">{settings.ctaLabel}</a>
+      )}
+
+      <label for="nav-toggle" class="burger" aria-label="Navigation öffnen">
+        <span></span><span></span><span></span>
+      </label>
+    </div>
   </div>
+
+  <!-- Mobile drawer — only visible when checkbox is checked -->
+  <nav class="nav-drawer" aria-label="Mobile navigation">
+    <ul class="drawer-links">
+      {settings.primaryNav?.map((item) => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+    </ul>
+    {settings.ctaLabel && settings.ctaHref && (
+      <a href={settings.ctaHref} class="drawer-cta">{settings.ctaLabel}</a>
+    )}
+  </nav>
 </header>
 
 <style>
@@ -70,6 +91,19 @@ const homeHref = locale === 'en' ? '/en/' : '/';
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
+  }
+
+  /* Hidden checkbox — controls drawer state */
+  .nav-toggle-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .header-inner {
     padding: 0 48px;
     height: var(--nav-height);
     display: grid;
@@ -152,7 +186,88 @@ const homeHref = locale === 'en' ? '/en/' : '/';
   .cta:hover,
   .cta:focus-visible { background: #000; }
 
+  /* Hamburger button */
+  .burger {
+    display: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: 4px;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+  }
+
+  .burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 1px;
+    transition: transform 220ms ease, opacity 220ms ease;
+  }
+
+  /* Burger animates to × when drawer is open */
+  .nav-toggle-input:checked ~ .header-inner .burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle-input:checked ~ .header-inner .burger span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-toggle-input:checked ~ .header-inner .burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile drawer */
+  .nav-drawer {
+    display: none;
+    padding: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .nav-toggle-input:checked ~ .nav-drawer {
+    display: block;
+  }
+
+  .drawer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-6);
+  }
+
+  .drawer-links a {
+    display: block;
+    padding: 14px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+    transition: color var(--duration-short);
+  }
+
+  .drawer-links a:hover { color: var(--color-accent); }
+
+  .drawer-cta {
+    display: inline-flex;
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 600;
+    transition: background var(--duration-short);
+  }
+
+  .drawer-cta:hover { background: #000; }
+
   @media (max-width: 900px) {
+    .header-inner { padding: 0 var(--space-6); }
     .nav-links { display: none; }
+    .cta { display: none; }
+    .burger { display: flex; }
   }
 </style>
