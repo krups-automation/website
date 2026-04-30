@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
 ---
 
 <BaseLayout title="KRUPS Automation — LOGO!MAT eCart" locale="de">
@@ -14,8 +15,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         von Batteriemodulen bis Antriebsstrang, bewährt bei den führenden Herstellern weltweit.
       </p>
       <div class="hero-ctas">
-        <a href="#systems" class="btn btn-accent">Unsere Systeme →</a>
-        <a href="/kontakt" class="btn btn-ghost-light">Experten kontaktieren</a>
+        <Button href="#systems" variant="primary">Unsere Systeme →</Button>
+        <Button href="/kontakt" variant="ghost-light">Experten kontaktieren</Button>
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><span class="val">500+</span><span class="lbl">Anlagen</span></div>
@@ -75,7 +76,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           für die anspruchsvollsten Montageumgebungen in der Automobil- und
           Industrieproduktion in Betrieb.
         </p>
-        <a href="/unternehmen" class="btn btn-ghost">Über das Unternehmen <span class="card-arrow">→</span></a>
+        <Button href="/unternehmen" variant="ghost">Über das Unternehmen →</Button>
       </div>
     </div>
   </section>
@@ -268,7 +269,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="why-footer">
-        <a href="/ressourcen/ecart-vs-agv" class="btn btn-ghost-light">Vollständigen eCart-vs.-AGV-Vergleich lesen →</a>
+        <Button href="/ressourcen/ecart-vs-agv" variant="ghost-light">Vollständigen eCart-vs.-AGV-Vergleich lesen →</Button>
       </div>
     </div>
   </section>
@@ -346,7 +347,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             Die richtige Wahl hängt von Traglast, Takt und
             Infrastrukturbedingungen ab.
           </p>
-          <a href="/ressourcen/technologievergleich" class="btn btn-ghost">Vollständiger Vergleich →</a>
+          <Button href="/ressourcen/technologievergleich" variant="ghost">Vollständiger Vergleich →</Button>
         </div>
 
         <div class="tech-comparison">
@@ -378,8 +379,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         wir zeigen Ihnen, was möglich ist.
       </p>
       <div class="footer-cta-btns">
-        <a href="/kontakt" class="btn btn-accent">Projekt anfragen →</a>
-        <a href="/downloads/ecart-broschuere" class="btn btn-ghost-light">Produktbroschüre herunterladen</a>
+        <Button href="/kontakt" variant="primary">Projekt anfragen →</Button>
+        <Button href="/downloads/ecart-broschuere" variant="ghost-light">Produktbroschüre herunterladen</Button>
       </div>
     </div>
   </section>
@@ -399,32 +400,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0 auto;
     padding: 0 64px;
   }
-
-  /* ───── Button variants (page-scoped) ───── */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 13px 26px;
-    border-radius: var(--radius-pill);
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1;
-    cursor: pointer;
-    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
-    white-space: nowrap;
-    border: none;
-    letter-spacing: 0.1px;
-  }
-  .btn-dark { background: var(--color-text); color: var(--color-bg); }
-  .btn-dark:hover { background: #333; }
-  .btn-accent { background: var(--color-accent); color: var(--color-text); }
-  .btn-accent:hover { background: var(--color-accent-hover); }
-  .btn-ghost { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
-  .btn-ghost:hover { border-color: var(--color-text); }
-  .btn-ghost-light { background: transparent; color: var(--color-dark-text); border: 1px solid rgba(232, 228, 221, 0.25); }
-  .btn-ghost-light:hover { border-color: rgba(232, 228, 221, 0.6); }
 
   /* ───── 1. HERO ───── */
   .hero {

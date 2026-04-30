@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Button from '../components/Button.astro';
 import { organizationSchema } from '../lib/schema-org';
 
 const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Unternehmen' }];
@@ -218,8 +219,8 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Unternehmen' }];
         Wir melden uns innerhalb eines Werktages.
       </p>
       <div class="cta-btns">
-        <a href="/kontakt" class="btn-primary">Kontakt aufnehmen</a>
-        <a href="/produkte" class="btn-secondary">Produktportfolio ansehen</a>
+        <Button href="/kontakt" variant="dark">Kontakt aufnehmen</Button>
+        <Button href="/produkte" variant="ghost">Produktportfolio ansehen</Button>
       </div>
     </div>
   </Section>
@@ -462,31 +463,6 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Unternehmen' }];
     margin-bottom: var(--space-6);
   }
   .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    background: var(--color-text);
-    color: var(--color-bg);
-    padding: 13px 26px;
-    border-radius: var(--radius-pill);
-    font-size: 14px;
-    font-weight: 600;
-    transition: opacity 0.15s;
-  }
-  .btn-primary:hover { opacity: 0.8; }
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    background: transparent;
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    padding: 13px 26px;
-    border-radius: var(--radius-pill);
-    font-size: 14px;
-    font-weight: 600;
-    transition: border-color 0.15s;
-  }
-  .btn-secondary:hover { border-color: var(--color-text); }
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
