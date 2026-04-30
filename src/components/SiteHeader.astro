@@ -91,7 +91,33 @@ const homeHref = locale === 'en' ? '/en/' : '/';
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
+    transition: background 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease;
   }
+
+  /* Transparent state — used on hero pages only (added via JS) */
+  .site-header.is-transparent {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent;
+  }
+  .site-header.is-transparent .brand { color: var(--color-dark-text); }
+  .site-header.is-transparent .brand span { color: var(--color-accent); }
+  .site-header.is-transparent .nav-links a { color: var(--color-dark-muted); }
+  .site-header.is-transparent .nav-links a:hover,
+  .site-header.is-transparent .nav-links a:focus-visible {
+    color: var(--color-dark-text);
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .site-header.is-transparent .lang-switch { color: var(--color-dark-muted); }
+  .site-header.is-transparent .lang-switch .current { color: var(--color-dark-text); }
+  .site-header.is-transparent .lang-switch:hover .other { color: var(--color-dark-text); }
+  .site-header.is-transparent .cta {
+    background: var(--color-accent);
+    color: var(--color-text);
+  }
+  .site-header.is-transparent .cta:hover { background: var(--color-accent-hover); }
+  .site-header.is-transparent .burger span { background: var(--color-dark-text); }
 
   /* Hidden checkbox — controls drawer state */
   .nav-toggle-input {
@@ -271,3 +297,22 @@ const homeHref = locale === 'en' ? '/en/' : '/';
     .burger { display: flex; }
   }
 </style>
+
+<script>
+  const header = document.querySelector('.site-header') as HTMLElement | null;
+  const heroEl = document.querySelector('.hero');
+
+  if (heroEl && header) {
+    header.classList.add('is-transparent');
+
+    const onScroll = () => {
+      if (window.scrollY > 24) {
+        header.classList.remove('is-transparent');
+      } else {
+        header.classList.add('is-transparent');
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>
