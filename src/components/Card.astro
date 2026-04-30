@@ -22,7 +22,7 @@ const classes = ['card', `card-pad-${padding}`, href && 'card-link', className].
     background: var(--color-bg);
     border: var(--border-hairline);
     border-radius: var(--radius-lg);
-    transition: border-color var(--duration-short);
+    transition: border-color var(--duration-short), transform var(--duration-short), box-shadow var(--duration-short);
     color: inherit;
   }
 
@@ -33,5 +33,7 @@ const classes = ['card', `card-pad-${padding}`, href && 'card-link', className].
   .card-link:hover,
   .card-link:focus-visible {
     border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
 </style>

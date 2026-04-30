@@ -84,11 +84,15 @@ const families = await getAllProductFamilies('de');
     border-radius: var(--radius-lg);
     padding: 44px;
     color: var(--color-text);
-    transition: border-color 220ms ease;
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
     display: flex;
     flex-direction: column;
   }
-  .family-card:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .family-card:hover {
+    border-color: rgba(232, 181, 0, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
   .family-card h2 {
     font-family: var(--font-heading);
     font-size: 32px;

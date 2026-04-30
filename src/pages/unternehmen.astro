@@ -318,9 +318,13 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Unternehmen' }];
     color: var(--color-text);
     display: flex;
     flex-direction: column;
-    transition: border-color 220ms;
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
   }
-  .product-block:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .product-block:hover {
+    border-color: rgba(232, 181, 0, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
   .product-block-tag {
     font-size: 10px;
     font-weight: 700;

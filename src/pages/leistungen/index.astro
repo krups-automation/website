@@ -83,9 +83,13 @@ const services = await getServicesByTier('run', 'de');
     display: flex;
     flex-direction: column;
     color: var(--color-text);
-    transition: border-color 220ms ease;
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
   }
-  .service-card:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .service-card:hover {
+    border-color: rgba(232, 181, 0, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
   .service-card h2 {
     font-family: var(--font-heading);
     font-size: 24px;
