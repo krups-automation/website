@@ -76,6 +76,21 @@ p {
   height: var(--nav-height);
 }
 
+/* Scroll reveal — [data-reveal] elements fade+slide up when they enter the viewport.
+   js-loaded class (added by BaseLayout script) gates the hidden state so there's
+   no FOUC if JS is slow or absent. */
+[data-reveal] {
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+.js-loaded [data-reveal]:not(.revealed) {
+  opacity: 0;
+  transform: translateY(12px);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { transition: none; }
+  .js-loaded [data-reveal]:not(.revealed) { opacity: 1; transform: none; }
+}
+
 /* Custom FAQ accordion marker — replaces browser default triangle */
 details.faq-item > summary {
   list-style: none;

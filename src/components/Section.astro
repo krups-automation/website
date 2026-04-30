@@ -13,7 +13,7 @@ const classes = ['section', `section-${surface}`, className].filter(Boolean).joi
 ---
 
 <Tag class={classes} id={id} {...rest}>
-  <div class={narrow ? 'inner inner-narrow' : 'inner'}>
+  <div class={narrow ? 'inner inner-narrow' : 'inner'} data-reveal>
     <slot />
   </div>
 </Tag>

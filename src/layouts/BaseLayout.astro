@@ -71,6 +71,32 @@ if (jsonLd && jsonLd.length > 0) {
     <SiteFooter settings={settings} locale={locale} />
     <CookieConsent />
 
+    <script>
+      // Gate the reveal CSS state so there's no FOUC before JS runs
+      document.documentElement.classList.add('js-loaded');
+
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            observer.unobserve(e.target);
+          }
+        }),
+        { threshold: 0.06, rootMargin: '0px 0px -48px 0px' }
+      );
+
+      requestAnimationFrame(() => {
+        document.querySelectorAll('[data-reveal]').forEach((el) => {
+          // Elements already in the viewport on page load: reveal immediately, no animation
+          if (el.getBoundingClientRect().top < window.innerHeight) {
+            el.classList.add('revealed');
+          } else {
+            observer.observe(el);
+          }
+        });
+      });
+    </script>
+
     <style>
       .skip-link {
         position: absolute;
