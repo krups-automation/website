@@ -37,6 +37,7 @@
   /* Sizes (desktop; override via clamps where marked) */
   --font-size-h1: 88px;
   --font-size-h2: clamp(36px, 3.5vw, 52px);
+  --font-size-h2-section: 28px;   /* inner-page sub-section headings (Technische Daten, FAQ, etc.) */
   --font-size-h3: 40px;
   --font-size-h4: 28px;
   --font-size-body: 18px;
