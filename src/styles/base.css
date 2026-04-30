@@ -72,6 +72,28 @@ p {
   height: var(--nav-height);
 }
 
+/* Custom FAQ accordion marker — replaces browser default triangle */
+details.faq-item > summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+}
+details.faq-item > summary::-webkit-details-marker { display: none; }
+details.faq-item > summary::after {
+  content: '+';
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  line-height: 1;
+}
+details[open].faq-item > summary::after {
+  content: '−';
+}
+
 /* Mono utility class for specs/labels */
 .mono {
   font-family: var(--font-mono);
