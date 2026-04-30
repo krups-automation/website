@@ -12,7 +12,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* Headings — Oswald, weight 600 for H1/H2, 500 for H3/H4 */
