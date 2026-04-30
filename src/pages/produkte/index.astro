@@ -26,7 +26,9 @@ const families = await getAllProductFamilies('de');
         genommen in Dernbach.
       </p>
     </header>
+  </Section>
 
+  <Section surface="clay">
     {families.length === 0 ? (
       <div class="empty-state">
         <p>
@@ -49,8 +51,7 @@ const families = await getAllProductFamilies('de');
 </BaseLayout>
 
 <style>
-  /* height set globally via --nav-height */
-  .page-header { margin: var(--space-6) 0 var(--space-12); max-width: 720px; }
+  .page-header { margin: var(--space-6) 0 var(--space-4); max-width: 720px; }
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -78,8 +79,9 @@ const families = await getAllProductFamilies('de');
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+  /* Cards on clay section — use --color-bg so they read lighter than the surface */
   .family-card {
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: 44px;

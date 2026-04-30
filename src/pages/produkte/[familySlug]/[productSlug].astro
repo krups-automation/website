@@ -86,7 +86,9 @@ const jsonLd = [
         </dl>
       </div>
     )}
+  </Section>
 
+  <Section surface="clay">
     {product.keyFeatures && product.keyFeatures.length > 0 && (
       <div class="features">
         <h2>Merkmale</h2>
@@ -102,40 +104,44 @@ const jsonLd = [
     )}
 
     {bodyHtml && <div class="product-body" set:html={bodyHtml} />}
-
-    {product.faq && product.faq.length > 0 && (
-      <div class="faq">
-        <h2>Häufige Fragen</h2>
-        {product.faq.map((q) => (
-          <details class="faq-item">
-            <summary>{q.question}</summary>
-            <p>{q.answer}</p>
-          </details>
-        ))}
-      </div>
-    )}
-
-    {product.downloads && product.downloads.length > 0 && (
-      <div class="downloads">
-        <h2>Downloads</h2>
-        <ul>
-          {product.downloads.map((d: any) => (
-            <li>
-              <a href={d.file?.asset?.url ?? '#'}>
-                {d.title}
-                {d.fileType && <span class="type"> · {d.fileType.toUpperCase()}</span>}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
   </Section>
+
+  {(product.faq?.length > 0 || product.downloads?.length > 0) && (
+    <Section surface="paper">
+      {product.faq && product.faq.length > 0 && (
+        <div class="faq">
+          <h2>Häufige Fragen</h2>
+          {product.faq.map((q) => (
+            <details class="faq-item">
+              <summary>{q.question}</summary>
+              <p>{q.answer}</p>
+            </details>
+          ))}
+        </div>
+      )}
+
+      {product.downloads && product.downloads.length > 0 && (
+        <div class="downloads">
+          <h2>Downloads</h2>
+          <ul>
+            {product.downloads.map((d: any) => (
+              <li>
+                <a href={d.file?.asset?.url ?? '#'}>
+                  {d.title}
+                  {d.fileType && <span class="type"> · {d.fileType.toUpperCase()}</span>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </Section>
+  )}
 </BaseLayout>
 
 <style>
   /* height set globally via --nav-height */
-  .product-header { margin: var(--space-6) 0 var(--space-12); max-width: 760px; }
+  .product-header { margin: var(--space-6) 0 var(--space-8); max-width: 760px; }
   .product-header h1 {
     font-family: var(--font-heading);
     font-size: clamp(44px, 5vw, 72px);
@@ -156,6 +162,9 @@ const jsonLd = [
     font-weight: 500;
     margin: var(--space-10) 0 var(--space-4);
   }
+  .specs h2,
+  .features h2,
+  .faq h2 { margin-top: 0; }
   .spec-list {
     border-top: 1px solid var(--color-border);
   }
@@ -187,7 +196,7 @@ const jsonLd = [
     padding: 0;
   }
   .feature-list li {
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: 24px;
@@ -219,6 +228,7 @@ const jsonLd = [
     line-height: 1.65;
     max-width: 65ch;
   }
+  .downloads { margin-top: var(--space-10); }
   .downloads ul { list-style: none; padding: 0; }
   .downloads li { padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border); }
   .downloads a { color: var(--color-text); font-weight: 500; }

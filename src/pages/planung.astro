@@ -42,7 +42,9 @@ const jsonLd = [
         </p>
       )}
     </header>
+  </Section>
 
+  <Section surface="clay">
     {service?.processSteps && service.processSteps.length > 0 && (
       <div class="steps">
         <h2>Vorgehen</h2>
@@ -71,18 +73,6 @@ const jsonLd = [
 
     {bodyHtml && <div class="service-body" set:html={bodyHtml} />}
 
-    {service?.faq && service.faq.length > 0 && (
-      <div class="faq">
-        <h2>Häufige Fragen</h2>
-        {service.faq.map((q) => (
-          <details class="faq-item">
-            <summary>{q.question}</summary>
-            <p>{q.answer}</p>
-          </details>
-        ))}
-      </div>
-    )}
-
     {!service && (
       <div class="empty-state">
         <p>
@@ -92,11 +82,25 @@ const jsonLd = [
       </div>
     )}
   </Section>
+
+  {service?.faq && service.faq.length > 0 && (
+    <Section surface="paper">
+      <div class="faq">
+        <h2>Häufige Fragen</h2>
+        {service.faq.map((q) => (
+          <details class="faq-item">
+            <summary>{q.question}</summary>
+            <p>{q.answer}</p>
+          </details>
+        ))}
+      </div>
+    </Section>
+  )}
 </BaseLayout>
 
 <style>
   /* height set globally via --nav-height */
-  .page-header { margin: var(--space-8) 0 var(--space-16); max-width: 760px; }
+  .page-header { margin: var(--space-8) 0 var(--space-8); max-width: 760px; }
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -125,8 +129,9 @@ const jsonLd = [
     font-family: var(--font-heading);
     font-size: var(--font-size-h2-section);
     font-weight: 500;
-    margin: var(--space-16) 0 var(--space-6);
+    margin: 0 0 var(--space-6);
   }
+  .deliverables { margin-top: var(--space-12); }
   .step-list {
     list-style: none;
     padding: 0;
@@ -138,7 +143,7 @@ const jsonLd = [
     grid-template-columns: 56px 1fr;
     gap: 24px;
     padding: 24px;
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
   }
@@ -169,7 +174,7 @@ const jsonLd = [
   }
   .deliverables li {
     padding: 16px 20px;
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     font-size: 14px;

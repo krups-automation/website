@@ -73,7 +73,9 @@ const breadcrumbs = [
         <div set:html={bottleneckHtml} />
       </section>
     )}
+  </Section>
 
+  <Section surface="clay">
     {industry.requirements && industry.requirements.length > 0 && (
       <section>
         <h2>Anforderungen</h2>
@@ -118,8 +120,10 @@ const breadcrumbs = [
         </div>
       </section>
     )}
+  </Section>
 
-    {industry.faq && industry.faq.length > 0 && (
+  {industry.faq && industry.faq.length > 0 && (
+    <Section surface="paper">
       <section>
         <h2>Häufige Fragen</h2>
         {industry.faq.map((q) => (
@@ -129,20 +133,22 @@ const breadcrumbs = [
           </details>
         ))}
       </section>
-    )}
+    </Section>
+  )}
 
-    {industry.cta?.headline && (
-      <section class="industry-cta">
+  {industry.cta?.headline && (
+    <Section surface="charcoal">
+      <div class="cta-block">
         <h2>{industry.cta.headline}</h2>
-        {industry.cta.description && <p>{industry.cta.description}</p>}
+        {industry.cta.description && <p class="cta-desc">{industry.cta.description}</p>}
         {industry.cta.buttonLabel && (
           <a href={industry.cta.buttonUrl ?? '/kontakt'} class="cta-btn">
             {industry.cta.buttonLabel} →
           </a>
         )}
-      </section>
-    )}
-  </Section>
+      </div>
+    </Section>
+  )}
 </BaseLayout>
 
 <style>
@@ -192,6 +198,7 @@ const breadcrumbs = [
     font-weight: 500;
     margin: var(--space-10) 0 var(--space-4);
   }
+  section:first-child h2 { margin-top: 0; }
   .prose :global(p) {
     max-width: 65ch;
     line-height: 1.7;
@@ -221,7 +228,7 @@ const breadcrumbs = [
     gap: 16px;
   }
   .product-card {
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: 24px;
@@ -247,18 +254,8 @@ const breadcrumbs = [
   .faq-item { border-bottom: 1px solid var(--color-border); padding: var(--space-4) 0; }
   .faq-item summary { cursor: pointer; font-weight: 600; font-size: 16px; }
   .faq-item p { margin-top: var(--space-3); color: var(--color-muted); line-height: 1.65; max-width: 65ch; }
-  .industry-cta {
-    margin-top: var(--space-16);
-    padding: 48px;
-    background: var(--color-dark-bg);
-    color: var(--color-dark-text);
-    border-radius: var(--radius-lg);
-  }
-  .industry-cta h2 {
-    color: var(--color-dark-text);
-    margin-top: 0;
-  }
-  .industry-cta p {
+  .cta-block h2 { color: var(--color-dark-text); margin-top: 0; }
+  .cta-desc {
     color: var(--color-dark-muted);
     line-height: 1.65;
     max-width: 540px;

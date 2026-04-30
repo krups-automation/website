@@ -17,15 +17,19 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
   <Section surface="paper">
     <Breadcrumbs items={breadcrumbs} />
 
+    <header class="page-header">
+      <div class="eyebrow">Kontakt</div>
+      <h1>Sprechen Sie mit uns</h1>
+      <p class="lede">
+        Schildern Sie uns Ihr Projekt — Last, Takt, Linienstruktur. Wir melden
+        uns innerhalb eines Werktages.
+      </p>
+    </header>
+  </Section>
+
+  <Section surface="clay">
     <div class="kontakt-grid">
       <div class="kontakt-left">
-        <div class="eyebrow">Kontakt</div>
-        <h1>Sprechen Sie mit uns</h1>
-        <p class="lede">
-          Schildern Sie uns Ihr Projekt — Last, Takt, Linienstruktur. Wir melden
-          uns innerhalb eines Werktages.
-        </p>
-
         <div class="contact-info">
           <div class="info-block">
             <span class="info-label">Hauptniederlassung</span>
@@ -151,14 +155,8 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
     color: var(--color-accent);
     margin-bottom: var(--space-4);
   }
-  .kontakt-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    padding: var(--space-10) 0 var(--space-16);
-    align-items: start;
-  }
-  .kontakt-left h1 {
+  .page-header { margin: var(--space-8) 0 var(--space-4); max-width: 760px; }
+  .page-header h1 {
     font-family: var(--font-heading);
     font-size: clamp(36px, 4vw, 60px);
     font-weight: 600;
@@ -170,7 +168,12 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
     color: var(--color-muted);
     line-height: 1.65;
     max-width: 420px;
-    margin-bottom: var(--space-10);
+  }
+  .kontakt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
   }
   .contact-info {
     display: flex;
@@ -225,7 +228,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
     font-family: var(--font-body);
     font-size: 15px;
     color: var(--color-text);
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: 12px 14px;

@@ -17,7 +17,6 @@ const services = await getServicesByTier('run', 'de');
 
   <Section surface="paper">
     <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Leistungen' }]} />
-
     <header class="page-header">
       <div class="eyebrow">Run</div>
       <h1>Beratung bis Betrieb.</h1>
@@ -26,7 +25,9 @@ const services = await getServicesByTier('run', 'de');
         Montage, Steuerungsintegration und Service. Die Linie läuft — wir halten sie am Laufen.
       </p>
     </header>
+  </Section>
 
+  <Section surface="clay">
     {services.length === 0 ? (
       <div class="empty-state">
         <p>Leistungsinhalte werden derzeit im Studio gepflegt. <a href="/kontakt">Kontakt</a></p>
@@ -46,8 +47,7 @@ const services = await getServicesByTier('run', 'de');
 </BaseLayout>
 
 <style>
-  /* height set globally via --nav-height */
-  .page-header { margin: var(--space-6) 0 var(--space-12); max-width: 720px; }
+  .page-header { margin: var(--space-6) 0 var(--space-4); max-width: 720px; }
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -75,8 +75,9 @@ const services = await getServicesByTier('run', 'de');
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 16px;
   }
+  /* Cards on clay — use --color-bg for contrast */
   .service-card {
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: 32px;
