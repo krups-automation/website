@@ -23,6 +23,7 @@ h1 {
   line-height: var(--line-height-h1);
   font-weight: 600;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 h2 {
@@ -31,6 +32,7 @@ h2 {
   line-height: var(--line-height-h2);
   font-weight: 600;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 h3 {
@@ -39,6 +41,7 @@ h3 {
   line-height: var(--line-height-h3);
   font-weight: 500;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 h4 {
@@ -47,6 +50,7 @@ h4 {
   line-height: var(--line-height-h4);
   font-weight: 500;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 p {
