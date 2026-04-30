@@ -82,7 +82,7 @@
 
   --nav-height: 72px;
   --content-max: 1280px;
-  --content-gutter: 80px;   /* desktop viewport edge min */
+  --content-gutter: 48px;   /* inner-page section padding — used by Section.astro and SiteFooter */
   --grid-gap: 24px;
 
   --breakpoint-mobile: 640px;

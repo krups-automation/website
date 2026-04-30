@@ -41,7 +41,7 @@ const classes = ['section', `section-${surface}`, className].filter(Boolean).joi
   .inner {
     max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0 var(--space-12);
+    padding: 0 var(--content-gutter);
   }
 
   .inner-narrow {
@@ -54,7 +54,7 @@ const classes = ['section', `section-${surface}`, className].filter(Boolean).joi
     }
 
     .inner {
-      padding: 0 var(--space-6);
+      padding: 0 var(--space-6); /* 24px mobile */
     }
   }
 </style>

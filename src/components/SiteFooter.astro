@@ -103,7 +103,7 @@ const description = locale === 'de'
   .container {
     max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0 var(--space-6);
+    padding: 0 var(--content-gutter);
   }
 
   .footer-grid {
@@ -211,6 +211,10 @@ const description = locale === 'de'
   }
 
   @media (max-width: 640px) {
+    .container {
+      padding: 0 var(--space-6);
+    }
+
     .footer-grid {
       grid-template-columns: 1fr;
     }
