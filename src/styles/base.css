@@ -91,13 +91,18 @@ p {
   .js-loaded [data-reveal]:not(.revealed) { opacity: 1; transform: none; }
 }
 
-/* Custom FAQ accordion marker — replaces browser default triangle */
+/* Custom FAQ accordion marker — replaces browser default triangle.
+   Pages with local <style> blocks need to repeat display:flex (Astro scoped
+   styles have higher specificity). The ::after pseudo is here for all pages. */
 details.faq-item > summary {
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-4);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
 }
 details.faq-item > summary::-webkit-details-marker { display: none; }
 details.faq-item > summary::after {

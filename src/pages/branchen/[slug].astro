@@ -252,7 +252,17 @@ const breadcrumbs = [
     line-height: 1.6;
   }
   .faq-item { border-bottom: 1px solid var(--color-border); padding: var(--space-4) 0; }
-  .faq-item summary { cursor: pointer; font-weight: 600; font-size: 16px; }
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
   .faq-item p { margin-top: var(--space-3); color: var(--color-muted); line-height: 1.65; max-width: 65ch; }
   .cta-block h2 { color: var(--color-dark-text); margin-top: 0; }
   .cta-desc {
