@@ -91,9 +91,9 @@ const families = await getAllProductFamilies('de');
     flex-direction: column;
   }
   .family-card:hover {
-    border-color: rgba(232, 181, 0, 0.5);
+    border-color: rgba(232, 181, 0, 0.8);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 24px rgba(26, 26, 24, 0.1);
   }
   .family-card h2 {
     font-family: var(--font-heading);
@@ -118,7 +118,7 @@ const families = await getAllProductFamilies('de');
     margin-top: auto;
   }
   .card-arrow { transition: transform 150ms ease; display: inline-block; }
-  .family-card:hover .card-arrow { transform: translateX(4px); }
+  .family-card:hover .card-arrow { transform: translateX(8px); }
   .empty-state {
     padding: 64px 32px;
     border: 1px dashed var(--color-border);

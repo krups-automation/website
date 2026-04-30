@@ -624,10 +624,14 @@ import Button from '../components/Button.astro';
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: 44px;
-    transition: border-color 220ms ease;
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
     color: var(--color-text);
   }
-  .product-card:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .product-card:hover {
+    border-color: rgba(232, 181, 0, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 24px rgba(26, 26, 24, 0.1);
+  }
   .product-card.featured { grid-row: span 2; display: flex; flex-direction: column; }
   .card-tag {
     font-size: 10px;
@@ -689,7 +693,7 @@ import Button from '../components/Button.astro';
     padding-top: 20px;
   }
   .card-arrow { transition: transform 150ms ease; display: inline-block; }
-  .product-card:hover .card-arrow { transform: translateX(4px); }
+  .product-card:hover .card-arrow { transform: translateX(8px); }
   .card-visual {
     flex: 1;
     min-height: 180px;
@@ -772,7 +776,11 @@ import Button from '../components/Button.astro';
     color: var(--color-text);
     transition: border-color 220ms ease, transform 220ms ease;
   }
-  .lifecycle-card:hover { border-color: rgba(232, 181, 0, 0.5); transform: translateY(-2px); }
+  .lifecycle-card:hover {
+    border-color: rgba(232, 181, 0, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 24px rgba(26, 26, 24, 0.1);
+  }
   .lifecycle-step {
     display: flex;
     align-items: baseline;
@@ -818,7 +826,7 @@ import Button from '../components/Button.astro';
     color: var(--color-text);
     margin-top: auto;
   }
-  .lifecycle-card:hover .card-arrow { transform: translateX(4px); }
+  .lifecycle-card:hover .card-arrow { transform: translateX(8px); }
 
   /* ───── 5. WHY ───── */
   .why { background: var(--color-dark-bg); padding: 140px 0; color: var(--color-dark-text); }
