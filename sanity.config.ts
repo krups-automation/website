@@ -44,12 +44,14 @@ export default defineConfig({
         document: { _type?: string; slug?: { current?: string }; language?: string };
       };
       const secret = import.meta.env.PUBLIC_PREVIEW_SECRET;
-      if (!secret || document._type !== 'page' || !document.slug?.current) {
+      const PREVIEWABLE = new Set(['page', 'product', 'productFamily', 'industry', 'service']);
+      if (!secret || !document._type || !PREVIEWABLE.has(document._type) || !document.slug?.current) {
         return prev;
       }
       const origin = typeof window !== 'undefined' ? window.location.origin : '';
       const params = new URLSearchParams({
         secret,
+        type: document._type,
         slug: document.slug.current,
         lang: document.language ?? 'de',
       });

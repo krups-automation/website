@@ -3,7 +3,13 @@ import { toHTML } from '@portabletext/to-html';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { getPageBySlug } from '../../sanity/queries';
+import {
+  getPageBySlug,
+  getProductBySlug,
+  getProductFamilyBySlug,
+  getIndustryBySlug,
+  getServiceBySlug,
+} from '../../sanity/queries';
 
 export const prerender = false;
 
@@ -13,37 +19,194 @@ if (!draftCookie || draftCookie.value !== '1') {
 }
 
 const rawSlug = Astro.params.slug ?? '';
-const slug = Array.isArray(rawSlug) ? rawSlug.join('/') : rawSlug;
-const page = await getPageBySlug(slug, 'de', { draft: true });
+const path = Array.isArray(rawSlug) ? rawSlug.join('/') : rawSlug;
+const slashIdx = path.indexOf('/');
+const type = slashIdx === -1 ? path : path.slice(0, slashIdx);
+const slug = slashIdx === -1 ? '' : path.slice(slashIdx + 1);
 
-if (!page) {
-  return new Response('Not found', { status: 404 });
+type AnyDoc = Record<string, unknown> & { _type?: string };
+let doc: AnyDoc | null = null;
+
+switch (type) {
+  case 'product':
+    doc = await getProductBySlug(slug, 'de', { draft: true });
+    break;
+  case 'productFamily':
+    doc = await getProductFamilyBySlug(slug, 'de', { draft: true });
+    break;
+  case 'industry':
+    doc = await getIndustryBySlug(slug, 'de', { draft: true });
+    break;
+  case 'service':
+    doc = await getServiceBySlug(slug, 'de', { draft: true });
+    break;
+  default:
+    doc = await getPageBySlug(slug, 'de', { draft: true });
 }
 
-const bodyHtml = page.body ? toHTML(page.body as any) : '';
+if (!doc) {
+  return new Response(`Kein Entwurf gefunden: ${type}/${slug}`, { status: 404 });
+}
+
+const title = (doc.name ?? doc.title ?? slug) as string;
+
+function html(field: unknown): string {
+  return field ? toHTML(field as any) : '';
+}
 ---
 
-<BaseLayout title={`[PREVIEW] ${page.title}`} description={page.metaDescription} locale="de">
+<BaseLayout title={`[VORSCHAU] ${title}`} locale="de">
   <div class="preview-banner">
-    <span class="preview-label">Preview mode — showing draft</span>
-    <a href="/api/exit-preview" class="preview-exit">Exit preview</a>
+    <span>Vorschau-Modus — zeigt Entwurf ({type}: {slug})</span>
+    <a href="/api/exit-preview" class="preview-exit">Vorschau beenden</a>
   </div>
 
   <div class="page-spacer"></div>
 
   <Section surface="paper" narrow>
-    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: page.title }]} />
-    <h1 class="page-title">{page.title}</h1>
-    {bodyHtml && <div class="page-body" set:html={bodyHtml} />}
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: `[Vorschau] ${title}` }]} />
+
+    <h1 class="preview-title">{title}</h1>
+
+    {/* PAGE */}
+    {type === 'page' && doc.body && (
+      <div class="content" set:html={html(doc.body)} />
+    )}
+
+    {/* PRODUCT */}
+    {type === 'product' && (
+      <div>
+        {doc.tagline && <p class="tagline">{doc.tagline as string}</p>}
+        {doc.specs && (doc.specs as any[]).length > 0 && (
+          <div class="block">
+            <h2>Technische Daten</h2>
+            <table class="specs-table">
+              {(doc.specs as any[]).map((s) => (
+                <tr>
+                  <td class="spec-label">{s.label}</td>
+                  <td class="spec-value">{s.value}{s.unit ? ` ${s.unit}` : ''}</td>
+                  {s.notes && <td class="spec-notes">{s.notes}</td>}
+                </tr>
+              ))}
+            </table>
+          </div>
+        )}
+        {doc.keyFeatures && (doc.keyFeatures as any[]).length > 0 && (
+          <div class="block">
+            <h2>Merkmale</h2>
+            <ul>
+              {(doc.keyFeatures as any[]).map((f) => (
+                <li><strong>{f.title}</strong>{f.description ? ` — ${f.description}` : ''}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {doc.faq && (doc.faq as any[]).length > 0 && (
+          <div class="block">
+            <h2>FAQ</h2>
+            {(doc.faq as any[]).map((q) => (
+              <div class="faq-item">
+                <p class="faq-q">{q.question}</p>
+                <p class="faq-a">{q.answer}</p>
+              </div>
+            ))}
+          </div>
+        )}
+        {doc.body && <div class="block content" set:html={html(doc.body)} />}
+      </div>
+    )}
+
+    {/* PRODUCT FAMILY */}
+    {type === 'productFamily' && (
+      <div>
+        {doc.tagline && <p class="tagline">{doc.tagline as string}</p>}
+        {doc.intro && <div class="content" set:html={html(doc.intro)} />}
+        {doc.keyFeatures && (doc.keyFeatures as any[]).length > 0 && (
+          <div class="block">
+            <h2>Merkmale</h2>
+            <ul>
+              {(doc.keyFeatures as any[]).map((f: any) => (
+                <li><strong>{f.title}</strong>{f.description ? ` — ${f.description}` : ''}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {doc.members && (doc.members as any[]).length > 0 && (
+          <div class="block">
+            <h2>Produkte in dieser Familie</h2>
+            <ul>
+              {(doc.members as any[]).map((m: any) => (
+                <li>{m.name} ({m.slug?.current})</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    )}
+
+    {/* INDUSTRY */}
+    {type === 'industry' && (
+      <div>
+        {doc.tagline && <p class="tagline">{doc.tagline as string}</p>}
+        {doc.characterBar && (doc.characterBar as any[]).length > 0 && (
+          <div class="block char-bar">
+            {(doc.characterBar as any[]).map((c: any) => (
+              <div class="char-item">
+                <span class="char-val">{c.value}</span>
+                <span class="char-lbl">{c.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        {doc.whatMoves && <div class="block content" set:html={html(doc.whatMoves)} />}
+        {doc.faq && (doc.faq as any[]).length > 0 && (
+          <div class="block">
+            <h2>FAQ</h2>
+            {(doc.faq as any[]).map((q: any) => (
+              <div class="faq-item">
+                <p class="faq-q">{q.question}</p>
+                <p class="faq-a">{q.answer}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    )}
+
+    {/* SERVICE */}
+    {type === 'service' && (
+      <div>
+        {doc.summary && <p class="tagline">{doc.summary as string}</p>}
+        {doc.processSteps && (doc.processSteps as any[]).length > 0 && (
+          <div class="block">
+            <h2>Prozessschritte</h2>
+            <ol>
+              {(doc.processSteps as any[]).map((s: any) => (
+                <li><strong>{s.title}</strong>{s.description ? ` — ${s.description}` : ''}</li>
+              ))}
+            </ol>
+          </div>
+        )}
+        {doc.deliverables && (doc.deliverables as any[]).length > 0 && (
+          <div class="block">
+            <h2>Leistungen</h2>
+            <ul>
+              {(doc.deliverables as any[]).map((d: any) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {doc.body && <div class="block content" set:html={html(doc.body)} />}
+      </div>
+    )}
   </Section>
 </BaseLayout>
 
 <style>
   .preview-banner {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     background: var(--color-accent);
     color: var(--color-text);
     padding: var(--space-2) var(--space-4);
@@ -57,15 +220,25 @@ const bodyHtml = page.body ? toHTML(page.body as any) : '';
     align-items: center;
     z-index: 300;
   }
-
-  .preview-exit {
-    color: var(--color-text);
-    text-decoration: underline;
-  }
-
+  .preview-exit { color: var(--color-text); text-decoration: underline; }
   .page-spacer { height: 140px; }
-  .page-title { margin-top: var(--space-6); margin-bottom: var(--space-8); }
-  .page-body :global(p) { margin-bottom: var(--space-4); max-width: 65ch; }
-  .page-body :global(h2) { margin: var(--space-8) 0 var(--space-4); }
-  .page-body :global(h3) { margin: var(--space-6) 0 var(--space-2); }
+  .preview-title { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+  .tagline { font-size: 18px; color: var(--color-muted); margin-bottom: var(--space-6); }
+  .block { margin-top: var(--space-8); }
+  .block h2 { margin-bottom: var(--space-4); }
+  .content :global(p) { margin-bottom: var(--space-4); max-width: 65ch; }
+  .content :global(h2) { margin: var(--space-8) 0 var(--space-4); }
+  .specs-table { border-collapse: collapse; width: 100%; }
+  .specs-table tr { border-bottom: 1px solid var(--color-border); }
+  .specs-table td { padding: 8px 12px; font-size: 14px; }
+  .spec-label { color: var(--color-muted); width: 40%; }
+  .spec-value { font-family: var(--font-mono); font-weight: 500; }
+  .spec-notes { color: var(--color-muted); font-size: 12px; }
+  .faq-item { margin-bottom: var(--space-4); border-left: 3px solid var(--color-accent); padding-left: var(--space-4); }
+  .faq-q { font-weight: 600; margin-bottom: 4px; }
+  .faq-a { color: var(--color-muted); font-size: 14px; }
+  .char-bar { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+  .char-item { display: flex; flex-direction: column; gap: 4px; }
+  .char-val { font-family: var(--font-mono); font-weight: 600; font-size: 18px; }
+  .char-lbl { font-size: 12px; color: var(--color-muted); text-transform: uppercase; letter-spacing: 1px; }
 </style>
