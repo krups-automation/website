@@ -27,7 +27,7 @@ export function organizationSchema() {
     logo: `${CANONICAL_URL}/favicon.svg`,
     description:
       'Rail-guided conveyor systems for precision automotive and industrial assembly — LOGO!MAT eCart and friction roller conveyors for 300–2.000 kg payloads.',
-    foundingDate: '1985',
+    foundingDate: '1983',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Ringstr. 13',
@@ -45,6 +45,7 @@ export function organizationSchema() {
     },
     sameAs: [
       'https://www.linkedin.com/company/krups-automation-gmbh/',
+      'https://www.wikidata.org/wiki/Q139742524',
     ],
   };
 }
