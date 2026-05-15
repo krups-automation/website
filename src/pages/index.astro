@@ -36,13 +36,13 @@ import Button from '../components/Button.astro';
       <span class="trust-bar-label">Referenzkunden</span>
       <div class="trust-sep"></div>
       <div class="trust-logos">
-        <span class="trust-logo">BMW</span>
-        <span class="trust-logo">Volkswagen</span>
-        <span class="trust-logo">Tesla</span>
-        <span class="trust-logo">Ford</span>
-        <span class="trust-logo">ŠKODA</span>
-        <span class="trust-logo">ZF</span>
-        <span class="trust-logo">Eaton</span>
+        <img class="trust-logo" src="/logos/bmw.svg" alt="BMW" height="28" />
+        <img class="trust-logo" src="/logos/volkswagen.svg" alt="Volkswagen" height="28" />
+        <img class="trust-logo" src="/logos/tesla.svg" alt="Tesla" height="28" />
+        <img class="trust-logo" src="/logos/toyota.svg" alt="Toyota" height="28" />
+        <img class="trust-logo" src="/logos/skoda.svg" alt="Škoda" height="28" />
+        <img class="trust-logo" src="/logos/audi.svg" alt="Audi" height="28" />
+        <img class="trust-logo" src="/logos/seat.svg" alt="SEAT" height="28" />
       </div>
     </div>
   </div>
@@ -521,16 +521,12 @@ import Button from '../components/Button.astro';
   .trust-sep { width: 1px; height: 14px; background: var(--color-border); flex-shrink: 0; }
   .trust-logos { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; }
   .trust-logo {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--color-text);
-    opacity: 0.25;
-    transition: opacity 200ms;
-    white-space: nowrap;
+    display: block;
+    filter: grayscale(1) brightness(0);
+    opacity: 0.22;
+    transition: opacity var(--duration-short);
   }
-  .trust-logo:hover { opacity: 0.6; }
+  .trust-logo:hover { opacity: 0.55; }
 
   /* ───── 3. PROOF ───── */
   .proof-alt { background: var(--color-bg); padding: 160px 0; }
