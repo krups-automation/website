@@ -1,5 +1,5 @@
 ---
-import type { Locale, SiteSettings } from '../sanity/queries';
+import { getAllIndustries, type Locale, type SiteSettings } from '../sanity/queries';
 
 interface Props {
   settings: SiteSettings;
@@ -7,6 +7,10 @@ interface Props {
 }
 
 const { settings, locale } = Astro.props;
+
+const allIndustries = await getAllIndustries(locale);
+const footerIndustries = allIndustries.slice(0, 4);
+const industryBase = '/branchen';
 
 const labels = locale === 'de'
   ? {
@@ -63,10 +67,9 @@ const description = locale === 'de'
       <div class="footer-col">
         <h3>{labels.industries}</h3>
         <ul>
-          <li><a href="#">Batteriemontage</a></li>
-          <li><a href="#">Antriebsstrang</a></li>
-          <li><a href="#">Prüf- &amp; Testautomation</a></li>
-          <li><a href="#">Nutzfahrzeuge</a></li>
+          {footerIndustries.map((industry) => (
+            <li><a href={`${industryBase}/${industry.slug.current}`}>{industry.name}</a></li>
+          ))}
         </ul>
       </div>
 
