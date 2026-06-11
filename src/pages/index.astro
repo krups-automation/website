@@ -51,25 +51,25 @@ import Button from '../components/Button.astro';
   <section class="proof-alt">
     <div class="container">
       <div class="proof-alt-strip">
-        <div class="proof-alt-item">
+        <div class="proof-alt-item" data-reveal data-delay="0">
           <span class="proof-alt-num">500+</span>
           <span class="proof-alt-label">Anlagen weltweit<br>im Einsatz</span>
         </div>
-        <div class="proof-alt-item">
+        <div class="proof-alt-item" data-reveal data-delay="1">
           <span class="proof-alt-num">40+</span>
           <span class="proof-alt-label">Jahre Entwicklungs-<br>erfahrung</span>
         </div>
-        <div class="proof-alt-item">
+        <div class="proof-alt-item" data-reveal data-delay="2">
           <span class="proof-alt-num">2.000 kg</span>
           <span class="proof-alt-label">Maximale<br>Traglast</span>
         </div>
-        <div class="proof-alt-item">
+        <div class="proof-alt-item" data-reveal data-delay="3">
           <span class="proof-alt-num">14</span>
           <span class="proof-alt-label">Länder mit<br>aktiven Anlagen</span>
         </div>
       </div>
 
-      <div class="proof-alt-bottom">
+      <div class="proof-alt-bottom" data-reveal>
         <h2 class="proof-headline">Vierzig Jahre Montagelinientechnik.</h2>
         <p class="proof-body">
           Seit 1985 entwickelt, fertigt und nimmt KRUPS Automation Fördersysteme
@@ -84,7 +84,7 @@ import Button from '../components/Button.astro';
   <!-- ════ 4. PRODUCTS ════ -->
   <section class="products" id="systems">
     <div class="container">
-      <div class="products-header">
+      <div class="products-header" data-reveal>
         <div>
           <div class="products-eyebrow">Produktsysteme</div>
           <h2>Zwei Plattformen.<br>Jede Montageaufgabe.</h2>
@@ -96,7 +96,7 @@ import Button from '../components/Button.astro';
       </div>
 
       <div class="products-grid">
-        <a class="product-card featured" href="/produkte/ecart">
+        <a class="product-card featured" href="/produkte/ecart" data-reveal data-delay="0">
           <div class="card-tag">Flaggschiff</div>
           <h3>LOGO!MAT eCart</h3>
           <p>
@@ -139,7 +139,7 @@ import Button from '../components/Button.astro';
           <span class="card-link">LOGO!MAT eCart entdecken <span class="card-arrow">→</span></span>
         </a>
 
-        <a class="product-card" href="/produkte/friktionsrollenfoerderer">
+        <a class="product-card" href="/produkte/friktionsrollenfoerderer" data-reveal data-delay="1">
           <div class="card-tag">Bewährte Plattform</div>
           <h3>Friktionsrollen&shy;förderer</h3>
           <p>
@@ -155,7 +155,7 @@ import Button from '../components/Button.astro';
           <span class="card-link">Friktionsförderer entdecken <span class="card-arrow">→</span></span>
         </a>
 
-        <a class="product-card" href="/kontakt">
+        <a class="product-card" href="/kontakt" data-reveal data-delay="2">
           <div class="card-tag">Sonderlösungen</div>
           <h3>Sonder&shy;entwicklungen</h3>
           <p>
@@ -176,7 +176,7 @@ import Button from '../components/Button.astro';
   <!-- ════ 4b. PLAN · BUILD · RUN ════ -->
   <section class="lifecycle">
     <div class="container">
-      <div class="lifecycle-header">
+      <div class="lifecycle-header" data-reveal>
         <div class="lifecycle-eyebrow">Aus einer Hand</div>
         <h2><em>Plan.</em> Build. <em>Run.</em></h2>
         <p class="lifecycle-sub">
@@ -187,7 +187,7 @@ import Button from '../components/Button.astro';
       </div>
 
       <div class="lifecycle-grid">
-        <a class="lifecycle-card" href="/planung">
+        <a class="lifecycle-card" href="/planung" data-reveal data-delay="0">
           <div class="lifecycle-step">
             <span class="lifecycle-num">01</span>
             <span class="lifecycle-label">Plan</span>
@@ -200,7 +200,7 @@ import Button from '../components/Button.astro';
           <span class="lifecycle-link">Planungsleistungen ansehen <span class="card-arrow">→</span></span>
         </a>
 
-        <a class="lifecycle-card" href="/produkte">
+        <a class="lifecycle-card" href="/produkte" data-reveal data-delay="1">
           <div class="lifecycle-step">
             <span class="lifecycle-num">02</span>
             <span class="lifecycle-label">Build</span>
@@ -213,7 +213,7 @@ import Button from '../components/Button.astro';
           <span class="lifecycle-link">Portfolio ansehen <span class="card-arrow">→</span></span>
         </a>
 
-        <a class="lifecycle-card" href="/leistungen">
+        <a class="lifecycle-card" href="/leistungen" data-reveal data-delay="2">
           <div class="lifecycle-step">
             <span class="lifecycle-num">03</span>
             <span class="lifecycle-label">Run</span>
@@ -232,7 +232,7 @@ import Button from '../components/Button.astro';
   <!-- ════ 5. WHY ════ -->
   <section class="why">
     <div class="container">
-      <div class="why-header">
+      <div class="why-header" data-reveal>
         <h2>Sechs Gründe, warum Werksplaner<br><em>LOGO!MAT</em> spezifizieren.</h2>
         <p class="why-header-right">
           Jede Aussage stammt aus einem Kundenprojektbericht.
@@ -242,27 +242,27 @@ import Button from '../components/Button.astro';
       </div>
 
       <div class="why-rows">
-        <div class="why-row">
+        <div class="why-row" data-reveal data-delay="0">
           <div class="why-claim">Inbetriebnahme in Tagen, nicht Wochen.</div>
           <div class="why-detail">UDP-Schnittstellen und vorverkabelte Module reduzieren den Elektroinstallationsaufwand auf einen Bruchteil konventioneller Systeme. <strong>Kunden berichten, dass Montageteams Installationen in Tagen abgeschlossen haben, die die eigenen Ingenieure auf Wochen veranschlagt hatten.</strong></div>
         </div>
-        <div class="why-row">
+        <div class="why-row" data-reveal data-delay="1">
           <div class="why-claim">Aktive Bremse — echte Sicherheit.</div>
           <div class="why-detail">Der Werkstückträger absorbiert kinetische Energie beim Nothalt. Eine Rutschkupplung begrenzt die Antriebskraft — sie stoppt keine bewegte Last. <strong>Der eCart verzögert sicher an der Station, auch wenn der Sicherheitskreis der Station geöffnet ist.</strong></div>
         </div>
-        <div class="why-row">
+        <div class="why-row" data-reveal data-delay="2">
           <div class="why-claim">30 % des Energieverbrauchs konventioneller Systeme.</div>
           <div class="why-detail">Von Kunden in Betriebsanlagen gemessen. Kurze Motorlaufzeiten und kein Dauerkettentrieb machen den Unterschied. <strong>Weniger Laufzeit an beweglichen Teilen bedeutet geringeren Verschleiß und längere Wartungsintervalle.</strong></div>
         </div>
-        <div class="why-row">
+        <div class="why-row" data-reveal data-delay="3">
           <div class="why-claim">Keine WLAN-Abhängigkeit.</div>
           <div class="why-detail">Schienengeführte, kabelgebundene Steuerung eliminiert Übertragungsfehler durch WLAN-Störungen, Bautätigkeit oder benachbarte Netzwerke. <strong>Keine Anlaufverzögerungen nach Notstopps — wie sie WLAN-abhängige AGV-Flotten betreffen.</strong></div>
         </div>
-        <div class="why-row">
+        <div class="why-row" data-reveal data-delay="4">
           <div class="why-claim">±0,1 mm Stoppgenauigkeit, jeden Takt.</div>
           <div class="why-detail">Servoangetriebene Positionierung auf der Schiene mit integrierten Stoppereinheiten. AGVs weichen je nach Bodenebene, Lastverteilung und Ladestand um Millimeter ab. <strong>Eine konstante Stoppposition ist in der Batteriemontage keine Option — sie ist Voraussetzung.</strong></div>
         </div>
-        <div class="why-row">
+        <div class="why-row" data-reveal data-delay="5">
           <div class="why-claim">Umkonfiguriert in Stunden.</div>
           <div class="why-detail">Änderungen am Schienenlayout — Stationen hinzufügen, Wendeschleifen, Liniensplit — erfordern Stunden mechanischer Arbeit und minimale SPS-Umprogrammierung. <strong>Änderungen können im digitalen Zwilling erprobt werden, bevor die laufende Anlage berührt wird.</strong></div>
         </div>
@@ -277,7 +277,7 @@ import Button from '../components/Button.astro';
   <!-- ════ 6. INDUSTRIES ════ -->
   <section class="industries">
     <div class="container">
-      <div class="industries-header">
+      <div class="industries-header" data-reveal>
         <h2>Wo KRUPS-Systeme im Einsatz sind.</h2>
         <p class="sub">
           Von der Batteriemodul-Montage im Giga-Maßstab bis zum Präzisions-
@@ -287,7 +287,7 @@ import Button from '../components/Button.astro';
       </div>
 
       <div class="industry-list">
-        <a class="industry-row featured" href="/branchen/batteriemontage">
+        <a class="industry-row featured" href="/branchen/batteriemontage" data-reveal data-delay="0">
           <div class="industry-num">01</div>
           <div class="industry-body">
             <h3>E-Mobilität &amp; Batteriemontage</h3>
@@ -298,7 +298,7 @@ import Button from '../components/Button.astro';
             <span class="clients">BMW · Volkswagen · Tesla</span>
           </div>
         </a>
-        <a class="industry-row" href="/branchen/antriebsstrang">
+        <a class="industry-row" href="/branchen/antriebsstrang" data-reveal data-delay="1">
           <div class="industry-num">02</div>
           <div class="industry-body">
             <h3>Automotive Antriebsstrang</h3>
@@ -309,7 +309,7 @@ import Button from '../components/Button.astro';
             <span class="clients">ZF · Ford · Eaton</span>
           </div>
         </a>
-        <a class="industry-row" href="/branchen/pruef-testautomation">
+        <a class="industry-row" href="/branchen/pruef-testautomation" data-reveal data-delay="2">
           <div class="industry-num">03</div>
           <div class="industry-body">
             <h3>Prüf- &amp; Testautomation</h3>
@@ -320,7 +320,7 @@ import Button from '../components/Button.astro';
             <span class="clients">ZF · Bosch</span>
           </div>
         </a>
-        <a class="industry-row" href="/branchen/nutzfahrzeuge-schwermontage">
+        <a class="industry-row" href="/branchen/nutzfahrzeuge-schwermontage" data-reveal data-delay="3">
           <div class="industry-num">04</div>
           <div class="industry-body">
             <h3>Nutzfahrzeuge &amp; Schwermontage</h3>
@@ -339,7 +339,7 @@ import Button from '../components/Button.astro';
   <section class="tech-band">
     <div class="container">
       <div class="tech-band-inner">
-        <div class="tech-band-text">
+        <div class="tech-band-text" data-reveal data-delay="0">
           <div class="tech-eyebrow">Technologievergleich</div>
           <h2>eCart vs. AGV vs. Kettenförderer.</h2>
           <p class="intro">
@@ -350,7 +350,7 @@ import Button from '../components/Button.astro';
           <Button href="/ressourcen/technologievergleich" variant="ghost">Vollständiger Vergleich →</Button>
         </div>
 
-        <div class="tech-comparison">
+        <div class="tech-comparison" data-reveal data-delay="1">
           <div class="comparison-header">
             <span>Kriterium</span>
             <span>eCart</span>
@@ -371,7 +371,7 @@ import Button from '../components/Button.astro';
   <!-- ════ 8. FOOTER CTA ════ -->
   <section class="footer-cta" id="contact">
     <div class="footer-cta-bg"></div>
-    <div class="container footer-cta-content">
+    <div class="container footer-cta-content" data-reveal>
       <div class="footer-cta-eyebrow">Gespräch beginnen</div>
       <h2>Gemeinsam entwickeln wir<br><em>Ihre nächste Linie.</em></h2>
       <p>
@@ -1116,4 +1116,5 @@ import Button from '../components/Button.astro';
     .proof-alt-item { border-right: none; border-top: 1px solid var(--color-border); padding: 32px 0 0; }
     .proof-alt-item:first-child { border-top: none; padding-top: 0; }
   }
+
 </style>
