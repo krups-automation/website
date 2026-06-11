@@ -31,9 +31,11 @@ export const page = defineType({
     }),
   ],
   preview: {
-    select: { title: 'title', slug: 'slug.current' },
-    prepare({ title, slug }) {
-      return { title, subtitle: slug ? `/${slug}` : undefined };
+    select: { title: 'title', slug: 'slug.current', language: 'language' },
+    prepare({ title, slug, language }: { title?: string; slug?: string; language?: string }) {
+      const lang = language ? `[${language.toUpperCase()}]` : '';
+      const path = slug ? `/${slug}` : '';
+      return { title, subtitle: [lang, path].filter(Boolean).join(' ') };
     },
   },
 });

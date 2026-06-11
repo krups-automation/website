@@ -2,8 +2,6 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
-const N8N_WEBHOOK = 'http://46.225.88.11:5678/webhook/contact-form';
-
 export const POST: APIRoute = async ({ request }) => {
   let body: Record<string, string>;
   try {
@@ -11,6 +9,13 @@ export const POST: APIRoute = async ({ request }) => {
   } catch {
     return new Response(JSON.stringify({ ok: false, error: 'Invalid JSON' }), {
       status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  // Honeypot: bots fill hidden fields, real users don't
+  if (body.website) {
+    return new Response(JSON.stringify({ ok: true }), {
       headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -23,11 +28,20 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
+  const webhook = import.meta.env.N8N_CONTACT_WEBHOOK;
+  if (!webhook) {
+    console.error('N8N_CONTACT_WEBHOOK is not set');
+    return new Response(JSON.stringify({ ok: false, error: 'Konfigurationsfehler' }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   try {
-    const res = await fetch(N8N_WEBHOOK, {
+    const res = await fetch(webhook, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ name, email, message, company: body.company, phone: body.phone }),
     });
 
     if (!res.ok) {

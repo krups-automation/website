@@ -78,8 +78,11 @@ if (jsonLd && jsonLd.length > 0) {
       const observer = new IntersectionObserver(
         (entries) => entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add('revealed');
-            observer.unobserve(e.target);
+            const el = e.target as HTMLElement;
+            const delay = el.dataset.delay ? parseInt(el.dataset.delay) * 80 : 0;
+            if (delay) el.style.transitionDelay = `${delay}ms`;
+            el.classList.add('revealed');
+            observer.unobserve(el);
           }
         }),
         { threshold: 0.06, rootMargin: '0px 0px -48px 0px' }
