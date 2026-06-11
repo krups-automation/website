@@ -10,7 +10,7 @@
   --color-bg: #F2EFEA;              /* Warm Paper */
   --color-surface: #E8E4DD;         /* Clay */
   --color-border: #D5D0C8;          /* Hairline */
-  --color-muted: #8A8680;           /* Stone */
+  --color-muted: #67645E;           /* Stone — darkened for WCAG AA (4.5:1+ on paper & clay) */
   --color-text: #1A1A18;            /* Near-black */
 
   /* Dark surfaces */
@@ -27,6 +27,7 @@
   --color-success: #2D7A4F;
   --color-warning: #E8B500;
   --color-error: #C4432A;
+  --color-error-text: #992F1C;       /* darkened error red — WCAG AA on light/tinted surfaces */
 
   /* — Typography ——————————————————————————————————————————————— */
 
