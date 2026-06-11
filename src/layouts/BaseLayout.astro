@@ -75,11 +75,13 @@ if (jsonLd && jsonLd.length > 0) {
       // Gate the reveal CSS state so there's no FOUC before JS runs
       document.documentElement.classList.add('js-loaded');
 
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       const observer = new IntersectionObserver(
         (entries) => entries.forEach((e) => {
           if (e.isIntersecting) {
             const el = e.target as HTMLElement;
-            const delay = el.dataset.delay ? parseInt(el.dataset.delay) * 80 : 0;
+            const delay = !reduceMotion && el.dataset.delay ? parseInt(el.dataset.delay) * 80 : 0;
             if (delay) el.style.transitionDelay = `${delay}ms`;
             el.classList.add('revealed');
             observer.unobserve(el);
