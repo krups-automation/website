@@ -29,6 +29,10 @@
   --color-error: #C4432A;
   --color-error-text: #992F1C;       /* darkened error red — WCAG AA on light/tinted surfaces */
 
+  /* Blue CTA */
+  --color-blue: #1D6FA4;
+  --color-blue-hover: #155E8A;
+
   /* — Typography ——————————————————————————————————————————————— */
 
   --font-heading: var(--font-oswald);
