@@ -1,5 +1,5 @@
 ---
-type Variant = 'primary' | 'dark' | 'ghost' | 'ghost-light' | 'blue';
+type Variant = 'primary' | 'dark' | 'ghost' | 'ghost-light';
 
 interface Props {
   variant?: Variant;
@@ -77,17 +77,6 @@ const classes = ['btn', `btn-${variant}`, className].filter(Boolean).join(' ');
   .btn-ghost:hover:not(:disabled),
   .btn-ghost:focus-visible {
     border-color: var(--color-text);
-  }
-
-  /* Blue CTA */
-  .btn-blue {
-    background: var(--color-blue);
-    color: #fff;
-  }
-
-  .btn-blue:hover:not(:disabled),
-  .btn-blue:focus-visible {
-    background: var(--color-blue-hover);
   }
 
   /* Ghost light — for dark sections */
