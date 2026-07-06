@@ -6,6 +6,7 @@ import Button from '../components/Button.astro';
 <BaseLayout title="KRUPS Automation — LOGO!MAT eCart" locale="de">
   <!-- ════ 1. HERO ════ -->
   <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-fade"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">LOGO!MAT eCart — Entwickelt und gefertigt in Dernbach</div>
@@ -408,7 +409,18 @@ import Button from '../components/Button.astro';
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: var(--color-dark-surface);
+    /* matches the blueprint scene's paper color so image + surface read as one */
+    background: #011d38;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    /* blueprint scene at native pixel scale, pinned right; the surrounding
+       surface is the same paper color, so margins are seamless. Left fade
+       is baked into the alpha. */
+    background: url('/images/hero-blueprint.webp') right center / auto no-repeat;
+    opacity: 0.9;
+    pointer-events: none;
   }
   .hero-fade {
     position: absolute;
@@ -417,6 +429,10 @@ import Button from '../components/Button.astro';
       radial-gradient(ellipse at 70% 50%, rgba(232, 181, 0, 0.04) 0%, transparent 60%),
       radial-gradient(ellipse at 10% 80%, rgba(232, 181, 0, 0.025) 0%, transparent 50%);
     pointer-events: none;
+  }
+  @media (max-width: 900px) {
+    /* text-first hero on small screens */
+    .hero-bg { display: none; }
   }
   .hero-content {
     position: relative;
