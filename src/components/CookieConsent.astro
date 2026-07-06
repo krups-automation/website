@@ -119,6 +119,21 @@ const analyticsEnabled = Boolean(posthogKey);
         }
 
         function init() {
+          const acceptBtn = document.getElementById('consent-accept');
+          const rejectBtn = document.getElementById('consent-reject');
+          acceptBtn?.addEventListener('click', accept);
+          rejectBtn?.addEventListener('click', reject);
+
+          // Re-open hook: any link with href="#cookie-einstellungen"
+          // (footer "Cookie-Einstellungen", Cookie-Richtlinie page)
+          document.addEventListener('click', (e) => {
+            const a = e.target instanceof Element && e.target.closest('a[href="#cookie-einstellungen"]');
+            if (a) {
+              e.preventDefault();
+              showBanner();
+            }
+          });
+
           let stored = null;
           try { stored = localStorage.getItem(KEY); } catch (_) {}
 
@@ -130,10 +145,6 @@ const analyticsEnabled = Boolean(posthogKey);
 
           // No decision yet
           showBanner();
-          const acceptBtn = document.getElementById('consent-accept');
-          const rejectBtn = document.getElementById('consent-reject');
-          acceptBtn?.addEventListener('click', accept);
-          rejectBtn?.addEventListener('click', reject);
         }
 
         if (document.readyState === 'loading') {

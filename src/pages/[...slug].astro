@@ -44,6 +44,7 @@ const bodyHtml = page.body ? toHTML(page.body as any) : '';
   .page-body :global(p) {
     margin-bottom: var(--space-4);
     max-width: 65ch;
+    white-space: pre-line; /* keep line breaks from imported legal text (addresses) */
   }
 
   .page-body :global(a) {
