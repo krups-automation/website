@@ -4,8 +4,13 @@ import Section from '../components/Section.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Button from '../components/Button.astro';
 import { organizationSchema } from '../lib/schema-org';
+import { getPublicCustomers } from '../sanity/queries';
 
 const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Unternehmen' }];
+
+const customers = await getPublicCustomers();
+const fallbackCustomers = ['BMW', 'Volkswagen', 'Tesla', 'Ford', 'ŠKODA', 'ZF', 'Eaton'];
+const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fallbackCustomers;
 ---
 
 <BaseLayout
@@ -199,13 +204,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Unternehmen' }];
         und Zulieferer — von der Batteriemodul-Linie bis zur Achsmontage.
       </p>
       <div class="customer-logos">
-        <span>BMW</span>
-        <span>Volkswagen</span>
-        <span>Tesla</span>
-        <span>Ford</span>
-        <span>ŠKODA</span>
-        <span>ZF</span>
-        <span>Eaton</span>
+        {customerNames.map((name) => <span>{name}</span>)}
       </div>
     </div>
   </Section>
