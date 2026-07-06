@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getAllDownloads, type Download } from '../sanity/queries';
+
+const downloads = await getAllDownloads();
+
+const CATEGORY_ORDER = ['brochure', 'datasheet', 'drawing', 'model3d', 'planning', 'publication'] as const;
+const CATEGORY_LABELS: Record<string, string> = {
+  brochure: 'Broschüren',
+  datasheet: 'Datenblätter',
+  drawing: 'Zeichnungen',
+  model3d: '3D-Modelle',
+  planning: 'Planungstools',
+  publication: 'Technische Publikationen',
+};
+const LANG_LABELS: Record<string, string> = {
+  de: 'DE',
+  en: 'EN',
+  fr: 'FR',
+  multilingual: 'DE/EN',
+};
+
+const groups = CATEGORY_ORDER.map((cat) => ({
+  category: cat,
+  label: CATEGORY_LABELS[cat],
+  items: downloads.filter((d) => d.category === cat),
+})).filter((g) => g.items.length > 0);
+
+function formatSize(bytes?: number) {
+  if (!bytes) return null;
+  return `${(bytes / 1e6).toFixed(1).replace('.', ',')} MB`;
+}
+
+function downloadUrl(d: Download) {
+  if (!d.url) return null;
+  return `${d.url}?dl=${d.slug.current}.${d.fileType}`;
+}
+
+const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Downloads' }];
+---
+
+<BaseLayout
+  title="Medien & Downloads — KRUPS Automation"
+  description="Broschüren, Datenblätter und technische Unterlagen der KRUPS Fördersysteme — LOGO!MAT eCart, Transfersysteme und Kleinfördersysteme."
+  locale="de"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <Breadcrumbs items={breadcrumbs} />
+    <header class="page-header">
+      <div class="eyebrow">Medien</div>
+      <h1>Downloads.</h1>
+      <p class="lede">
+        Broschüren, Datenblätter und technische Unterlagen zu allen
+        KRUPS Fördersystemen — zum direkten Download.
+      </p>
+    </header>
+  </Section>
+
+  <Section surface="clay">
+    {groups.length === 0 ? (
+      <div class="empty-state">
+        <p>Downloads werden derzeit im Studio gepflegt. <a href="/kontakt">Kontakt</a></p>
+      </div>
+    ) : (
+      groups.map((group) => (
+        <div class="download-group">
+          <h2>{group.label}</h2>
+          <ul class="download-list">
+            {group.items.map((d) => {
+              const href = downloadUrl(d);
+              const size = formatSize(d.size);
+              return (
+                <li class="download-row">
+                  <div class="download-info">
+                    <span class="download-title">{d.title}</span>
+                    {d.description && <span class="download-desc">{d.description}</span>}
+                  </div>
+                  <div class="download-meta">
+                    <span class="meta-chip">{LANG_LABELS[d.language] ?? d.language}</span>
+                    <span class="meta-chip">{d.fileType.toUpperCase()}</span>
+                    {size && <span class="meta-chip">{size}</span>}
+                    {href ? (
+                      <a class="download-link" href={href} download>
+                        Download <span class="dl-arrow">↓</span>
+                      </a>
+                    ) : (
+                      <span class="meta-chip">folgt</span>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))
+    )}
+  </Section>
+
+  <Section surface="paper">
+    <div class="cta-block">
+      <h2>Unterlagen nicht gefunden?</h2>
+      <p>
+        3D-Modelle, CAD-Daten und projektspezifische Unterlagen stellen wir
+        auf Anfrage bereit.
+      </p>
+      <a class="cta-link" href="/kontakt">Kontakt aufnehmen →</a>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-spacer { height: 100px; }
+  .page-header { margin: var(--space-6) 0 var(--space-4); max-width: 720px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+  .page-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(40px, 4.5vw, 64px);
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: var(--space-4);
+  }
+  .lede {
+    font-size: 17px;
+    color: var(--color-muted);
+    line-height: 1.65;
+  }
+
+  .download-group { margin-bottom: var(--space-8); }
+  .download-group:last-child { margin-bottom: 0; }
+  .download-group h2 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+  }
+
+  .download-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .download-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .download-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .download-title { font-weight: 600; }
+  .download-desc {
+    font-size: 14px;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+  .download-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+  .meta-chip {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm, 2px);
+    padding: 2px 8px;
+    white-space: nowrap;
+  }
+  .download-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 2px;
+    white-space: nowrap;
+  }
+  .download-link:hover .dl-arrow { transform: translateY(2px); }
+  .dl-arrow { display: inline-block; transition: transform 0.15s ease; }
+
+  .cta-block { max-width: 640px; }
+  .cta-block h2 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+  }
+  .cta-block p { color: var(--color-muted); margin-bottom: var(--space-4); }
+  .cta-link {
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .download-row { flex-direction: column; align-items: flex-start; }
+    .download-meta { flex-wrap: wrap; }
+  }
+</style>

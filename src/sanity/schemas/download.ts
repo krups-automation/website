@@ -25,6 +25,23 @@ export const download = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Broschüre', value: 'brochure' },
+          { title: 'Datenblatt', value: 'datasheet' },
+          { title: 'Zeichnung', value: 'drawing' },
+          { title: '3D-Modell', value: 'model3d' },
+          { title: 'Planungstool', value: 'planning' },
+          { title: 'Technische Publikation', value: 'publication' },
+        ],
+        layout: 'radio',
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'fileType',
       title: 'File type',
       type: 'string',

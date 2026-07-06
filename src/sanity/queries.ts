@@ -155,11 +155,26 @@ export interface Download {
   _id: string;
   title: string;
   slug: { current: string };
+  category?: 'brochure' | 'datasheet' | 'drawing' | 'model3d' | 'planning' | 'publication';
   fileType: 'pdf' | 'step' | 'dxf' | 'zip' | 'other';
   language: 'de' | 'en' | 'fr' | 'multilingual';
   description?: string;
   gated?: boolean;
   file?: { asset?: { _ref: string; url?: string } };
+  url?: string;
+  size?: number;
+}
+
+export async function getAllDownloads() {
+  return safeFetch<Download[]>(
+    sanityClient,
+    `*[_type == "download"] | order(category asc, language asc, title asc) {
+      _id, title, slug, category, fileType, language, description, gated,
+      "url": file.asset->url, "size": file.asset->size
+    }`,
+    {},
+    []
+  );
 }
 
 const PRODUCT_PROJECTION = `{
