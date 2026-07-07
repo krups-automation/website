@@ -2,9 +2,8 @@
 import type { GetStaticPaths } from 'astro';
 import { toHTML } from '@portabletext/to-html';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
 import Section from '../../../components/Section.astro';
-import Breadcrumbs from '../../../components/Breadcrumbs.astro';
-import SanityImage from '../../../components/SanityImage.astro';
 import { getAllProductFamilies, getProductFamilyBySlug } from '../../../sanity/queries';
 
 export const getStaticPaths = (async () => {
@@ -21,46 +20,26 @@ if (!family) {
 
 const introHtml = family.intro ? toHTML(family.intro as any) : '';
 const bodyHtml = family.body ? toHTML(family.body as any) : '';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Produkte', href: '/produkte' },
+  { label: family.name },
+];
 ---
 
 <BaseLayout
   title={`${family.name} — KRUPS Automation`}
   description={family.metaDescription ?? family.tagline}
   locale="de"
-  breadcrumbs={[
-    { label: 'Home', href: '/' },
-    { label: 'Produkte', href: '/produkte' },
-    { label: family.name },
-  ]}
+  breadcrumbs={breadcrumbs}
 >
-  <section class="page-hero">
-    <div class="page-hero-inner">
-      <Breadcrumbs
-        items={[
-          { label: 'Home', href: '/' },
-          { label: 'Produkte', href: '/produkte' },
-          { label: family.name },
-        ]}
-      />
-      <div class="page-hero-text">
-        <h1>{family.name}</h1>
-        {family.tagline && <p class="hero-lede">{family.tagline}</p>}
-      </div>
-    </div>
-    {family.heroImage && (
-      <div class="page-hero-img">
-        <SanityImage
-          source={family.heroImage}
-          alt={family.name}
-          width={800}
-          loading="eager"
-          fetchpriority="high"
-          sizes="45vw"
-          class="hero-photo"
-        />
-      </div>
-    )}
-  </section>
+  <PageHero
+    breadcrumbs={breadcrumbs}
+    title={family.name}
+    lede={family.tagline}
+    image={family.heroImage}
+  />
 
   <Section surface="paper">
     {introHtml && <div class="intro" set:html={introHtml} />}
@@ -91,72 +70,6 @@ const bodyHtml = family.body ? toHTML(family.body as any) : '';
 </BaseLayout>
 
 <style>
-  /* ── page hero ── */
-  .page-hero {
-    position: relative;
-    min-height: 480px;
-    background: var(--color-dark-bg);
-    overflow: hidden;
-  }
-  .page-hero-inner {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: var(--content-max);
-    margin: 0 auto;
-    padding: calc(var(--nav-height) + var(--space-16)) var(--space-16) var(--space-16);
-    min-height: 480px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .page-hero-inner :global(.breadcrumbs ol) { color: var(--color-dark-muted); }
-  .page-hero-inner :global(.breadcrumbs a) { color: var(--color-dark-muted); }
-  .page-hero-inner :global(.breadcrumbs a:hover) { color: var(--color-dark-text); }
-  .page-hero-inner :global(.breadcrumbs [aria-current='page']) { color: var(--color-dark-text); }
-  .page-hero-text { max-width: 55%; margin-top: var(--space-5); }
-  .page-hero-text h1 {
-    font-family: var(--font-heading);
-    font-size: clamp(40px, 4.5vw, 64px);
-    font-weight: 600;
-    line-height: 1.02;
-    color: var(--color-dark-text);
-    margin-bottom: var(--space-4);
-  }
-  .hero-lede {
-    font-size: 17px;
-    color: var(--color-dark-muted);
-    line-height: 1.6;
-    max-width: 46ch;
-  }
-  .page-hero-img {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 45%;
-    z-index: 1;
-  }
-  .page-hero-img::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: linear-gradient(90deg, var(--color-dark-bg) 0%, rgba(28,28,26,0.5) 50%, rgba(28,28,26,0) 100%);
-  }
-  .page-hero-img :global(.hero-photo) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  @media (max-width: 768px) {
-    .page-hero { min-height: unset; }
-    .page-hero-inner { min-height: unset; padding: calc(var(--nav-height) + var(--space-8)) var(--space-6) var(--space-8); }
-    .page-hero-text { max-width: 100%; }
-    .page-hero-img { position: static; width: 100%; height: 240px; }
-    .page-hero-img::before { background: linear-gradient(180deg, rgba(28,28,26,0.4) 0%, rgba(28,28,26,0) 60%); }
-  }
   /* ── family body ── */
   .intro :global(p) { font-size: 16px; line-height: 1.7; color: var(--color-muted); margin-bottom: var(--space-4); max-width: 65ch; margin-top: var(--space-6); }
   .member-grid {

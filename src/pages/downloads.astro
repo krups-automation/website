@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
+import PageHeader from '../components/PageHeader.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { getAllDownloads, type Download } from '../sanity/queries';
 
@@ -51,14 +52,11 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Downloads' }];
 
   <Section surface="paper">
     <Breadcrumbs items={breadcrumbs} />
-    <header class="page-header">
-      <div class="eyebrow">Medien</div>
-      <h1>Downloads.</h1>
-      <p class="lede">
-        Broschüren, Datenblätter und technische Unterlagen zu allen
-        KRUPS Fördersystemen — zum direkten Download.
-      </p>
-    </header>
+    <PageHeader
+      eyebrow="Medien"
+      title="Downloads."
+      lede="Broschüren, Datenblätter und technische Unterlagen zu allen KRUPS Fördersystemen — zum direkten Download."
+    />
   </Section>
 
   <Section surface="clay">
@@ -115,28 +113,6 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Downloads' }];
 
 <style>
   .page-spacer { height: 100px; }
-  .page-header { margin: var(--space-6) 0 var(--space-4); max-width: 720px; }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin-bottom: var(--space-4);
-  }
-  .page-header h1 {
-    font-family: var(--font-heading);
-    font-size: clamp(40px, 4.5vw, 64px);
-    font-weight: 600;
-    line-height: 1.05;
-    margin-bottom: var(--space-4);
-  }
-  .lede {
-    font-size: 17px;
-    color: var(--color-muted);
-    line-height: 1.65;
-  }
 
   .download-group { margin-bottom: var(--space-8); }
   .download-group:last-child { margin-bottom: 0; }
@@ -176,8 +152,8 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Downloads' }];
   }
   .meta-chip {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 1px;
+    font-size: var(--font-size-eyebrow);
+    letter-spacing: var(--tracking-label);
     color: var(--color-muted);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm, 2px);
@@ -188,7 +164,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Downloads' }];
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-text);
     text-decoration: none;

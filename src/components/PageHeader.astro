@@ -1,0 +1,34 @@
+---
+/*
+ * PageHeader — light in-flow page header for index/utility pages.
+ * Eyebrow + H1 + lede; sits inside a Section on paper/clay surfaces.
+ */
+interface Props {
+  title?: string; // omit and use <span slot="title"> for markup titles (e.g. line breaks)
+  eyebrow?: string;
+  lede?: string;
+  class?: string;
+}
+
+const { title, eyebrow, lede, class: className } = Astro.props;
+---
+
+<header class={['page-header', className].filter(Boolean).join(' ')}>
+  {eyebrow && <div class="eyebrow">{eyebrow}</div>}
+  <h1>{title ?? <slot name="title" />}</h1>
+  {lede && <p class="lede">{lede}</p>}
+  <slot />
+</header>
+
+<style>
+  .page-header {
+    margin: var(--space-6) 0 var(--space-4);
+    max-width: 720px;
+  }
+
+  .page-header h1 {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
+    margin-bottom: var(--space-4);
+  }
+</style>

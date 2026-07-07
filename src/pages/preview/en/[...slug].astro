@@ -207,7 +207,7 @@ function html(field: unknown): string {
     padding: var(--space-2) var(--space-4);
     font-family: var(--font-mono);
     font-size: var(--font-size-label);
-    letter-spacing: 1.5px;
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     font-weight: 500;
     display: flex;
@@ -235,5 +235,5 @@ function html(field: unknown): string {
   .char-bar { display: flex; gap: var(--space-6); flex-wrap: wrap; }
   .char-item { display: flex; flex-direction: column; gap: 4px; }
   .char-val { font-family: var(--font-mono); font-weight: 600; font-size: 18px; }
-  .char-lbl { font-size: 12px; color: var(--color-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .char-lbl { font-size: 12px; color: var(--color-muted); text-transform: uppercase; letter-spacing: var(--tracking-label); }
 </style>

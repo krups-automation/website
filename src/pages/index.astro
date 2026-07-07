@@ -115,25 +115,25 @@ import Button from '../components/Button.astro';
           </div>
           <div class="card-visual">
             <svg class="card-track-svg" viewBox="0 0 600 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="40" y1="76" x2="560" y2="76" stroke="#E8B500" stroke-width="1.5"/>
-              <line x1="40" y1="184" x2="560" y2="184" stroke="#E8B500" stroke-width="1.5"/>
-              <rect x="78" y="96" width="104" height="72" rx="5" stroke="#1A1A18" stroke-width="1.5" fill="none"/>
-              <rect x="83" y="101" width="94" height="62" rx="3" stroke="#8A8680" stroke-width="1" fill="none"/>
-              <circle cx="98" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
-              <circle cx="164" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
-              <rect x="244" y="96" width="104" height="72" rx="5" stroke="#1A1A18" stroke-width="1.5" fill="none"/>
-              <rect x="249" y="101" width="94" height="62" rx="3" stroke="#8A8680" stroke-width="1" fill="none"/>
-              <circle cx="264" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
-              <circle cx="330" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
-              <rect x="410" y="96" width="104" height="72" rx="5" stroke="#1A1A18" stroke-width="1.5" fill="none"/>
-              <rect x="415" y="101" width="94" height="62" rx="3" stroke="#8A8680" stroke-width="1" fill="none"/>
-              <circle cx="430" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
-              <circle cx="496" cy="184" r="7" stroke="#E8B500" stroke-width="1.5" fill="none"/>
-              <line x1="204" y1="64" x2="204" y2="196" stroke="#8A8680" stroke-width="1" stroke-dasharray="3 4"/>
-              <line x1="370" y1="64" x2="370" y2="196" stroke="#8A8680" stroke-width="1" stroke-dasharray="3 4"/>
-              <path d="M544 130 L558 130 L551 123 M558 130 L551 137" stroke="#E8B500" stroke-width="1.5" stroke-linecap="round"/>
-              <text x="204" y="56" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, 'Courier New', monospace" font-size="9" fill="#8A8680" letter-spacing="0.5">STA 01</text>
-              <text x="370" y="56" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, 'Courier New', monospace" font-size="9" fill="#8A8680" letter-spacing="0.5">STA 02</text>
+              <line x1="40" y1="76" x2="560" y2="76" stroke="var(--color-accent)" stroke-width="1.5"/>
+              <line x1="40" y1="184" x2="560" y2="184" stroke="var(--color-accent)" stroke-width="1.5"/>
+              <rect x="78" y="96" width="104" height="72" rx="5" stroke="var(--color-text)" stroke-width="1.5" fill="none"/>
+              <rect x="83" y="101" width="94" height="62" rx="3" stroke="var(--color-drawing-line)" stroke-width="1" fill="none"/>
+              <circle cx="98" cy="184" r="7" stroke="var(--color-accent)" stroke-width="1.5" fill="none"/>
+              <circle cx="164" cy="184" r="7" stroke="var(--color-accent)" stroke-width="1.5" fill="none"/>
+              <rect x="244" y="96" width="104" height="72" rx="5" stroke="var(--color-text)" stroke-width="1.5" fill="none"/>
+              <rect x="249" y="101" width="94" height="62" rx="3" stroke="var(--color-drawing-line)" stroke-width="1" fill="none"/>
+              <circle cx="264" cy="184" r="7" stroke="var(--color-accent)" stroke-width="1.5" fill="none"/>
+              <circle cx="330" cy="184" r="7" stroke="var(--color-accent)" stroke-width="1.5" fill="none"/>
+              <rect x="410" y="96" width="104" height="72" rx="5" stroke="var(--color-text)" stroke-width="1.5" fill="none"/>
+              <rect x="415" y="101" width="94" height="62" rx="3" stroke="var(--color-drawing-line)" stroke-width="1" fill="none"/>
+              <circle cx="430" cy="184" r="7" stroke="var(--color-accent)" stroke-width="1.5" fill="none"/>
+              <circle cx="496" cy="184" r="7" stroke="var(--color-accent)" stroke-width="1.5" fill="none"/>
+              <line x1="204" y1="64" x2="204" y2="196" stroke="var(--color-drawing-line)" stroke-width="1" stroke-dasharray="3 4"/>
+              <line x1="370" y1="64" x2="370" y2="196" stroke="var(--color-drawing-line)" stroke-width="1" stroke-dasharray="3 4"/>
+              <path d="M544 130 L558 130 L551 123 M558 130 L551 137" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round"/>
+              <text x="204" y="56" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, 'Courier New', monospace" font-size="9" fill="var(--color-drawing-line)" letter-spacing="0.5">STA 01</text>
+              <text x="370" y="56" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, 'Courier New', monospace" font-size="9" fill="var(--color-drawing-line)" letter-spacing="0.5">STA 02</text>
             </svg>
             <span class="card-visual-label">eCart V3 — Rail system schematic</span>
           </div>
@@ -399,7 +399,7 @@ import Button from '../components/Button.astro';
   .container {
     max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0 64px;
+    padding: 0 var(--content-gutter);
   }
 
   /* ───── 1. HERO ───── */
@@ -409,8 +409,8 @@ import Button from '../components/Button.astro';
     display: flex;
     align-items: center;
     overflow: hidden;
-    /* matches the blueprint scene's paper color so image + surface read as one */
-    background: #011d38;
+    /* matches the blueprint scene's charcoal base so image + surface read as one */
+    background: var(--color-dark-bg);
   }
   .hero-bg {
     position: absolute;
@@ -440,13 +440,13 @@ import Button from '../components/Button.astro';
     width: 100%;
     max-width: var(--content-max);
     margin: 0 auto;
-    padding: calc(var(--nav-height) + 80px) 64px 96px;
+    padding: calc(var(--nav-height) + var(--space-20)) var(--content-gutter) var(--space-24);
   }
   .hero-eyebrow {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--font-size-eyebrow);
     font-weight: 500;
-    letter-spacing: 2px;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-accent);
     margin-bottom: 24px;
@@ -464,7 +464,7 @@ import Button from '../components/Button.astro';
   }
   .hero h1 {
     font-family: var(--font-heading);
-    font-size: clamp(64px, 7.5vw, 104px);
+    font-size: var(--font-size-display);
     font-weight: 600;
     line-height: 0.97;
     letter-spacing: 0;
@@ -499,12 +499,12 @@ import Button from '../components/Button.astro';
     font-size: 13px;
     font-weight: 600;
     color: var(--color-dark-text);
-    letter-spacing: 0.3px;
+    letter-spacing: var(--tracking-mono);
   }
   .hero-stat .lbl {
-    font-size: 10px;
+    font-size: var(--font-size-eyebrow);
     font-weight: 500;
-    letter-spacing: 0.8px;
+    letter-spacing: var(--tracking-mono);
     text-transform: uppercase;
     color: var(--color-dark-muted);
   }
@@ -522,13 +522,13 @@ import Button from '../components/Button.astro';
     gap: 40px;
     max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0 64px;
+    padding: 0 var(--content-gutter);
     flex-wrap: wrap;
   }
   .trust-bar-label {
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 1.5px;
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-muted);
     white-space: nowrap;
@@ -572,9 +572,9 @@ import Button from '../components/Button.astro';
   .proof-alt-label {
     display: block;
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: var(--font-size-eyebrow);
     font-weight: 500;
-    letter-spacing: 1.5px;
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-muted);
     line-height: 1.5;
@@ -606,7 +606,7 @@ import Button from '../components/Button.astro';
   .products-eyebrow {
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-muted);
     margin-bottom: 16px;
@@ -642,13 +642,13 @@ import Button from '../components/Button.astro';
   .product-card:hover {
     border-color: rgba(232, 181, 0, 0.8);
     transform: translateY(-2px);
-    box-shadow: 0 4px 24px rgba(26, 26, 24, 0.1);
+    box-shadow: var(--shadow-md);
   }
   .product-card.featured { grid-row: span 2; display: flex; flex-direction: column; }
   .card-tag {
-    font-size: 10px;
+    font-size: var(--font-size-eyebrow);
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-accent);
     margin-bottom: 20px;
@@ -681,7 +681,7 @@ import Button from '../components/Button.astro';
   }
   .card-specs {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--font-size-eyebrow);
     color: var(--color-muted);
     padding: 18px 0;
     border-top: 1px solid var(--color-border);
@@ -720,8 +720,8 @@ import Button from '../components/Button.astro';
   }
   .card-visual-label {
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 1.5px;
+    font-size: var(--font-size-eyebrow);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-muted);
     opacity: 0.45;
@@ -741,9 +741,9 @@ import Button from '../components/Button.astro';
   .lifecycle-header { margin-bottom: 64px; max-width: 720px; }
   .lifecycle-eyebrow {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--font-size-eyebrow);
     font-weight: 500;
-    letter-spacing: 2px;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-accent);
     margin-bottom: 20px;
@@ -791,7 +791,7 @@ import Button from '../components/Button.astro';
   .lifecycle-card:hover {
     border-color: rgba(232, 181, 0, 0.8);
     transform: translateY(-2px);
-    box-shadow: 0 4px 24px rgba(26, 26, 24, 0.1);
+    box-shadow: var(--shadow-md);
   }
   .lifecycle-step {
     display: flex;
@@ -805,7 +805,7 @@ import Button from '../components/Button.astro';
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 1.5px;
+    letter-spacing: var(--tracking-label);
     color: var(--color-muted);
   }
   .lifecycle-label {
@@ -814,7 +814,7 @@ import Button from '../components/Button.astro';
     font-size: 22px;
     font-weight: 500;
     color: var(--color-accent);
-    letter-spacing: 0.5px;
+    letter-spacing: var(--tracking-mono);
   }
   .lifecycle-card h3 {
     font-family: var(--font-heading);
@@ -990,9 +990,9 @@ import Button from '../components/Button.astro';
     max-width: 400px;
   }
   .tech-eyebrow {
-    font-size: 11px;
+    font-size: var(--font-size-eyebrow);
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-muted);
     margin-bottom: 20px;
@@ -1009,9 +1009,9 @@ import Button from '../components/Button.astro';
     padding: 14px 24px;
   }
   .comparison-header span {
-    font-size: 10px;
+    font-size: var(--font-size-eyebrow);
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-dark-muted);
     text-align: center;
@@ -1052,9 +1052,9 @@ import Button from '../components/Button.astro';
   }
   .footer-cta-content { position: relative; z-index: 1; }
   .footer-cta-eyebrow {
-    font-size: 11px;
+    font-size: var(--font-size-eyebrow);
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-accent);
     margin-bottom: 28px;
@@ -1069,7 +1069,7 @@ import Button from '../components/Button.astro';
   }
   .footer-cta h2 em { font-style: italic; color: var(--color-accent); }
   .footer-cta p {
-    font-size: 17px;
+    font-size: var(--font-size-lede);
     color: var(--color-dark-muted);
     max-width: 420px;
     margin: 0 auto 40px;

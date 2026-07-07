@@ -29,32 +29,44 @@
   --color-error: #C4432A;
   --color-error-text: #992F1C;       /* darkened error red — WCAG AA on light/tinted surfaces */
 
+  /* Illustration */
+  --color-drawing-line: #8A8680;     /* secondary linework in technical-drawing SVGs */
+
   /* — Typography ——————————————————————————————————————————————— */
 
   --font-heading: var(--font-oswald);
   --font-body: var(--font-barlow);
   --font-mono: var(--font-jetbrains-mono);
 
-  /* Sizes (desktop; override via clamps where marked) */
-  --font-size-h1: 88px;
+  /* Sizes — responsive clamps are the canonical values, not overrides */
+  --font-size-display: clamp(64px, 7.5vw, 104px);  /* homepage hero only */
+  --font-size-h1: clamp(40px, 4.5vw, 64px);        /* inner-page heroes */
   --font-size-h2: clamp(36px, 3.5vw, 52px);
   --font-size-h2-section: 28px;   /* inner-page sub-section headings (Technische Daten, FAQ, etc.) */
   --font-size-h3: 40px;
   --font-size-h4: 28px;
   --font-size-body: 18px;
+  --font-size-lede: 17px;         /* hero/intro standfirst paragraphs */
   --font-size-body-sm: 15px;
   --font-size-specs: 14px;
   --font-size-label: 13px;
+  --font-size-eyebrow: 11px;      /* mono uppercase kickers — legibility floor, no sizes below this */
   --font-size-nav: 14px;
   --font-size-button: 14px;
 
-  --line-height-h1: 1.0;
+  --line-height-h1: 1.05;
   --line-height-h2: 1.05;
   --line-height-h3: 1.1;
   --line-height-h4: 1.15;
   --line-height-body: 1.6;
+  --line-height-lede: 1.6;
   --line-height-body-sm: 1.5;
   --line-height-specs: 1.4;
+
+  /* Tracking — two scales only: labels/eyebrows (wide) and mono specs (subtle) */
+  --tracking-eyebrow: 2px;
+  --tracking-label: 1.5px;
+  --tracking-mono: 0.5px;
 
   /* — Spacing (base 8px) ———————————————————————————————————————— */
 
@@ -87,6 +99,8 @@
   --content-gutter: 48px;   /* inner-page section padding — used by Section.astro and SiteFooter */
   --grid-gap: 24px;
 
+  /* Breakpoints — documentation only: custom properties can't be used inside
+     @media queries, so these values are repeated literally where needed */
   --breakpoint-mobile: 640px;
   --breakpoint-tablet: 900px;
   --breakpoint-desktop: 1280px;
@@ -105,4 +119,9 @@
   /* — Borders ———————————————————————————————————————————————— */
 
   --border-hairline: 1px solid var(--color-border);
+
+  /* — Shadows ———————————————————————————————————————————————— */
+
+  --shadow-md: 0 4px 24px rgba(26, 26, 24, 0.10);
+  --shadow-lg: 0 8px 40px rgba(15, 15, 14, 0.30);
 }

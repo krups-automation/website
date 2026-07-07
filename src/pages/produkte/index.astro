@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
+import PageHeader from '../../components/PageHeader.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getAllProductFamilies } from '../../sanity/queries';
 
@@ -17,15 +18,11 @@ const families = await getAllProductFamilies('de');
 
   <Section surface="paper">
     <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Produkte' }]} />
-    <header class="page-header">
-      <div class="eyebrow">Build</div>
-      <h1>Zwei Plattformen. Jede Montageaufgabe.</h1>
-      <p class="lede">
-        Von leichten Komponenten bis zum schweren Batteriepack — ein vollständiges
-        Förderportfolio von einem Hersteller. Entwickelt, gefertigt und in Betrieb
-        genommen in Dernbach.
-      </p>
-    </header>
+    <PageHeader
+      eyebrow="Build"
+      title="Zwei Plattformen. Jede Montageaufgabe."
+      lede="Von leichten Komponenten bis zum schweren Batteriepack — ein vollständiges Förderportfolio von einem Hersteller. Entwickelt, gefertigt und in Betrieb genommen in Dernbach."
+    />
   </Section>
 
   <Section surface="clay">
@@ -51,29 +48,6 @@ const families = await getAllProductFamilies('de');
 </BaseLayout>
 
 <style>
-  .page-header { margin: var(--space-6) 0 var(--space-4); max-width: 720px; }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin-bottom: var(--space-4);
-  }
-  .page-header h1 {
-    font-family: var(--font-heading);
-    font-size: clamp(40px, 4.5vw, 64px);
-    font-weight: 600;
-    line-height: 1.05;
-    margin-bottom: var(--space-4);
-  }
-  .lede {
-    font-size: 17px;
-    color: var(--color-muted);
-    line-height: 1.65;
-    max-width: 560px;
-  }
   .family-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -93,7 +67,7 @@ const families = await getAllProductFamilies('de');
   .family-card:hover {
     border-color: rgba(232, 181, 0, 0.8);
     transform: translateY(-2px);
-    box-shadow: 0 4px 24px rgba(26, 26, 24, 0.1);
+    box-shadow: var(--shadow-md);
   }
   .family-card h2 {
     font-family: var(--font-heading);

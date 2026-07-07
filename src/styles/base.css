@@ -122,13 +122,31 @@ details[open].faq-item > summary::after {
 .mono {
   font-family: var(--font-mono);
   font-size: var(--font-size-specs);
-  letter-spacing: 0.5px;
+  letter-spacing: var(--tracking-mono);
 }
 
 .label {
   font-family: var(--font-mono);
   font-size: var(--font-size-label);
   font-weight: 500;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
+}
+
+/* Eyebrow — mono uppercase kicker above headings (page heroes, section intros) */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+
+/* Lede — standfirst paragraph under a page-hero heading */
+.lede {
+  font-size: var(--font-size-lede);
+  line-height: var(--line-height-lede);
+  color: var(--color-muted);
 }

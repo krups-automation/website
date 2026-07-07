@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
+import PageHeader from '../../components/PageHeader.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getAllIndustries } from '../../sanity/queries';
 
@@ -18,14 +19,10 @@ const industries = await getAllIndustries('de');
   <Section surface="paper">
     <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Branchen' }]} />
 
-    <header class="page-header">
-      <h1>Wo KRUPS-Systeme laufen.</h1>
-      <p class="lede">
-        Von der Batteriemontage in Giga-Scale bis zum Präzisions-Prüfstand für Antriebsstränge —
-        die Traglastspanne und Flexibilität von LOGO!MAT deckt die anspruchsvollsten
-        Anwendungen in der Industrie ab.
-      </p>
-    </header>
+    <PageHeader
+      title="Wo KRUPS-Systeme laufen."
+      lede="Von der Batteriemontage in Giga-Scale bis zum Präzisions-Prüfstand für Antriebsstränge — die Traglastspanne und Flexibilität von LOGO!MAT deckt die anspruchsvollsten Anwendungen in der Industrie ab."
+    />
 
     {industries.length === 0 ? (
       <div class="empty-state">
@@ -58,20 +55,6 @@ const industries = await getAllIndustries('de');
 
 <style>
   /* height set globally via --nav-height */
-  .page-header { margin: var(--space-6) 0 var(--space-12); max-width: 720px; }
-  .page-header h1 {
-    font-family: var(--font-heading);
-    font-size: clamp(40px, 4.5vw, 64px);
-    font-weight: 600;
-    line-height: 1.05;
-    margin-bottom: var(--space-4);
-  }
-  .lede {
-    font-size: 17px;
-    color: var(--color-muted);
-    line-height: 1.65;
-    max-width: 560px;
-  }
   .industry-list { display: flex; flex-direction: column; }
   .industry-row {
     display: grid;
@@ -122,8 +105,8 @@ const industries = await getAllIndustries('de');
   }
   .char-bar .lbl {
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 1.5px;
+    font-size: var(--font-size-eyebrow);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-muted);
   }
