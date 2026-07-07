@@ -3,8 +3,10 @@ import type { GetStaticPaths } from 'astro';
 import { toHTML } from '@portabletext/to-html';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHero from '../../../components/PageHero.astro';
+import ProductDetail from '../../../components/ProductDetail.astro';
 import Section from '../../../components/Section.astro';
-import { getAllProductFamilies, getProductFamilyBySlug } from '../../../sanity/queries';
+import { getAllProductFamilies, getProductFamilyBySlug, getProductBySlug } from '../../../sanity/queries';
+import { productSchema, faqSchema } from '../../../lib/schema-org';
 
 export const getStaticPaths = (async () => {
   const families = await getAllProductFamilies('de');
@@ -18,6 +20,10 @@ if (!family) {
   return Astro.redirect('/404');
 }
 
+// single-member families collapse: this page renders the full product content
+const soleMemberSlug = family.members?.length === 1 ? family.members[0].slug?.current : null;
+const product = soleMemberSlug ? await getProductBySlug(soleMemberSlug, 'de') : null;
+
 const introHtml = family.intro ? toHTML(family.intro as any) : '';
 const bodyHtml = family.body ? toHTML(family.body as any) : '';
 
@@ -26,6 +32,19 @@ const breadcrumbs = [
   { label: 'Produkte', href: '/produkte' },
   { label: family.name },
 ];
+
+const jsonLd = product
+  ? [
+      productSchema({
+        name: product.name,
+        description: product.metaDescription ?? product.tagline ?? family.tagline,
+        url: `/produkte/${familySlug}`,
+        category: 'Fördersystem',
+        specs: product.specs?.map((s) => ({ label: s.label, value: s.value, unit: s.unit })),
+      }),
+      ...(product.faq && product.faq.length > 0 ? [faqSchema(product.faq)] : []),
+    ]
+  : undefined;
 ---
 
 <BaseLayout
@@ -33,6 +52,7 @@ const breadcrumbs = [
   description={family.metaDescription ?? family.tagline}
   locale="de"
   breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
 >
   <PageHero
     breadcrumbs={breadcrumbs}
@@ -41,23 +61,44 @@ const breadcrumbs = [
     image={family.heroImage}
   />
 
-  <Section surface="paper">
-    {introHtml && <div class="intro" set:html={introHtml} />}
+  {product ? (
+    <ProductDetail product={product} />
+  ) : (
+    <Section surface="paper">
+      {introHtml && (
+        <div class="intro-block">
+          <div class="eyebrow">Das System</div>
+          <div class="intro" set:html={introHtml} />
+        </div>
+      )}
 
-    {family.members && family.members.length > 0 && (
-      <div class="member-grid">
-        {family.members.map((m) => (
-          <a class="member-card" href={`/produkte/${family.slug.current}/${m.slug.current}`}>
-            <h2>{m.name}</h2>
-            {m.tagline && <p>{m.tagline}</p>}
-            <span class="card-link">Details <span class="card-arrow">→</span></span>
-          </a>
-        ))}
-      </div>
-    )}
+      {family.members && family.members.length > 0 && (
+        <div class="member-grid">
+          {family.members.map((m) => (
+            <a class="member-card" href={`/produkte/${family.slug.current}/${m.slug.current}`}>
+              <h2>{m.name}</h2>
+              {m.tagline && <p>{m.tagline}</p>}
+              {m.specs && m.specs.length > 0 && (
+                <div class="card-specs">
+                  {m.specs.map((s: any) => (
+                    <span class="spec-chip">
+                      <span class="chip-label">{s.label}</span>
+                      {s.value}{s.unit ? ` ${s.unit}` : ''}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <span class="card-link">Details <span class="card-arrow">→</span></span>
+            </a>
+          ))}
+        </div>
+      )}
 
-    {bodyHtml && <div class="family-body" set:html={bodyHtml} />}
+      {bodyHtml && <div class="family-body" set:html={bodyHtml} />}
+    </Section>
+  )}
 
+  <Section surface="paper" class="sonder-section">
     <aside class="sonder-cta">
       <h2>Sonderentwicklung gefragt?</h2>
       <p>
@@ -70,13 +111,26 @@ const breadcrumbs = [
 </BaseLayout>
 
 <style>
-  /* ── family body ── */
-  .intro :global(p) { font-size: 16px; line-height: 1.7; color: var(--color-muted); margin-bottom: var(--space-4); max-width: 65ch; margin-top: var(--space-6); }
+  /* ── intro: first paragraph reads as a lede, rest as body ── */
+  .intro-block { max-width: 720px; margin-bottom: var(--space-10); }
+  .intro :global(p) {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin-bottom: var(--space-4);
+    max-width: 65ch;
+  }
+  .intro :global(p:first-of-type) {
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--color-text);
+  }
+  .intro :global(strong) { color: var(--color-text); }
+
   .member-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 16px;
-    margin-bottom: var(--space-12);
   }
   .member-card {
     background: var(--color-surface);
@@ -102,6 +156,30 @@ const breadcrumbs = [
     line-height: 1.6;
     margin-bottom: var(--space-4);
   }
+  .card-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--space-5);
+  }
+  .spec-chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: var(--tracking-mono);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    border-radius: var(--radius-md);
+    padding: 4px 10px;
+  }
+  .chip-label {
+    display: block;
+    font-size: var(--font-size-eyebrow);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 1px;
+  }
   .card-link {
     display: inline-flex;
     align-items: center;
@@ -115,8 +193,10 @@ const breadcrumbs = [
   .member-card:hover .card-arrow { transform: translateX(4px); }
   .family-body :global(p) { max-width: 65ch; margin-bottom: var(--space-4); line-height: 1.7; }
   .family-body :global(h2) { margin: var(--space-8) 0 var(--space-3); font-family: var(--font-heading); }
+
+  /* CTA sits in its own slim section so it follows both page variants */
+  :global(.sonder-section) { padding-top: 0 !important; }
   .sonder-cta {
-    margin-top: var(--space-16);
     padding: 40px;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);

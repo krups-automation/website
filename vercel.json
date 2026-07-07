@@ -1,67 +1,244 @@
 {
   "redirects": [
-    { "source": "/de", "destination": "/", "permanent": true },
-
-    { "source": "/de/kontakt", "destination": "/kontakt", "permanent": true },
-    { "source": "/de/impressum", "destination": "/impressum", "permanent": true },
-    { "source": "/de/datenschutz", "destination": "/datenschutz", "permanent": true },
-    { "source": "/de/cookie-richtlinien", "destination": "/cookie-richtlinien", "permanent": true },
-
-    { "source": "/de/leistungen/:slug", "destination": "/leistungen/:slug", "permanent": true },
-
-    { "source": "/de/anwendungsbereiche", "destination": "/branchen", "permanent": true },
-
-    { "source": "/de/foerdersysteme/elektrisch-angetriebene-werkstuecktraeger", "destination": "/produkte/ecart", "permanent": true },
-    { "source": "/de/foerdersysteme/friktionsrollenfoerderer", "destination": "/produkte/friktionsrollenfoerderer", "permanent": true },
-    { "source": "/de/foerdersysteme/foerdersysteme-uebersicht", "destination": "/produkte", "permanent": true },
-    { "source": "/de/foerdersysteme/sonderentwicklungen", "destination": "/produkte", "permanent": true },
-
-    { "source": "/de/kleinfoerdersysteme/:path*", "destination": "/produkte", "permanent": true },
-    { "source": "/de/kleinfoerdersysteme", "destination": "/produkte", "permanent": true },
-
-    { "source": "/de/medien-downloads/:path*", "destination": "/downloads", "permanent": true },
-    { "source": "/de/medien-downloads", "destination": "/downloads", "permanent": true },
-    { "source": "/de/ecart-broschuere-digital", "destination": "/downloads", "permanent": true },
-
-    { "source": "/de/taktzeitberechnung", "destination": "/kontakt", "permanent": true },
-    { "source": "/de/nachhaltigkeit", "destination": "/unternehmen", "permanent": true },
-    { "source": "/de/unternehmen/mission-statement", "destination": "/unternehmen", "permanent": true },
-
-    { "source": "/de/news/:path*", "destination": "/", "permanent": true },
-    { "source": "/de/news", "destination": "/", "permanent": true },
-
-    { "source": "/de/:path*", "destination": "/", "permanent": true },
-
-    { "source": "/en/contact-directions", "destination": "/kontakt", "permanent": true },
-    { "source": "/en/legal-notice", "destination": "/impressum", "permanent": true },
-    { "source": "/en/data-privacy", "destination": "/datenschutz", "permanent": true },
-    { "source": "/en/cookie-policy", "destination": "/cookie-richtlinien", "permanent": true },
-
-    { "source": "/en/services/assembly", "destination": "/leistungen/montage", "permanent": true },
-    { "source": "/en/services/consulting", "destination": "/leistungen/beratung", "permanent": true },
-    { "source": "/en/services/controls-integration", "destination": "/leistungen/steuerungsintegration", "permanent": true },
-    { "source": "/en/services/manufacturing", "destination": "/leistungen/fertigung", "permanent": true },
-    { "source": "/en/services/project-planning", "destination": "/leistungen/projektierung", "permanent": true },
-    { "source": "/en/services/service", "destination": "/leistungen/service", "permanent": true },
-
-    { "source": "/en/application-samples", "destination": "/branchen", "permanent": true },
-
-    { "source": "/en/conveyor-systems/electrically-driven-conveyor-systems", "destination": "/produkte/ecart", "permanent": true },
-    { "source": "/en/conveyor-systems/friction-roller-conveyors", "destination": "/produkte/friktionsrollenfoerderer", "permanent": true },
-    { "source": "/en/conveyor-systems/:path*", "destination": "/produkte", "permanent": true },
-    { "source": "/en/small-conveyor-systems/:path*", "destination": "/produkte", "permanent": true },
-    { "source": "/en/small-conveyor-systems", "destination": "/produkte", "permanent": true },
-
-    { "source": "/en/media-downloads/:path*", "destination": "/downloads", "permanent": true },
-    { "source": "/en/media-downloads", "destination": "/downloads", "permanent": true },
-    { "source": "/en/ecart-brochure-digital", "destination": "/downloads", "permanent": true },
-
-    { "source": "/en/takt-time-calculation", "destination": "/kontakt", "permanent": true },
-    { "source": "/en/sustainability", "destination": "/unternehmen", "permanent": true },
-    { "source": "/en/company/:path*", "destination": "/unternehmen", "permanent": true },
-
-    { "source": "/en/news/:path*", "destination": "/", "permanent": true },
-    { "source": "/en/news", "destination": "/", "permanent": true },
-    { "source": "/en/sign-in", "destination": "/", "permanent": true }
+    {
+      "source": "/produkte/ecart/ecart",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/de/kontakt",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/de/impressum",
+      "destination": "/impressum",
+      "permanent": true
+    },
+    {
+      "source": "/de/datenschutz",
+      "destination": "/datenschutz",
+      "permanent": true
+    },
+    {
+      "source": "/de/cookie-richtlinien",
+      "destination": "/cookie-richtlinien",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/:slug",
+      "destination": "/leistungen/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/de/anwendungsbereiche",
+      "destination": "/branchen",
+      "permanent": true
+    },
+    {
+      "source": "/de/foerdersysteme/elektrisch-angetriebene-werkstuecktraeger",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/foerdersysteme/friktionsrollenfoerderer",
+      "destination": "/produkte/friktionsrollenfoerderer",
+      "permanent": true
+    },
+    {
+      "source": "/de/foerdersysteme/foerdersysteme-uebersicht",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/de/foerdersysteme/sonderentwicklungen",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/de/kleinfoerdersysteme/:path*",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/de/kleinfoerdersysteme",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/de/medien-downloads/:path*",
+      "destination": "/downloads",
+      "permanent": true
+    },
+    {
+      "source": "/de/medien-downloads",
+      "destination": "/downloads",
+      "permanent": true
+    },
+    {
+      "source": "/de/ecart-broschuere-digital",
+      "destination": "/downloads",
+      "permanent": true
+    },
+    {
+      "source": "/de/taktzeitberechnung",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/de/nachhaltigkeit",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/unternehmen/mission-statement",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/de/news",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/de/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/contact-directions",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/en/legal-notice",
+      "destination": "/impressum",
+      "permanent": true
+    },
+    {
+      "source": "/en/data-privacy",
+      "destination": "/datenschutz",
+      "permanent": true
+    },
+    {
+      "source": "/en/cookie-policy",
+      "destination": "/cookie-richtlinien",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/assembly",
+      "destination": "/leistungen/montage",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/consulting",
+      "destination": "/leistungen/beratung",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/controls-integration",
+      "destination": "/leistungen/steuerungsintegration",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/manufacturing",
+      "destination": "/leistungen/fertigung",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/project-planning",
+      "destination": "/leistungen/projektierung",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/service",
+      "destination": "/leistungen/service",
+      "permanent": true
+    },
+    {
+      "source": "/en/application-samples",
+      "destination": "/branchen",
+      "permanent": true
+    },
+    {
+      "source": "/en/conveyor-systems/electrically-driven-conveyor-systems",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/conveyor-systems/friction-roller-conveyors",
+      "destination": "/produkte/friktionsrollenfoerderer",
+      "permanent": true
+    },
+    {
+      "source": "/en/conveyor-systems/:path*",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/en/small-conveyor-systems/:path*",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/en/small-conveyor-systems",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/en/media-downloads/:path*",
+      "destination": "/downloads",
+      "permanent": true
+    },
+    {
+      "source": "/en/media-downloads",
+      "destination": "/downloads",
+      "permanent": true
+    },
+    {
+      "source": "/en/ecart-brochure-digital",
+      "destination": "/downloads",
+      "permanent": true
+    },
+    {
+      "source": "/en/takt-time-calculation",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/en/sustainability",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/company/:path*",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/news",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/sign-in",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }

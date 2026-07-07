@@ -236,10 +236,20 @@ export async function getProductFamilyBySlug(
     pickClient(opts.draft),
     `*[_type == "productFamily" && language == $lang && slug.current == $slug][0] {
       _id, name, slug, tagline, metaTitle, metaDescription, heroImage, intro, keyFeatures, body,
-      "members": members[]->{_id, name, slug, tagline, heroImage}
+      "members": members[]->{_id, name, slug, tagline, heroImage, "specs": specs[0...3]{label, value, unit}}
     }`,
     { slug, lang },
     null
+  );
+}
+
+/** Slugs of families with exactly one member — these collapse into a single product page. */
+export async function getSingleMemberFamilySlugs(lang: Locale): Promise<string[]> {
+  return safeFetch(
+    sanityClient,
+    `*[_type == "productFamily" && language == $lang && count(members) == 1].slug.current`,
+    { lang },
+    []
   );
 }
 
