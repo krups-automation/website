@@ -79,14 +79,14 @@ const jsonLd = product
               <h2>{m.name}</h2>
               {m.tagline && <p>{m.tagline}</p>}
               {m.specs && m.specs.length > 0 && (
-                <div class="card-specs">
+                <dl class="card-specs">
                   {m.specs.map((s: any) => (
-                    <span class="spec-chip">
-                      <span class="chip-label">{s.label}</span>
-                      {s.value}{s.unit ? ` ${s.unit}` : ''}
-                    </span>
+                    <div class="spec-row">
+                      <dt>{s.label}</dt>
+                      <dd>{s.value}{s.unit ? ` ${s.unit}` : ''}</dd>
+                    </div>
                   ))}
-                </div>
+                </dl>
               )}
               <span class="card-link">Details <span class="card-arrow">→</span></span>
             </a>
@@ -156,29 +156,32 @@ const jsonLd = product
     line-height: 1.6;
     margin-bottom: var(--space-4);
   }
+  /* spec rows pinned to the card bottom so all cards align identically */
   .card-specs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: var(--space-5);
+    margin: auto 0 var(--space-5);
+    padding-top: var(--space-4);
   }
-  .spec-chip {
+  .spec-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+    padding: 8px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .spec-row dt {
     font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: var(--tracking-mono);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    background: var(--color-bg);
-    border-radius: var(--radius-md);
-    padding: 4px 10px;
-  }
-  .chip-label {
-    display: block;
     font-size: var(--font-size-eyebrow);
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-muted);
-    margin-bottom: 1px;
+  }
+  .spec-row dd {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text);
+    text-align: right;
+    white-space: nowrap;
   }
   .card-link {
     display: inline-flex;
@@ -187,7 +190,6 @@ const jsonLd = product
     font-size: 13px;
     font-weight: 600;
     color: var(--color-text);
-    margin-top: auto;
   }
   .card-arrow { display: inline-block; transition: transform 150ms ease; }
   .member-card:hover .card-arrow { transform: translateX(4px); }
