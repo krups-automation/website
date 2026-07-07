@@ -48,7 +48,12 @@ const sortedFamilies = [...families].sort(
       eyebrow="Build"
       title="Zwei Plattformen. Jede Montageaufgabe."
       lede="Von leichten Komponenten bis zum schweren Batteriepack — ein vollständiges Förderportfolio von einem Hersteller. Entwickelt, gefertigt und in Betrieb genommen in Dernbach."
-    />
+    >
+      <p class="customer-strip">
+        <span class="strip-label">Im Einsatz bei</span>
+        BMW · Volkswagen · Tesla · Toyota · Škoda · Audi · SEAT
+      </p>
+    </PageHeader>
   </Section>
 
   <Section surface="clay">
@@ -183,6 +188,21 @@ const sortedFamilies = [...families].sort(
     color: var(--color-muted);
     line-height: 1.65;
     margin-bottom: var(--space-6);
+  }
+  .customer-strip {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: var(--tracking-mono);
+    color: var(--color-text);
+    margin-top: var(--space-6);
+  }
+  .strip-label {
+    display: block;
+    font-size: var(--font-size-eyebrow);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 4px;
   }
   .card-tag {
     font-size: var(--font-size-eyebrow);
