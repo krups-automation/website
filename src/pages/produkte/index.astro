@@ -6,6 +6,32 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getAllProductFamilies } from '../../sanity/queries';
 
 const families = await getAllProductFamilies('de');
+
+// display metadata per family — order, category tag, headline specs, schematic
+const familyMeta: Record<string, { order: number; tag: string; specs: [string, string][] }> = {
+  ecart: {
+    order: 0,
+    tag: 'Flaggschiff',
+    specs: [
+      ['Antrieb', 'am Fahrzeug'],
+      ['Traglast', '300 – 2.000 kg'],
+      ['Positioniergenauigkeit', '±0,1 mm'],
+    ],
+  },
+  friktionsrollenfoerderer: {
+    order: 1,
+    tag: 'Bewährte Plattform',
+    specs: [
+      ['Antrieb', 'in der Strecke'],
+      ['Traglast', 'bis 1.000 kg'],
+      ['Baureihen', 'L / XL / T'],
+    ],
+  },
+};
+
+const sortedFamilies = [...families].sort(
+  (a, b) => (familyMeta[a.slug.current]?.order ?? 99) - (familyMeta[b.slug.current]?.order ?? 99)
+);
 ---
 
 <BaseLayout
@@ -35,13 +61,89 @@ const families = await getAllProductFamilies('de');
       </div>
     ) : (
       <div class="family-grid">
-        {families.map((family) => (
-          <a class="family-card" href={`/produkte/${family.slug.current}`}>
-            <h2>{family.name}</h2>
-            {family.tagline && <p class="tagline">{family.tagline}</p>}
-            <span class="card-link">Zur Familie <span class="card-arrow">→</span></span>
-          </a>
-        ))}
+        {sortedFamilies.map((family) => {
+          const meta = familyMeta[family.slug.current];
+          return (
+            <a class="family-card" href={`/produkte/${family.slug.current}`}>
+              {meta && <div class="card-tag">{meta.tag}</div>}
+              <h2>{family.name}</h2>
+              {family.tagline && <p class="tagline">{family.tagline}</p>}
+              {meta && (
+                <dl class="card-specs">
+                  {meta.specs.map(([label, value]) => (
+                    <div class="spec-row">
+                      <dt>{label}</dt>
+                      <dd>{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+              <span class="card-link">Details <span class="card-arrow">→</span></span>
+              {family.slug.current === 'ecart' && (
+                <div class="card-visual" aria-hidden="true">
+                  <svg viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <g id="pf-ecart">
+                        <rect x="22" y="0" width="76" height="26" stroke="var(--color-drawing-line)" stroke-width="1"/>
+                        <line x1="41" y1="0" x2="41" y2="26" stroke="var(--color-drawing-line)" stroke-width="1"/>
+                        <line x1="60" y1="0" x2="60" y2="26" stroke="var(--color-drawing-line)" stroke-width="1"/>
+                        <line x1="79" y1="0" x2="79" y2="26" stroke="var(--color-drawing-line)" stroke-width="1"/>
+                        <rect x="-6" y="26" width="132" height="8" stroke="var(--color-text)" stroke-width="1.5"/>
+                        <rect x="0" y="34" width="120" height="56" stroke="var(--color-text)" stroke-width="1.5"/>
+                        <rect x="8" y="42" width="104" height="40" stroke="var(--color-drawing-line)" stroke-width="1"/>
+                        <rect x="48" y="70" width="24" height="12" stroke="var(--color-accent)" stroke-width="1.5"/>
+                        <circle cx="18" cy="101" r="9" stroke="var(--color-text)" stroke-width="1.5"/>
+                        <circle cx="102" cy="101" r="9" stroke="var(--color-text)" stroke-width="1.5"/>
+                      </g>
+                    </defs>
+                    <use href="#pf-ecart" x="105" y="45"/>
+                    <use href="#pf-ecart" x="340" y="45"/>
+                    <line x1="30" y1="158" x2="570" y2="158" stroke="var(--color-accent)" stroke-width="1.5"/>
+                    <line x1="30" y1="164" x2="570" y2="164" stroke="var(--color-accent)" stroke-width="1"/>
+                    <g stroke="var(--color-drawing-line)" stroke-width="1">
+                      <path d="M70 164 v8 h12 M76 164 v8"/>
+                      <path d="M290 164 v8 h12 M296 164 v8"/>
+                      <path d="M510 164 v8 h12 M516 164 v8"/>
+                    </g>
+                    <path d="M548 144 L570 144 L562 136 M570 144 L562 152" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              )}
+              {family.slug.current === 'friktionsrollenfoerderer' && (
+                <div class="card-visual" aria-hidden="true">
+                  <svg viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="30" y1="140" x2="570" y2="140" stroke="var(--color-text)" stroke-width="1.5"/>
+                    <line x1="30" y1="164" x2="570" y2="164" stroke="var(--color-text)" stroke-width="1.5"/>
+                    <g stroke="var(--color-accent)" stroke-width="1.2">
+                      {Array.from({ length: 20 }, (_, i) => (
+                        <circle cx={52 + i * 26} cy="152" r="7" fill="none"/>
+                      ))}
+                    </g>
+                    <g stroke="var(--color-text)" stroke-width="1.5">
+                      <rect x="90" y="128" width="120" height="10"/>
+                      <rect x="330" y="128" width="120" height="10"/>
+                    </g>
+                    <g stroke="var(--color-drawing-line)" stroke-width="1">
+                      <rect x="120" y="100" width="60" height="28"/>
+                      <line x1="140" y1="100" x2="140" y2="128"/>
+                      <line x1="160" y1="100" x2="160" y2="128"/>
+                      <rect x="360" y="100" width="60" height="28"/>
+                      <line x1="380" y1="100" x2="380" y2="128"/>
+                      <line x1="400" y1="100" x2="400" y2="128"/>
+                    </g>
+                    <g stroke="var(--color-drawing-line)" stroke-width="1">
+                      <path d="M105 164 v28 M99 192 h12"/>
+                      <path d="M300 164 v28 M294 192 h12"/>
+                      <path d="M495 164 v28 M489 192 h12"/>
+                    </g>
+                    <rect x="284" y="172" width="26" height="14" stroke="var(--color-accent)" stroke-width="1.5"/>
+                    <path d="M548 118 L570 118 L562 110 M570 118 L562 126" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              )}
+            </a>
+          );
+        })}
       </div>
     )}
   </Section>
@@ -82,6 +184,40 @@ const families = await getAllProductFamilies('de');
     line-height: 1.65;
     margin-bottom: var(--space-6);
   }
+  .card-tag {
+    font-size: var(--font-size-eyebrow);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+  }
+  .card-specs {
+    margin: auto 0 var(--space-5);
+    padding-top: var(--space-2);
+  }
+  .spec-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+    padding: 8px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .spec-row dt {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-eyebrow);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .spec-row dd {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text);
+    text-align: right;
+    white-space: nowrap;
+  }
   .card-link {
     display: inline-flex;
     align-items: center;
@@ -89,7 +225,18 @@ const families = await getAllProductFamilies('de');
     font-size: 13px;
     font-weight: 600;
     color: var(--color-text);
-    margin-top: auto;
+  }
+  .card-visual {
+    margin: 24px -44px -44px;
+    background: linear-gradient(160deg, var(--color-surface) 0%, var(--color-border) 100%);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    overflow: hidden;
+  }
+  .card-visual svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.85;
   }
   .card-arrow { transition: transform 150ms ease; display: inline-block; }
   .family-card:hover .card-arrow { transform: translateX(8px); }
