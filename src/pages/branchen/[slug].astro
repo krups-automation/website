@@ -152,13 +152,13 @@ const breadcrumbs = [
 <style>
   .char-bar {
     list-style: none;
-    padding: 24px 0;
+    padding: var(--space-6) 0;
     margin: 0 0 var(--space-12);
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 24px;
+    gap: var(--space-6);
   }
   .char-bar .lbl {
     display: block;
@@ -172,7 +172,7 @@ const breadcrumbs = [
   .char-bar .val {
     display: block;
     font-family: var(--font-mono);
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     font-weight: 600;
     color: var(--color-text);
   }
@@ -193,13 +193,13 @@ const breadcrumbs = [
   .req-row {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 32px;
+    gap: var(--space-8);
     padding: var(--space-4) 0;
     border-bottom: 1px solid var(--color-border);
   }
   .req-row dt {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--font-size-label);
     letter-spacing: var(--tracking-mono);
     font-weight: 500;
     color: var(--color-muted);
@@ -209,29 +209,29 @@ const breadcrumbs = [
   .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
+    gap: var(--space-4);
   }
   .product-card {
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: 24px;
+    padding: var(--space-6);
     color: var(--color-text);
-    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+    transition: border-color var(--duration-short) ease, transform var(--duration-short) ease, box-shadow var(--duration-short) ease;
   }
   .product-card:hover {
-    border-color: rgba(232, 181, 0, 0.8);
+    border-color: var(--color-accent-strong);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
   .product-card h3 {
     font-family: var(--font-heading);
-    font-size: 20px;
+    font-size: var(--font-size-card-title-sm);
     font-weight: 500;
     margin-bottom: var(--space-2);
   }
   .product-card p {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     color: var(--color-muted);
     line-height: 1.6;
   }
@@ -239,7 +239,7 @@ const breadcrumbs = [
   .faq-item summary {
     cursor: pointer;
     font-weight: 600;
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -257,15 +257,15 @@ const breadcrumbs = [
   }
   .cta-btn {
     display: inline-block;
-    padding: 13px 24px;
+    padding: 13px var(--space-6);
     background: var(--color-accent);
     color: var(--color-text);
     border-radius: var(--radius-md);
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     font-weight: 600;
   }
   .cta-btn:hover { background: var(--color-accent-hover); }
   @media (max-width: 768px) {
-    .req-row { grid-template-columns: 1fr; gap: 4px; }
+    .req-row { grid-template-columns: 1fr; gap: var(--space-1); }
   }
 </style>

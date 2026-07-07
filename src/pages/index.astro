@@ -421,7 +421,7 @@ import Button from '../components/Button.astro';
   :root {
     --dark-text-strong: color-mix(in srgb, var(--color-dark-text) 70%, transparent);
     --dark-text-subtle: color-mix(in srgb, var(--color-dark-text) 42%, transparent);
-    --dark-border: rgba(255, 255, 255, 0.07);
+    --dark-border: var(--color-dark-border);
   }
 
   /* ───── Layout helper ───── */
@@ -478,7 +478,7 @@ import Button from '../components/Button.astro';
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-accent);
-    margin-bottom: 24px;
+    margin-bottom: var(--space-6);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -499,33 +499,33 @@ import Button from '../components/Button.astro';
     letter-spacing: 0;
     color: var(--color-dark-text);
     max-width: 700px;
-    margin-bottom: 32px;
+    margin-bottom: var(--space-8);
   }
   .hero h1 em {
     font-style: italic;
     color: var(--color-accent);
   }
   .hero-sub {
-    font-size: 18px;
+    font-size: var(--font-size-body);
     color: var(--color-dark-muted);
     max-width: 400px;
     line-height: 1.65;
-    margin-bottom: 40px;
+    margin-bottom: var(--space-10);
   }
-  .hero-ctas { display: flex; gap: 12px; margin-bottom: 64px; flex-wrap: wrap; }
+  .hero-ctas { display: flex; gap: var(--space-3); margin-bottom: var(--space-16); flex-wrap: wrap; }
   .hero-stats {
     display: flex;
-    gap: 32px;
+    gap: var(--space-8);
     align-items: center;
-    padding-top: 32px;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-dark-border);
     max-width: 560px;
     flex-wrap: wrap;
   }
-  .hero-stat { display: flex; flex-direction: column; gap: 4px; }
+  .hero-stat { display: flex; flex-direction: column; gap: var(--space-1); }
   .hero-stat .val {
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: var(--font-size-label);
     font-weight: 600;
     color: var(--color-dark-text);
     letter-spacing: var(--tracking-mono);
@@ -537,7 +537,7 @@ import Button from '../components/Button.astro';
     text-transform: uppercase;
     color: var(--color-dark-muted);
   }
-  .hero-stat-sep { width: 1px; height: 28px; background: rgba(255, 255, 255, 0.08); flex-shrink: 0; }
+  .hero-stat-sep { width: 1px; height: 28px; background: var(--color-dark-border); flex-shrink: 0; }
 
   /* ───── 2. TRUST BAR ───── */
   .trust-bar {
@@ -548,14 +548,14 @@ import Button from '../components/Button.astro';
   .trust-bar-inner {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: var(--space-10);
     max-width: var(--content-max);
     margin: 0 auto;
     padding: 0 var(--content-gutter);
     flex-wrap: wrap;
   }
   .trust-bar-label {
-    font-size: 12px;
+    font-size: var(--font-size-label);
     font-weight: 500;
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
@@ -579,15 +579,15 @@ import Button from '../components/Button.astro';
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding-bottom: 56px;
-    margin-bottom: 64px;
+    margin-bottom: var(--space-16);
     border-bottom: 1px solid var(--color-border);
   }
   .proof-alt-item {
-    padding-right: 32px;
+    padding-right: var(--space-8);
     border-right: 1px solid var(--color-border);
   }
   .proof-alt-item:last-child { border-right: none; }
-  .proof-alt-item + .proof-alt-item { padding-left: 32px; }
+  .proof-alt-item + .proof-alt-item { padding-left: var(--space-8); }
   .proof-alt-num {
     display: block;
     font-family: var(--font-heading);
@@ -595,7 +595,7 @@ import Button from '../components/Button.astro';
     font-weight: 600;
     line-height: 1;
     color: var(--color-accent);
-    margin-bottom: 12px;
+    margin-bottom: var(--space-3);
     white-space: nowrap;
   }
   .proof-alt-label {
@@ -614,13 +614,13 @@ import Button from '../components/Button.astro';
     font-size: clamp(36px, 3.5vw, 52px);
     font-weight: 600;
     line-height: 1.05;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
   }
   .proof-body {
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     line-height: 1.7;
-    margin-bottom: 32px;
+    margin-bottom: var(--space-8);
   }
 
   /* ───── 4. PRODUCTS ───── */
@@ -630,15 +630,15 @@ import Button from '../components/Button.astro';
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 56px;
-    gap: 48px;
+    gap: var(--space-12);
   }
   .products-eyebrow {
-    font-size: 12px;
+    font-size: var(--font-size-label);
     font-weight: 600;
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-muted);
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4);
   }
   .products-header h2 {
     font-family: var(--font-heading);
@@ -647,7 +647,7 @@ import Button from '../components/Button.astro';
     line-height: 1.05;
   }
   .products-header-right {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     max-width: 300px;
     text-align: right;
@@ -658,18 +658,18 @@ import Button from '../components/Button.astro';
     display: grid;
     grid-template-columns: 7fr 5fr;
     grid-template-rows: auto auto;
-    gap: 16px;
+    gap: var(--space-4);
   }
   .product-card {
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: 44px;
-    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+    transition: border-color var(--duration-short) ease, transform var(--duration-short) ease, box-shadow var(--duration-short) ease;
     color: var(--color-text);
   }
   .product-card:hover {
-    border-color: rgba(232, 181, 0, 0.8);
+    border-color: var(--color-accent-strong);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
@@ -680,10 +680,10 @@ import Button from '../components/Button.astro';
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-accent);
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
   }
   .card-tag::before {
     content: '';
@@ -696,17 +696,17 @@ import Button from '../components/Button.astro';
   }
   .product-card h3 {
     font-family: var(--font-heading);
-    font-size: 32px;
+    font-size: var(--font-size-card-title-lg);
     font-weight: 500;
     line-height: 1.1;
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4);
   }
-  .product-card.featured h3 { font-size: 44px; font-weight: 600; }
+  .product-card.featured h3 { font-size: var(--font-size-headline); font-weight: 600; }
   .product-card p {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     line-height: 1.65;
-    margin-bottom: 24px;
+    margin-bottom: var(--space-6);
   }
   .card-specs {
     font-family: var(--font-mono);
@@ -715,7 +715,7 @@ import Button from '../components/Button.astro';
     padding: 18px 0;
     border-top: 1px solid var(--color-border);
     display: flex;
-    gap: 8px;
+    gap: var(--space-2);
     flex-wrap: wrap;
   }
   .spec-chip {
@@ -727,18 +727,18 @@ import Button from '../components/Button.astro';
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: var(--font-size-label);
     font-weight: 600;
     color: var(--color-text);
     margin-top: auto;
-    padding-top: 20px;
+    padding-top: var(--space-5);
   }
-  .card-arrow { transition: transform 150ms ease; display: inline-block; }
+  .card-arrow { transition: transform var(--duration-short) ease; display: inline-block; }
   .product-card:hover .card-arrow { transform: translateX(8px); }
   .card-visual {
     flex: 1;
     min-height: 180px;
-    margin: 24px -44px -44px;
+    margin: var(--space-6) -44px -44px;
     background: linear-gradient(160deg, var(--color-surface) 0%, var(--color-border) 100%);
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     position: relative;
@@ -768,7 +768,7 @@ import Button from '../components/Button.astro';
 
   /* ───── 4b. PLAN · BUILD · RUN ───── */
   .lifecycle { background: var(--color-bg); padding: 160px 0; }
-  .lifecycle-header { margin-bottom: 64px; max-width: 720px; }
+  .lifecycle-header { margin-bottom: var(--space-16); max-width: 720px; }
   .lifecycle-eyebrow {
     font-family: var(--font-mono);
     font-size: var(--font-size-eyebrow);
@@ -776,7 +776,7 @@ import Button from '../components/Button.astro';
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-accent);
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -794,11 +794,11 @@ import Button from '../components/Button.astro';
     font-size: clamp(36px, 3.5vw, 52px);
     font-weight: 600;
     line-height: 1.05;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
   }
   .lifecycle-header h2 em { font-style: italic; color: var(--color-muted); }
   .lifecycle-sub {
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     max-width: 560px;
     line-height: 1.65;
@@ -806,34 +806,34 @@ import Button from '../components/Button.astro';
   .lifecycle-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: var(--space-4);
   }
   .lifecycle-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: 40px;
+    padding: var(--space-10);
     display: flex;
     flex-direction: column;
     color: var(--color-text);
-    transition: border-color 220ms ease, transform 220ms ease;
+    transition: border-color var(--duration-short) ease, transform var(--duration-short) ease;
   }
   .lifecycle-card:hover {
-    border-color: rgba(232, 181, 0, 0.8);
+    border-color: var(--color-accent-strong);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
   .lifecycle-step {
     display: flex;
     align-items: baseline;
-    gap: 12px;
-    margin-bottom: 24px;
-    padding-bottom: 20px;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-5);
     border-bottom: 1px solid var(--color-border);
   }
   .lifecycle-num {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--font-size-label);
     font-weight: 500;
     letter-spacing: var(--tracking-label);
     color: var(--color-muted);
@@ -841,20 +841,20 @@ import Button from '../components/Button.astro';
   .lifecycle-label {
     font-family: var(--font-heading);
     font-style: italic;
-    font-size: 22px;
+    font-size: var(--font-size-card-title-sm);
     font-weight: 500;
     color: var(--color-accent);
     letter-spacing: var(--tracking-mono);
   }
   .lifecycle-card h3 {
     font-family: var(--font-heading);
-    font-size: 26px;
+    font-size: var(--font-size-card-title);
     font-weight: 500;
     line-height: 1.15;
     margin-bottom: 14px;
   }
   .lifecycle-card p {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     line-height: 1.65;
     margin-bottom: 28px;
@@ -863,7 +863,7 @@ import Button from '../components/Button.astro';
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: var(--font-size-label);
     font-weight: 600;
     color: var(--color-text);
     margin-top: auto;
@@ -876,9 +876,9 @@ import Button from '../components/Button.astro';
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: 48px;
-    margin-bottom: 64px;
-    padding-bottom: 48px;
+    gap: var(--space-12);
+    margin-bottom: var(--space-16);
+    padding-bottom: var(--space-12);
     border-bottom: 1px solid var(--dark-border);
   }
   .why-header h2 {
@@ -891,7 +891,7 @@ import Button from '../components/Button.astro';
   }
   .why-header h2 em { font-style: italic; color: var(--color-dark-muted); }
   .why-header-right {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-dark-muted);
     max-width: 300px;
     text-align: right;
@@ -902,42 +902,42 @@ import Button from '../components/Button.astro';
   .why-row {
     display: grid;
     grid-template-columns: 2fr 3fr;
-    gap: 64px;
+    gap: var(--space-16);
     padding: 36px 0;
     border-bottom: 1px solid var(--dark-border);
     align-items: baseline;
-    transition: background 150ms;
+    transition: background var(--duration-short);
   }
   .why-row:first-child { border-top: none; }
   .why-row:hover { background: rgba(255, 255, 255, 0.015); }
   .why-claim {
     font-family: var(--font-heading);
-    font-size: 22px;
+    font-size: var(--font-size-card-title-sm);
     font-style: italic;
     font-weight: 500;
     line-height: 1.2;
     color: var(--color-dark-text);
   }
   .why-detail {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-dark-muted);
     line-height: 1.65;
   }
   .why-detail strong { color: var(--dark-text-strong); font-weight: 600; }
-  .why-footer { margin-top: 48px; }
+  .why-footer { margin-top: var(--space-12); }
 
   /* ───── 6. INDUSTRIES ───── */
   .industries { background: var(--color-bg); padding: 160px 0; }
-  .industries-header { margin-bottom: 64px; }
+  .industries-header { margin-bottom: var(--space-16); }
   .industries-header h2 {
     font-family: var(--font-heading);
     font-size: clamp(36px, 3.5vw, 52px);
     font-weight: 600;
     line-height: 1.05;
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4);
   }
   .industries-header .sub {
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     max-width: 480px;
     line-height: 1.65;
@@ -946,34 +946,34 @@ import Button from '../components/Button.astro';
   .industry-row {
     display: grid;
     grid-template-columns: 72px 1fr 200px;
-    gap: 0 48px;
-    padding: 40px 0;
+    gap: 0 var(--space-12);
+    padding: var(--space-10) 0;
     border-bottom: 1px solid var(--color-border);
     align-items: start;
-    transition: background 150ms;
+    transition: background var(--duration-short);
     color: var(--color-text);
   }
   .industry-row:first-child { border-top: 1px solid var(--color-border); }
   .industry-row:hover { background: rgba(26, 26, 24, 0.02); }
   .industry-num {
     font-family: var(--font-heading);
-    font-size: 36px;
+    font-size: var(--font-size-h3);
     font-weight: 300;
     color: var(--color-border);
     line-height: 1.1;
-    padding-top: 4px;
-    transition: color 200ms;
+    padding-top: var(--space-1);
+    transition: color var(--duration-short);
   }
   .industry-row:hover .industry-num { color: var(--color-accent); }
   .industry-body h3 {
     font-family: var(--font-heading);
-    font-size: 26px;
+    font-size: var(--font-size-card-title);
     font-weight: 500;
     margin-bottom: 10px;
     line-height: 1.2;
   }
   .industry-body p {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     color: var(--color-muted);
     line-height: 1.6;
     max-width: 540px;
@@ -981,20 +981,20 @@ import Button from '../components/Button.astro';
   .industry-meta { text-align: right; padding-top: 6px; padding-right: var(--space-4); }
   .industry-meta .payload {
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: var(--font-size-label);
     font-weight: 500;
     color: var(--color-text);
     display: block;
     margin-bottom: 6px;
   }
   .industry-meta .clients {
-    font-size: 12px;
+    font-size: var(--font-size-label);
     color: var(--color-muted);
     display: block;
     line-height: 1.5;
   }
-  .industry-row.featured .industry-num { color: rgba(232, 181, 0, 0.4); }
-  .industry-row.featured .industry-body h3 { font-size: 30px; font-weight: 600; }
+  .industry-row.featured .industry-num { color: var(--color-accent-soft); }
+  .industry-row.featured .industry-body h3 { font-size: var(--font-size-card-title-lg); font-weight: 600; }
   .industry-row.featured:hover .industry-num { color: var(--color-accent); }
 
   /* ───── 7. TECH ───── */
@@ -1002,7 +1002,7 @@ import Button from '../components/Button.astro';
   .tech-band-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: var(--space-20);
     align-items: center;
   }
   .tech-band-text h2 {
@@ -1010,13 +1010,13 @@ import Button from '../components/Button.astro';
     font-size: clamp(36px, 3.5vw, 48px);
     font-weight: 600;
     line-height: 1.05;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
   }
   .tech-band-text .intro {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     line-height: 1.7;
-    margin-bottom: 32px;
+    margin-bottom: var(--space-8);
     max-width: 400px;
   }
   .tech-eyebrow {
@@ -1025,7 +1025,7 @@ import Button from '../components/Button.astro';
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--color-muted);
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
   }
   .tech-comparison {
     border: 1px solid var(--color-border);
@@ -1036,7 +1036,7 @@ import Button from '../components/Button.astro';
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     background: var(--color-dark-bg);
-    padding: 14px 24px;
+    padding: 14px var(--space-6);
   }
   .comparison-header span {
     font-size: var(--font-size-eyebrow);
@@ -1052,12 +1052,12 @@ import Button from '../components/Button.astro';
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     background: var(--color-bg);
-    padding: 15px 24px;
+    padding: 15px var(--space-6);
     border-top: 1px solid var(--color-border);
     align-items: center;
   }
-  .comparison-row .attr { font-size: 14px; font-weight: 500; color: var(--color-text); }
-  .comparison-row .val { font-family: var(--font-mono); font-size: 14px; font-weight: 500; text-align: center; }
+  .comparison-row .attr { font-size: var(--font-size-specs); font-weight: 500; color: var(--color-text); }
+  .comparison-row .val { font-family: var(--font-mono); font-size: var(--font-size-specs); font-weight: 500; text-align: center; }
   .val-yes { color: var(--color-success); }
   .val-no { color: var(--color-error); opacity: 0.65; }
   .val-accent { color: var(--color-accent); font-weight: 600; }
@@ -1076,8 +1076,8 @@ import Button from '../components/Button.astro';
     inset: 0;
     opacity: 0.035;
     background-image:
-      linear-gradient(rgba(232, 181, 0, 0.5) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(232, 181, 0, 0.5) 1px, transparent 1px);
+      linear-gradient(var(--color-accent-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-accent-soft) 1px, transparent 1px);
     background-size: 48px 48px;
   }
   .footer-cta-content { position: relative; z-index: 1; }
@@ -1095,53 +1095,52 @@ import Button from '../components/Button.astro';
     font-weight: 600;
     line-height: 1;
     color: var(--color-dark-text);
-    margin-bottom: 24px;
+    margin-bottom: var(--space-6);
   }
   .footer-cta h2 em { font-style: italic; color: var(--color-accent); }
   .footer-cta p {
     font-size: var(--font-size-lede);
     color: var(--color-dark-muted);
     max-width: 420px;
-    margin: 0 auto 40px;
+    margin: 0 auto var(--space-10);
     line-height: 1.65;
   }
-  .footer-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .footer-cta-btns { display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap; }
 
   /* ───── Responsive ───── */
   @media (max-width: 1024px) {
     .container,
     .hero-content,
-    .trust-bar-inner { padding-left: 40px; padding-right: 40px; }
+    .trust-bar-inner { padding-left: var(--space-10); padding-right: var(--space-10); }
     .tech-band-inner { grid-template-columns: 1fr; }
     .tech-comparison { overflow-x: auto; }
     .comparison-header, .comparison-row { min-width: 460px; }
-    .proof-alt-strip { grid-template-columns: 1fr 1fr; gap: 40px 0; }
+    .proof-alt-strip { grid-template-columns: 1fr 1fr; gap: var(--space-10) 0; }
     .proof-alt-item:nth-child(2) { border-right: none; }
     .proof-alt-item:nth-child(3),
-    .proof-alt-item:nth-child(4) { border-top: 1px solid var(--color-border); padding-top: 32px; }
+    .proof-alt-item:nth-child(4) { border-top: 1px solid var(--color-border); padding-top: var(--space-8); }
     .proof-alt-item:nth-child(3) { border-right: none; padding-left: 0; }
     .industry-row {
       grid-template-columns: 56px 1fr;
       grid-template-rows: auto auto;
-      gap: 0 32px;
+      gap: 0 var(--space-8);
     }
     .industry-meta {
       grid-column: 2;
       text-align: left;
-      padding-top: 8px;
+      padding-top: var(--space-2);
     }
-    .industry-meta .payload { display: inline; margin-bottom: 0; margin-right: 12px; }
+    .industry-meta .payload { display: inline; margin-bottom: 0; margin-right: var(--space-3); }
     .industry-meta .clients { display: inline; }
   }
 
   @media (max-width: 768px) {
     .container,
     .hero-content,
-    .trust-bar-inner { padding-left: 24px; padding-right: 24px; }
+    .trust-bar-inner { padding-left: var(--space-6); padding-right: var(--space-6); }
     .hero-content { padding-top: 120px; padding-bottom: 72px; }
-    .hero h1 { font-size: 52px; }
-    .hero-sub { font-size: 16px; max-width: 100%; }
-    .hero-stats { gap: 20px; }
+    .hero-sub { font-size: var(--font-size-body-sm); max-width: 100%; }
+    .hero-stats { gap: var(--space-5); }
     .hero-stat-sep { display: none; }
     .products-header { flex-direction: column; align-items: flex-start; }
     .products-header-right { text-align: left; max-width: 100%; }
@@ -1150,16 +1149,16 @@ import Button from '../components/Button.astro';
     .lifecycle-grid { grid-template-columns: 1fr; }
     .why-header { flex-direction: column; align-items: flex-start; }
     .why-header-right { text-align: left; max-width: 100%; }
-    .why-row { grid-template-columns: 1fr; gap: 12px; }
-    .industries-header h2 { font-size: 36px; }
-    .industry-row { grid-template-columns: 48px 1fr; gap: 0 24px; }
+    .why-row { grid-template-columns: 1fr; gap: var(--space-3); }
+    .industries-header h2 { font-size: var(--font-size-h3); }
+    .industry-row { grid-template-columns: 48px 1fr; gap: 0 var(--space-6); }
     .footer-cta-btns { flex-direction: column; align-items: center; }
   }
 
   @media (max-width: 480px) {
     .hero-ctas { flex-direction: column; align-items: stretch; }
     .proof-alt-strip { grid-template-columns: 1fr; }
-    .proof-alt-item { border-right: none; border-top: 1px solid var(--color-border); padding: 32px 0 0; }
+    .proof-alt-item { border-right: none; border-top: 1px solid var(--color-border); padding: var(--space-8) 0 0; }
     .proof-alt-item:first-child { border-top: none; padding-top: 0; }
   }
 

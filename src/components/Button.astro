@@ -29,7 +29,6 @@ const classes = ['btn', `btn-${variant}`, className].filter(Boolean).join(' ');
     font-family: var(--font-body);
     font-size: var(--font-size-button);
     font-weight: 600;
-    letter-spacing: 0.1px;
     line-height: 1;
     padding: 13px 26px;
     min-height: 44px;
@@ -83,7 +82,7 @@ const classes = ['btn', `btn-${variant}`, className].filter(Boolean).join(' ');
   .btn-ghost-light {
     background: transparent;
     color: var(--color-dark-text);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--color-dark-border-strong);
   }
 
   .btn-ghost-light:hover:not(:disabled),

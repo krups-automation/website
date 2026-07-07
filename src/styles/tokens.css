@@ -1,6 +1,8 @@
 /*
  * Design tokens — KRUPS Automation
- * Source: /home/ckrups/projekte/website/DESIGN.md
+ * Constitution: DESIGN.md (repo root). Enforced by scripts/design-lint.mjs —
+ * pages may only do layout; type, color, tracking, motion, and elevation
+ * must come from these tokens.
  */
 
 :root {
@@ -22,6 +24,12 @@
   /* Accent */
   --color-accent: #E8B500;          /* KRUPS Yellow */
   --color-accent-hover: #CC9F00;
+  --color-accent-soft: rgba(232, 181, 0, 0.5);    /* hover borders, ornaments */
+  --color-accent-strong: rgba(232, 181, 0, 0.8);  /* emphasized hover borders */
+
+  /* Hairlines on dark surfaces */
+  --color-dark-border: rgba(255, 255, 255, 0.08);
+  --color-dark-border-strong: rgba(255, 255, 255, 0.2);
 
   /* Status */
   --color-success: #2D7A4F;
@@ -38,19 +46,41 @@
   --font-body: var(--font-barlow);
   --font-mono: var(--font-jetbrains-mono);
 
-  /* Sizes — responsive clamps are the canonical values, not overrides */
-  --font-size-display: clamp(64px, 7.5vw, 104px);  /* homepage hero only */
+  /* Sizes — the ratified scale. Every font-size in the codebase MUST be one of
+     these tokens (enforced by scripts/design-lint.mjs). One size per job:
+
+       display        homepage hero H1
+       headline       featured-card display headline
+       h1             inner-page hero H1
+       h2             homepage section headings
+       h3             large sub-headings, ornament numerals
+       h2-section/h4  inner-page section headings (Technische Daten, FAQ, …)
+       card-title-lg  family/feature card headings
+       card-title     product/member card headings
+       card-title-sm  minor card headings (feature list items)
+       body           default prose (18)
+       lede           hero/intro standfirst (17)
+       body-sm        secondary prose, card copy, FAQ (15)
+       specs          UI text, buttons, nav, spec values (14)
+       label          small UI, links, chips (13)
+       eyebrow        mono uppercase kickers (11) — legibility floor, nothing below */
+
+  --font-size-display: clamp(52px, 7.5vw, 104px);  /* homepage hero only */
+  --font-size-headline: 44px;
   --font-size-h1: clamp(40px, 4.5vw, 64px);        /* inner-page heroes */
   --font-size-h2: clamp(36px, 3.5vw, 52px);
-  --font-size-h2-section: 28px;   /* inner-page sub-section headings (Technische Daten, FAQ, etc.) */
-  --font-size-h3: 40px;
+  --font-size-h2-section: 28px;
+  --font-size-h3: 36px;
   --font-size-h4: 28px;
+  --font-size-card-title-lg: 32px;
+  --font-size-card-title: 26px;
+  --font-size-card-title-sm: 20px;
   --font-size-body: 18px;
-  --font-size-lede: 17px;         /* hero/intro standfirst paragraphs */
+  --font-size-lede: 17px;
   --font-size-body-sm: 15px;
   --font-size-specs: 14px;
   --font-size-label: 13px;
-  --font-size-eyebrow: 11px;      /* mono uppercase kickers — legibility floor, no sizes below this */
+  --font-size-eyebrow: 11px;
   --font-size-nav: 14px;
   --font-size-button: 14px;
 
@@ -63,10 +93,11 @@
   --line-height-body-sm: 1.5;
   --line-height-specs: 1.4;
 
-  /* Tracking — two scales only: labels/eyebrows (wide) and mono specs (subtle) */
+  /* Tracking — labels/eyebrows (wide), mono specs (subtle), display numerals (tight) */
   --tracking-eyebrow: 2px;
   --tracking-label: 1.5px;
   --tracking-mono: 0.5px;
+  --tracking-tight: -2px;
 
   /* — Spacing (base 8px) ———————————————————————————————————————— */
 

@@ -59,33 +59,33 @@ const industries = await getAllIndustries('de');
   .industry-row {
     display: grid;
     grid-template-columns: 72px 1fr 220px;
-    gap: 48px;
-    padding: 40px 0;
+    gap: var(--space-12);
+    padding: var(--space-10) 0;
     border-bottom: 1px solid var(--color-border);
     align-items: start;
     color: var(--color-text);
-    transition: background 150ms;
+    transition: background var(--duration-short);
   }
   .industry-row:first-child { border-top: 1px solid var(--color-border); }
   .industry-row:hover { background: rgba(26, 26, 24, 0.02); }
   .industry-num {
     font-family: var(--font-heading);
-    font-size: 36px;
+    font-size: var(--font-size-h3);
     font-weight: 300;
     color: var(--color-border);
     line-height: 1.1;
-    transition: color 200ms;
+    transition: color var(--duration-short);
   }
   .industry-row:hover .industry-num { color: var(--color-accent); }
   .industry-body h2 {
     font-family: var(--font-heading);
-    font-size: 26px;
+    font-size: var(--font-size-card-title);
     font-weight: 500;
     line-height: 1.2;
     margin-bottom: var(--space-2);
   }
   .industry-body p {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     color: var(--color-muted);
     line-height: 1.6;
     max-width: 540px;
@@ -96,7 +96,7 @@ const industries = await getAllIndustries('de');
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--space-2);
   }
   .char-bar li {
     display: flex;
@@ -112,12 +112,12 @@ const industries = await getAllIndustries('de');
   }
   .char-bar .val {
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: var(--font-size-label);
     font-weight: 500;
     color: var(--color-text);
   }
   .empty-state {
-    padding: 48px;
+    padding: var(--space-12);
     border: 1px dashed var(--color-border);
     border-radius: var(--radius-lg);
     color: var(--color-muted);
@@ -125,8 +125,8 @@ const industries = await getAllIndustries('de');
   }
   .empty-state a { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 4px; }
   @media (max-width: 900px) {
-    .industry-row { grid-template-columns: 56px 1fr; gap: 24px; }
-    .industry-meta { grid-column: 2; padding-top: 8px; }
-    .char-bar { flex-direction: row; gap: 24px; }
+    .industry-row { grid-template-columns: 56px 1fr; gap: var(--space-6); }
+    .industry-meta { grid-column: 2; padding-top: var(--space-2); }
+    .char-bar { flex-direction: row; gap: var(--space-6); }
   }
 </style>

@@ -91,7 +91,7 @@ const homeHref = locale === 'en' ? '/en/' : '/';
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
-    transition: background 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease;
+    transition: background var(--duration-medium) ease, border-color var(--duration-medium) ease, backdrop-filter var(--duration-medium) ease;
   }
 
   /* Transparent state — used on hero pages only (added via JS) */
@@ -130,7 +130,7 @@ const homeHref = locale === 'en' ? '/en/' : '/';
   }
 
   .header-inner {
-    padding: 0 48px;
+    padding: 0 var(--space-12);
     height: var(--nav-height);
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -139,9 +139,8 @@ const homeHref = locale === 'en' ? '/en/' : '/';
 
   .brand {
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     font-weight: 700;
-    letter-spacing: -0.2px;
     color: var(--color-text);
     white-space: nowrap;
   }
@@ -155,7 +154,7 @@ const homeHref = locale === 'en' ? '/en/' : '/';
   }
 
   .nav-links a {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     font-weight: 500;
     color: var(--color-muted);
     padding: 6px 14px;
@@ -185,7 +184,7 @@ const homeHref = locale === 'en' ? '/en/' : '/';
     font-weight: 500;
     letter-spacing: var(--tracking-label);
     color: var(--color-muted);
-    padding: 6px 4px;
+    padding: 6px var(--space-1);
     min-height: 44px;
     display: inline-flex;
     align-items: center;
@@ -199,9 +198,9 @@ const homeHref = locale === 'en' ? '/en/' : '/';
   .cta {
     background: var(--color-text);
     color: var(--color-bg);
-    padding: 8px 22px;
+    padding: var(--space-2) 22px;
     border-radius: var(--radius-md);
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     font-weight: 600;
     min-height: 44px;
     display: inline-flex;
@@ -216,8 +215,8 @@ const homeHref = locale === 'en' ? '/en/' : '/';
   .burger {
     display: none;
     cursor: pointer;
-    padding: 8px;
-    margin-left: 4px;
+    padding: var(--space-2);
+    margin-left: var(--space-1);
     flex-direction: column;
     gap: 5px;
     min-width: 44px;
@@ -233,7 +232,7 @@ const homeHref = locale === 'en' ? '/en/' : '/';
     height: 2px;
     background: var(--color-text);
     border-radius: 1px;
-    transition: transform 220ms ease, opacity 220ms ease;
+    transition: transform var(--duration-short) ease, opacity var(--duration-short) ease;
   }
 
   /* Burger animates to × when drawer is open */
@@ -268,7 +267,7 @@ const homeHref = locale === 'en' ? '/en/' : '/';
   .drawer-links a {
     display: block;
     padding: 14px 0;
-    font-size: 18px;
+    font-size: var(--font-size-body);
     font-weight: 500;
     color: var(--color-text);
     border-bottom: 1px solid var(--color-border);
@@ -281,9 +280,9 @@ const homeHref = locale === 'en' ? '/en/' : '/';
     display: inline-flex;
     background: var(--color-text);
     color: var(--color-bg);
-    padding: 12px 24px;
+    padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-md);
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     font-weight: 600;
     transition: background var(--duration-short);
   }

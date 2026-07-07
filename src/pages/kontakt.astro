@@ -156,7 +156,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
   .kontakt-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: var(--space-20);
     align-items: start;
   }
   .contact-info {
@@ -175,12 +175,12 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
   }
   address {
     font-style: normal;
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     line-height: 1.7;
     color: var(--color-text);
   }
   .contact-info a {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-text);
     text-decoration: none;
   }
@@ -211,22 +211,22 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
     gap: var(--space-4);
   }
   label {
-    font-size: 13px;
+    font-size: var(--font-size-label);
     font-weight: 500;
     color: var(--color-text);
   }
   .req { color: var(--color-accent); }
   input, textarea {
     font-family: var(--font-body);
-    font-size: 16px; /* >=16px prevents iOS Safari zoom-on-focus */
+    font-size: var(--font-size-body-sm); /* >=16px prevents iOS Safari zoom-on-focus */
     color: var(--color-text);
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    padding: 12px 14px;
+    padding: var(--space-3) 14px;
     width: 100%;
     box-sizing: border-box;
-    transition: border-color 0.15s;
+    transition: border-color var(--duration-short);
     outline: none;
   }
   input:focus, textarea:focus {
@@ -235,9 +235,9 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
   textarea { resize: vertical; min-height: 120px; }
   .form-footer { margin-top: var(--space-2); }
   .form-message {
-    padding: 16px 20px;
+    padding: var(--space-4) var(--space-5);
     border-radius: var(--radius-md);
-    font-size: 13px;
+    font-size: var(--font-size-label);
     line-height: 1.6;
   }
   .form-message.success {
@@ -253,7 +253,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Kontakt' }];
   .form-message.error a { color: inherit; font-weight: 600; }
 
   @media (max-width: 900px) {
-    .kontakt-grid { grid-template-columns: 1fr; gap: 48px; }
+    .kontakt-grid { grid-template-columns: 1fr; gap: var(--space-12); }
     .field-row { grid-template-columns: 1fr; }
   }
 </style>

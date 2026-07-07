@@ -96,14 +96,14 @@ const bodyHtml = product.body ? toHTML(product.body as any) : '';
   /* ── intro: first paragraph reads as a lede, rest as body ── */
   .intro-block { max-width: 720px; margin-bottom: var(--space-10); }
   .intro :global(p) {
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     line-height: 1.7;
     color: var(--color-muted);
     margin-bottom: var(--space-4);
     max-width: 65ch;
   }
   .intro :global(p:first-of-type) {
-    font-size: 20px;
+    font-size: var(--font-size-card-title-sm);
     line-height: 1.55;
     color: var(--color-text);
   }
@@ -124,7 +124,7 @@ const bodyHtml = product.body ? toHTML(product.body as any) : '';
   .spec-row {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 32px;
+    gap: var(--space-8);
     padding: var(--space-4) 0;
     border-bottom: 1px solid var(--color-border);
     align-items: baseline;
@@ -138,16 +138,16 @@ const bodyHtml = product.body ? toHTML(product.body as any) : '';
     padding-top: 2px;
   }
   .spec-row dd {
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     font-weight: 500;
     color: var(--color-text);
   }
-  .spec-row .unit { color: var(--color-muted); font-weight: 400; font-size: 14px; }
-  .spec-row .notes { color: var(--color-muted); font-size: 13px; font-weight: 400; }
+  .spec-row .unit { color: var(--color-muted); font-weight: 400; font-size: var(--font-size-specs); }
+  .spec-row .notes { color: var(--color-muted); font-size: var(--font-size-label); font-weight: 400; }
   .feature-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
+    gap: var(--space-4);
     list-style: none;
     padding: 0;
     counter-reset: feature-counter;
@@ -157,7 +157,7 @@ const bodyHtml = product.body ? toHTML(product.body as any) : '';
     border: 1px solid var(--color-border);
     border-top: 2px solid var(--color-accent);
     border-radius: var(--radius-lg);
-    padding: 28px 24px 24px;
+    padding: 28px var(--space-6) var(--space-6);
     counter-increment: feature-counter;
     position: relative;
   }
@@ -173,13 +173,13 @@ const bodyHtml = product.body ? toHTML(product.body as any) : '';
   }
   .feature-list h3 {
     font-family: var(--font-heading);
-    font-size: 20px;
+    font-size: var(--font-size-card-title-sm);
     font-weight: 500;
     margin-bottom: var(--space-2);
     line-height: 1.15;
   }
   .feature-list p {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     color: var(--color-muted);
     line-height: 1.6;
   }
@@ -191,7 +191,7 @@ const bodyHtml = product.body ? toHTML(product.body as any) : '';
   .faq-item summary {
     cursor: pointer;
     font-weight: 600;
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -209,8 +209,8 @@ const bodyHtml = product.body ? toHTML(product.body as any) : '';
   .downloads ul { list-style: none; padding: 0; }
   .downloads li { padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border); }
   .downloads a { color: var(--color-text); font-weight: 500; }
-  .downloads .type { color: var(--color-muted); font-family: var(--font-mono); font-size: 12px; }
+  .downloads .type { color: var(--color-muted); font-family: var(--font-mono); font-size: var(--font-size-label); }
   @media (max-width: 768px) {
-    .spec-row { grid-template-columns: 1fr; gap: 4px; }
+    .spec-row { grid-template-columns: 1fr; gap: var(--space-1); }
   }
 </style>

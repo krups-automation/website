@@ -104,32 +104,32 @@ const jsonLd = [
     list-style: none;
     padding: 0;
     display: grid;
-    gap: 16px;
+    gap: var(--space-4);
   }
   .step-list li {
     display: grid;
     grid-template-columns: 56px 1fr;
-    gap: 24px;
-    padding: 24px;
+    gap: var(--space-6);
+    padding: var(--space-6);
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
   }
   .step-num {
     font-family: var(--font-heading);
-    font-size: 32px;
+    font-size: var(--font-size-card-title-lg);
     font-weight: 300;
     color: var(--color-accent);
     line-height: 1;
   }
   .step-list h3 {
     font-family: var(--font-heading);
-    font-size: 18px;
+    font-size: var(--font-size-body);
     font-weight: 500;
     margin-bottom: var(--space-2);
   }
   .step-list p {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     color: var(--color-muted);
     line-height: 1.6;
   }
@@ -138,14 +138,14 @@ const jsonLd = [
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 12px;
+    gap: var(--space-3);
   }
   .deliverables li {
-    padding: 16px 20px;
+    padding: var(--space-4) var(--space-5);
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    font-size: 14px;
+    font-size: var(--font-size-specs);
   }
   .service-body :global(p) { max-width: 65ch; line-height: 1.7; margin-bottom: var(--space-4); }
   .faq-item {
@@ -155,7 +155,7 @@ const jsonLd = [
   .faq-item summary {
     cursor: pointer;
     font-weight: 600;
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -165,7 +165,7 @@ const jsonLd = [
   .faq-item summary::-webkit-details-marker { display: none; }
   .faq-item p { margin-top: var(--space-3); color: var(--color-muted); line-height: 1.65; max-width: 65ch; }
   .empty-state {
-    padding: 48px;
+    padding: var(--space-12);
     border: 1px dashed var(--color-border);
     border-radius: var(--radius-lg);
     color: var(--color-muted);

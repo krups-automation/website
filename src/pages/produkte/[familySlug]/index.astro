@@ -114,14 +114,14 @@ const jsonLd = product
   /* ── intro: first paragraph reads as a lede, rest as body ── */
   .intro-block { max-width: 720px; margin-bottom: var(--space-10); }
   .intro :global(p) {
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     line-height: 1.7;
     color: var(--color-muted);
     margin-bottom: var(--space-4);
     max-width: 65ch;
   }
   .intro :global(p:first-of-type) {
-    font-size: 20px;
+    font-size: var(--font-size-card-title-sm);
     line-height: 1.55;
     color: var(--color-text);
   }
@@ -130,28 +130,28 @@ const jsonLd = product
   .member-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 16px;
+    gap: var(--space-4);
   }
   .member-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: 32px;
+    padding: var(--space-8);
     color: var(--color-text);
     display: flex;
     flex-direction: column;
-    transition: border-color 220ms ease;
+    transition: border-color var(--duration-short) ease;
   }
-  .member-card:hover { border-color: rgba(232, 181, 0, 0.5); }
+  .member-card:hover { border-color: var(--color-accent-soft); }
   .member-card h2 {
     font-family: var(--font-heading);
-    font-size: 26px;
+    font-size: var(--font-size-card-title);
     font-weight: 500;
     margin-bottom: var(--space-2);
     line-height: 1.15;
   }
   .member-card p {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     color: var(--color-muted);
     line-height: 1.6;
     margin-bottom: var(--space-4);
@@ -164,9 +164,9 @@ const jsonLd = product
   .spec-row {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 16px;
+    gap: var(--space-4);
     align-items: baseline;
-    padding: 8px 0;
+    padding: var(--space-2) 0;
     border-top: 1px solid var(--color-border);
   }
   .spec-row dt {
@@ -178,7 +178,7 @@ const jsonLd = product
   }
   .spec-row dd {
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: var(--font-size-label);
     color: var(--color-text);
     text-align: right;
     white-space: nowrap;
@@ -187,11 +187,11 @@ const jsonLd = product
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: var(--font-size-label);
     font-weight: 600;
     color: var(--color-text);
   }
-  .card-arrow { display: inline-block; transition: transform 150ms ease; }
+  .card-arrow { display: inline-block; transition: transform var(--duration-short) ease; }
   .member-card:hover .card-arrow { transform: translateX(4px); }
   .family-body :global(p) { max-width: 65ch; margin-bottom: var(--space-4); line-height: 1.7; }
   .family-body :global(h2) { margin: var(--space-8) 0 var(--space-3); font-family: var(--font-heading); }
@@ -199,26 +199,26 @@ const jsonLd = product
   /* CTA sits in its own slim section so it follows both page variants */
   :global(.sonder-section) { padding-top: 0 !important; }
   .sonder-cta {
-    padding: 40px;
+    padding: var(--space-10);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     background: var(--color-surface);
   }
   .sonder-cta h2 {
     font-family: var(--font-heading);
-    font-size: 28px;
+    font-size: var(--font-size-h2-section);
     font-weight: 500;
     margin-bottom: var(--space-3);
   }
   .sonder-cta p {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     line-height: 1.65;
     margin-bottom: var(--space-4);
     max-width: 540px;
   }
   .btn-inline {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     font-weight: 600;
     color: var(--color-text);
     text-decoration: underline;

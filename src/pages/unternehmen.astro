@@ -241,12 +241,12 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   .stat-strip {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: var(--space-8);
     padding: var(--space-8) 0 var(--space-6);
     border-top: 1px solid var(--color-border);
     flex-wrap: wrap;
   }
-  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+  .stat-item { display: flex; flex-direction: column; gap: var(--space-1); }
   .stat-num {
     font-family: var(--font-heading);
     font-size: clamp(40px, 4vw, 56px);
@@ -272,10 +272,10 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   .text-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: var(--space-10);
   }
   .text-cols p {
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     line-height: 1.7;
   }
@@ -284,7 +284,7 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   .product-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: var(--space-4);
     margin-top: var(--space-8);
   }
   .product-block {
@@ -295,10 +295,10 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
     color: var(--color-text);
     display: flex;
     flex-direction: column;
-    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+    transition: border-color var(--duration-short) ease, transform var(--duration-short) ease, box-shadow var(--duration-short) ease;
   }
   .product-block:hover {
-    border-color: rgba(232, 181, 0, 0.8);
+    border-color: var(--color-accent-strong);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
@@ -312,20 +312,20 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   }
   .product-block h3 {
     font-family: var(--font-heading);
-    font-size: 28px;
+    font-size: var(--font-size-h2-section);
     font-weight: 500;
     line-height: 1.1;
     margin-bottom: var(--space-3);
   }
   .product-block p {
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     line-height: 1.65;
     margin-bottom: var(--space-4);
     flex: 1;
   }
   .product-link {
-    font-size: 13px;
+    font-size: var(--font-size-label);
     font-weight: 600;
     color: var(--color-text);
     margin-top: auto;
@@ -336,12 +336,12 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   .mfg-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: var(--space-20);
     align-items: start;
   }
   .mfg-text h2 { color: var(--color-dark-text); }
   .mfg-text p {
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-dark-muted);
     line-height: 1.7;
     margin-bottom: var(--space-4);
@@ -351,11 +351,11 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   .mfg-fact {
     display: flex;
     justify-content: space-between;
-    gap: 24px;
+    gap: var(--space-6);
     padding: var(--space-4) 0;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid var(--color-dark-border);
   }
-  .mfg-fact:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+  .mfg-fact:first-child { border-top: 1px solid var(--color-dark-border); }
   .fact-label {
     font-family: var(--font-mono);
     font-size: var(--font-size-eyebrow);
@@ -365,7 +365,7 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
     white-space: nowrap;
   }
   .fact-val {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     color: var(--color-dark-text);
     text-align: right;
   }
@@ -374,14 +374,14 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   .location-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: var(--space-4);
     margin-top: var(--space-8);
   }
   .location-card {
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: 32px;
+    padding: var(--space-8);
   }
   .location-card--hq { border-color: rgba(232, 181, 0, 0.3); }
   .location-flag {
@@ -394,18 +394,18 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   }
   .location-card h3 {
     font-family: var(--font-heading);
-    font-size: 22px;
+    font-size: var(--font-size-card-title-sm);
     font-weight: 500;
     margin-bottom: var(--space-1);
   }
   .location-role {
-    font-size: 12px;
+    font-size: var(--font-size-label);
     color: var(--color-muted);
     margin-bottom: var(--space-4);
     font-style: italic;
   }
   .location-card p {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     color: var(--color-muted);
     line-height: 1.65;
   }
@@ -413,7 +413,7 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   /* ── Customers ── */
   .customers-block { max-width: 800px; }
   .customers-sub {
-    font-size: 16px;
+    font-size: var(--font-size-body-sm);
     color: var(--color-muted);
     line-height: 1.65;
     margin-bottom: var(--space-8);
@@ -421,12 +421,12 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   }
   .customer-logos {
     display: flex;
-    gap: 40px;
+    gap: var(--space-10);
     flex-wrap: wrap;
     align-items: center;
   }
   .customer-logos span {
-    font-size: 12px;
+    font-size: var(--font-size-label);
     font-weight: 700;
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
@@ -443,15 +443,15 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
     line-height: 1.65;
     margin-bottom: var(--space-6);
   }
-  .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .cta-btns { display: flex; gap: var(--space-3); flex-wrap: wrap; }
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    .text-cols { grid-template-columns: 1fr; gap: 20px; }
+    .text-cols { grid-template-columns: 1fr; gap: var(--space-5); }
     .product-cols { grid-template-columns: 1fr; }
-    .mfg-grid { grid-template-columns: 1fr; gap: 40px; }
+    .mfg-grid { grid-template-columns: 1fr; gap: var(--space-10); }
     .location-grid { grid-template-columns: 1fr; }
-    .stat-strip { gap: 20px; }
+    .stat-strip { gap: var(--space-5); }
     .stat-sep { display: none; }
   }
 </style>

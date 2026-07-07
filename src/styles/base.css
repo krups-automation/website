@@ -80,7 +80,7 @@ p {
    js-loaded class (added by BaseLayout script) gates the hidden state so there's
    no FOUC if JS is slow or absent. */
 [data-reveal] {
-  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  transition: opacity var(--duration-medium) var(--ease-out), transform var(--duration-medium) var(--ease-out);
 }
 .js-loaded [data-reveal]:not(.revealed) {
   opacity: 0;
@@ -101,14 +101,14 @@ details.faq-item > summary {
   align-items: center;
   gap: var(--space-4);
   cursor: pointer;
-  font-size: 16px;
+  font-size: var(--font-size-body-sm);
   font-weight: 600;
 }
 details.faq-item > summary::-webkit-details-marker { display: none; }
 details.faq-item > summary::after {
   content: '+';
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: var(--font-size-body-sm);
   font-weight: 400;
   color: var(--color-accent);
   flex-shrink: 0;

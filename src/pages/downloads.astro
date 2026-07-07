@@ -118,7 +118,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Downloads' }];
   .download-group:last-child { margin-bottom: 0; }
   .download-group h2 {
     font-family: var(--font-heading);
-    font-size: 24px;
+    font-size: var(--font-size-card-title);
     font-weight: 600;
     margin-bottom: var(--space-4);
   }
@@ -140,7 +140,7 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Downloads' }];
   .download-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .download-title { font-weight: 600; }
   .download-desc {
-    font-size: 14px;
+    font-size: var(--font-size-specs);
     color: var(--color-muted);
     line-height: 1.5;
   }
@@ -157,12 +157,12 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Downloads' }];
     color: var(--color-muted);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm, 2px);
-    padding: 2px 8px;
+    padding: 2px var(--space-2);
     white-space: nowrap;
   }
   .download-link {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--font-size-label);
     font-weight: 600;
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
@@ -173,12 +173,12 @@ const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Downloads' }];
     white-space: nowrap;
   }
   .download-link:hover .dl-arrow { transform: translateY(2px); }
-  .dl-arrow { display: inline-block; transition: transform 0.15s ease; }
+  .dl-arrow { display: inline-block; transition: transform var(--duration-short) ease; }
 
   .cta-block { max-width: 640px; }
   .cta-block h2 {
     font-family: var(--font-heading);
-    font-size: 28px;
+    font-size: var(--font-size-h2-section);
     font-weight: 600;
     margin-bottom: var(--space-3);
   }

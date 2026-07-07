@@ -105,7 +105,7 @@ const description = locale === 'de'
   .site-footer {
     background: var(--color-dark-bg);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 56px 0 40px;
+    padding: 56px 0 var(--space-10);
     color: var(--color-dark-text);
   }
 
@@ -124,7 +124,7 @@ const description = locale === 'de'
 
   .brand-name {
     font-family: var(--font-body);
-    font-size: 15px;
+    font-size: var(--font-size-body-sm);
     font-weight: 700;
     color: var(--color-dark-text);
     margin-bottom: var(--space-2);
@@ -135,7 +135,7 @@ const description = locale === 'de'
   }
 
   .footer-brand p {
-    font-size: 13px;
+    font-size: var(--font-size-label);
     color: var(--color-dark-muted);
     line-height: 1.65;
     max-width: 260px;
@@ -167,8 +167,8 @@ const description = locale === 'de'
   }
 
   .footer-col ul a {
-    font-size: 13px;
-    color: #cbc7c0;
+    font-size: var(--font-size-label);
+    color: var(--color-dark-muted);
     padding: 6px 0;
     min-height: 44px;
     display: inline-flex;
@@ -203,7 +203,7 @@ const description = locale === 'de'
   }
 
   .bottom-links a {
-    font-size: 12px;
+    font-size: var(--font-size-label);
     color: var(--color-dark-muted);
     transition: color var(--duration-short);
   }
