@@ -29,7 +29,7 @@ PAYLOAD=$(cat <<'JSON'
   "includeDrafts": false,
   "rule": {
     "on": ["create", "update", "delete"],
-    "filter": "_type in [\"siteSettings\", \"page\"]",
+    "filter": "_type in [\"siteSettings\",\"page\",\"product\",\"productFamily\",\"download\",\"industry\",\"service\",\"customer\",\"caseStudy\",\"article\",\"author\",\"tag\",\"pillar\"]",
     "projection": "{_id, _type, _rev}"
   }
 }

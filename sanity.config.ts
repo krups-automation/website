@@ -16,7 +16,8 @@ export default defineConfig({
   basePath: '/admin',
   plugins: [
     structureTool({ structure: deskStructure }),
-    visionTool(),
+    // GROQ playground is a dev aid; keep it out of the production Studio
+    ...(import.meta.env.DEV ? [visionTool()] : []),
     documentInternationalization({
       supportedLanguages: [
         { id: 'de', title: 'Deutsch' },

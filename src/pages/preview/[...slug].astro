@@ -3,6 +3,7 @@ import { toHTML } from '@portabletext/to-html';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { DRAFT_COOKIE, verifyDraftToken } from '../../lib/preview-auth';
 import {
   getPageBySlug,
   getProductBySlug,
@@ -13,8 +14,8 @@ import {
 
 export const prerender = false;
 
-const draftCookie = Astro.cookies.get('krups-draft');
-if (!draftCookie || draftCookie.value !== '1') {
+const draftCookie = Astro.cookies.get(DRAFT_COOKIE);
+if (!verifyDraftToken(draftCookie?.value, import.meta.env.SANITY_PREVIEW_SECRET)) {
   return Astro.redirect('/', 307);
 }
 

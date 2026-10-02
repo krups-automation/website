@@ -1,8 +1,19 @@
 import type { APIRoute } from 'astro';
+import { rateLimited } from '../../lib/rate-limit';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+const json = (data: object, status = 200, headers: Record<string, string> = {}) =>
+  new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json', ...headers },
+  });
+
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+  if (rateLimited(`contact:${clientAddress}`, 5, 10 * 60 * 1000)) {
+    return json({ ok: false, error: 'Zu viele Anfragen' }, 429, { 'Retry-After': '600' });
+  }
+
   let body: Record<string, string>;
   try {
     body = await request.json();
@@ -21,6 +32,12 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const { name, email, message } = body;
+  const tooLong = [name, email, message, body.company, body.phone].some(
+    (v) => typeof v === 'string' && v.length > (v === message ? 5000 : 300)
+  );
+  if (tooLong) {
+    return json({ ok: false, error: 'Eingabe zu lang' }, 422);
+  }
   if (!name?.trim() || !email?.trim() || !message?.trim()) {
     return new Response(JSON.stringify({ ok: false, error: 'Pflichtfelder fehlen' }), {
       status: 422,

@@ -1,9 +1,9 @@
 import type { APIRoute } from 'astro';
+import { DRAFT_COOKIE, DRAFT_TTL_SECONDS, createDraftToken } from '../../lib/preview-auth';
 
 export const prerender = false;
 
 const SECRET = import.meta.env.SANITY_PREVIEW_SECRET;
-const DRAFT_COOKIE = 'krups-draft';
 
 const VALID_TYPES = new Set(['page', 'product', 'productFamily', 'industry', 'service']);
 
@@ -22,12 +22,12 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
     return new Response('Invalid preview type', { status: 400 });
   }
 
-  cookies.set(DRAFT_COOKIE, '1', {
+  cookies.set(DRAFT_COOKIE, createDraftToken(SECRET), {
     path: '/',
     httpOnly: true,
     sameSite: 'lax',
     secure: import.meta.env.PROD,
-    maxAge: 60 * 60,
+    maxAge: DRAFT_TTL_SECONDS,
   });
 
   const prefix = lang === 'en' ? '/preview/en' : '/preview';
