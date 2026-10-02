@@ -10,6 +10,7 @@ import JsonLd from '../components/JsonLd.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import { getSiteSettings, SITE_SETTINGS_FALLBACK, type Locale } from '../sanity/queries';
 import {
+  CANONICAL_URL,
   organizationSchema,
   websiteSchema,
   breadcrumbSchema,
@@ -24,14 +25,20 @@ interface Props {
   breadcrumbs?: Crumb[];
   /** Additional JSON-LD entries for this page (Product, FAQPage, Article, etc). */
   jsonLd?: Array<Record<string, unknown>>;
+  /** Path of the other-language version (e.g. '/en/about'). Emits hreflang only when set. */
+  alternatePath?: string;
+  /** Keep the page out of search indexes (drafts, previews). */
+  noindex?: boolean;
 }
 
-const { title, description, locale = 'de', breadcrumbs, jsonLd } = Astro.props;
+const { title, description, locale = 'de', breadcrumbs, jsonLd, alternatePath, noindex } = Astro.props;
 
 const fetched = await getSiteSettings(locale);
 const settings = fetched ?? SITE_SETTINGS_FALLBACK[locale];
 const metaDescription = description ?? settings.siteTagline ?? '';
 const currentPath = Astro.url.pathname;
+const canonicalUrl = `${CANONICAL_URL}${currentPath}`;
+const ogLocale = locale === 'de' ? 'de_DE' : 'en_US';
 
 const structuredData: Array<Record<string, unknown>> = [
   organizationSchema(),
@@ -55,6 +62,23 @@ if (jsonLd && jsonLd.length > 0) {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {metaDescription && <meta name="description" content={metaDescription} />}
+    {noindex ? <meta name="robots" content="noindex, nofollow" /> : <link rel="canonical" href={canonicalUrl} />}
+    {alternatePath && !noindex && (
+      <>
+        <link rel="alternate" hreflang={locale} href={canonicalUrl} />
+        <link rel="alternate" hreflang={locale === 'de' ? 'en' : 'de'} href={`${CANONICAL_URL}${alternatePath}`} />
+        <link rel="alternate" hreflang="x-default" href={locale === 'de' ? canonicalUrl : `${CANONICAL_URL}${alternatePath}`} />
+      </>
+    )}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="KRUPS Automation" />
+    <meta property="og:title" content={title} />
+    {metaDescription && <meta property="og:description" content={metaDescription} />}
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    {metaDescription && <meta name="twitter:description" content={metaDescription} />}
 
     <Font cssVariable="--font-oswald" preload />
     <Font cssVariable="--font-barlow" preload />

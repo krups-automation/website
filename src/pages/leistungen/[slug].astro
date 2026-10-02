@@ -16,7 +16,9 @@ const { slug } = Astro.params;
 const service = slug ? await getServiceBySlug(slug, 'de') : null;
 
 if (!service || service.tier !== 'run') {
-  return Astro.redirect('/404');
+  // Paths come from getStaticPaths, so a miss means CMS/data drift: fail the build
+  // instead of emitting a redirect page that crawlers treat as a soft 404.
+  throw new Error(`No service found for ${Astro.url.pathname}`);
 }
 
 const bodyHtml = service.body ? toHTML(service.body as any) : '';

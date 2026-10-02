@@ -14,7 +14,10 @@ async function safeFetch<T>(
   try {
     return (await client.fetch<T>(query, params)) ?? fallback;
   } catch (err) {
-    console.warn('[sanity] fetch failed:', err);
+    // A failed fetch must not yield a green build with empty pages: fail loudly in
+    // production builds/runtime, degrade gracefully only in local dev.
+    if (import.meta.env.PROD) throw err;
+    console.warn('[sanity] fetch failed (dev fallback):', err);
     return fallback;
   }
 }

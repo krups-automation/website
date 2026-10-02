@@ -27,7 +27,9 @@ const { familySlug, productSlug } = Astro.params;
 const product = productSlug ? await getProductBySlug(productSlug, 'de') : null;
 
 if (!product || product.productFamily?.slug?.current !== familySlug) {
-  return Astro.redirect('/404');
+  // Paths come from getStaticPaths, so a miss means CMS/data drift: fail the build
+  // instead of emitting a redirect page that crawlers treat as a soft 404.
+  throw new Error(`No product found for ${Astro.url.pathname}`);
 }
 
 const familyName = product.productFamily?.name ?? '';

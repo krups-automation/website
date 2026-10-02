@@ -16,7 +16,9 @@ const { slug } = Astro.params;
 const industry = slug ? await getIndustryBySlug(slug, 'de') : null;
 
 if (!industry) {
-  return Astro.redirect('/404');
+  // Paths come from getStaticPaths, so a miss means CMS/data drift: fail the build
+  // instead of emitting a redirect page that crawlers treat as a soft 404.
+  throw new Error(`No industry found for ${Astro.url.pathname}`);
 }
 
 const whatMovesHtml = industry.whatMoves ? toHTML(industry.whatMoves as any) : '';

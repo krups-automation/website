@@ -55,7 +55,7 @@ function html(field: unknown): string {
 }
 ---
 
-<BaseLayout title={`[VORSCHAU] ${title}`} locale="de">
+<BaseLayout title={`[VORSCHAU] ${title}`} locale="de" noindex>
   <div class="preview-banner">
     <span>Vorschau-Modus — zeigt Entwurf ({type}: {slug})</span>
     <a href="/api/exit-preview" class="preview-exit">Vorschau beenden</a>

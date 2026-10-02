@@ -1,0 +1,15 @@
+# KRUPS Automation
+
+> KRUPS Automation GmbH (Dernbach, Germany, founded 1983) builds rail-guided conveyor systems for automotive and industrial assembly: the LOGO!MAT eCart and friction roller conveyors for payloads from 300 to 2,000 kg. Subsidiaries in Kentucky (USA) and Qingdao (China).
+
+## Key pages
+- [Products](https://www.krups-automation.com/produkte): LOGO!MAT eCart and conveyor product families with technical specifications
+- [Industries](https://www.krups-automation.com/branchen): Automotive, battery module/pack assembly, drive systems, commercial vehicles, white goods
+- [Services](https://www.krups-automation.com/leistungen): Planning, commissioning and service
+- [Planning](https://www.krups-automation.com/planung): Project planning for conveyor systems
+- [Company](https://www.krups-automation.com/unternehmen): About KRUPS Automation
+- [Downloads](https://www.krups-automation.com/downloads): Datasheets and brochures
+- [Contact](https://www.krups-automation.com/kontakt): Sales and technical inquiries
+
+## Machine-readable
+- [Sitemap](https://www.krups-automation.com/sitemap.xml)
