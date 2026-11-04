@@ -1,75 +1,122 @@
 # KRUPS Automation — Website
 
-Source code for [krups-automation.com](https://krups-automation.com) — Astro 6 + Sanity v5 + Vercel.
+Source code for the [krups-automation.com](https://krups-automation.com) rebuild — **Astro 6 + Sanity v5 + Vercel**.
+**Not yet live** — DNS still points to the old Joomla site; see § 1 "Planned / deferred".
 
-## Stack
+---
 
-- **Astro 6** — static site with selective server rendering for preview routes
-- **Sanity v5** — embedded Studio at `/admin`, DE/EN via `@sanity/document-internationalization`
-- **Vercel** — production hosting + auto-deploy on git push
-- **Self-hosted fonts** — Oswald, Barlow, JetBrains Mono via Astro Fonts API
-- **PortableText → HTML** — for Sanity body content
+## 1) Current state & plan
 
-## Structure
+### Stack as-built
 
-```
-src/
-  components/     Button, Card, Badge, Section, SiteHeader, SiteFooter, Breadcrumbs
-  layouts/        BaseLayout (html wrapper + Sanity siteSettings fetch)
-  pages/
-    index.astro       DE homepage
-    [...slug].astro   DE dynamic page renderer
-    en/               EN equivalents
-    preview/          Draft preview routes (server-rendered)
-    api/
-      preview.ts      Sets preview cookie and redirects
-      exit-preview.ts Clears preview cookie
-  sanity/
-    schemas/        siteSettings + page schema
-    queries.ts      GROQ queries + fallback data
-    draft-client.ts Authenticated client for preview (drafts perspective)
-  styles/
-    tokens.css      Design tokens from DESIGN.md
-    reset.css
-    base.css        Base typography (h1-h4, body, mono utilities)
-sanity.config.ts    Studio config (structure, vision, i18n, productionUrl resolver)
-astro.config.mjs    Astro + Vercel adapter + fonts + @sanity/astro integration
-```
+- **Astro 6** — fully static, with selective server rendering only for draft-preview routes
+- **Sanity v5** — embedded Studio at `/admin`; DE/EN via `@sanity/document-internationalization`
+- **Vercel** — production hosting; auto-deploy on push to `main`
+- **Self-hosted fonts** — Oswald, Barlow, JetBrains Mono (Astro Fonts API, primed from Google)
+- **`@portabletext/to-html`** — Sanity PortableText → HTML for body content
+- **No client-side JS framework** — interactivity is vanilla inline scripts (consent banner, PostHog)
+- **Design system as law** — `src/styles/tokens.css` + `scripts/design-lint.mjs` build gate (runs via `prebuild`; fails on raw font-size / letter-spacing / hex colors / `Nms` durations / raw box-shadow in any `.astro` `<style>` block). Constitution: `DESIGN.md`.
+
+### What's built
+
+- **Sanity content model complete** — 15 schemas (`siteSettings`, `page`, `blockContent`, `author`, `tag`, `pillar`, `download`, `productFamily`, `product`, `industry`, `service`, `customer`, `caseStudy`, `article`) per `PHASE2-CONTENT-MODEL.md`
+- **Typed query layer** — `src/sanity/queries.ts` GROQ fetchers for every content type (draft-aware) **plus hardcoded fallback data**, so pages render even if Sanity errors or is empty
+- **Routes (`src/pages/`)**:
+
+  ```
+  /                                  DE homepage (hero, proof, products, Plan·Build·Run, why, industries)
+  /produkte/                         product-family overview
+  /produkte/[familySlug]/            family landing (eCart, Friktionsrollen)
+  /produkte/[familySlug]/[productSlug]/  product detail
+  /leistungen/                       6 "Run" services overview
+  /leistungen/[slug]                 Run service detail
+  /planung                           Plan-tier service (Produktionsplanung)
+  /branchen/                         industry overview (5 industries)
+  /branchen/[slug]                   industry detail
+  /unternehmen /kontakt /downloads   static pages (downloads pulls from Sanity)
+  /impressum /datenschutz /cookie-richtlinien   legal pages via Sanity `page` docs
+  /[...slug]                         dynamic renderer for Sanity `page` docs
+  /404  /sitemap.xml.ts
+  /en/  /en/[...slug]                EN mirrored tree ("translation pending" banner)
+  /preview/[...slug] + /preview/en   draft preview (server-rendered)
+  /api/preview  /api/exit-preview  /api/contact (N8N webhook relay)
+  ```
+
+- **301 redirect map** — `vercel.json` (crawl of the old Joomla site, 2026-07-06). EN rules currently point at DE pages until translations ship; stopgap targets pending decisions (`REDIRECTS.md`)
+- **Import tooling** — `scripts/import-{products,industries,services,customers,downloads,legal-pages}.py`
+- **Analytics** — PostHog (EU host) loaded only after explicit cookie consent
+
+### Planned / deferred
+
+1. **Content entry in Sanity** — manual for products/industries/services/customers, scripted for ~13 PDFs (per `PHASE2-CONTENT-MODEL.md`)
+2. **Pre-launch checklist** — DNS switch, webhook verification (see `PHASE2-CONTENT-MODEL.md` § "Webhook filter update"; original plan `PHASE1-SCAFFOLDING.md`)
+3. **EN translations** — DE-first launch; EN renders a banner until the second pass
+4. **Case-study index** (`/fallstudien`) — query helpers already exist; list/detail pages deliberately deferred until 2+ case studies exist in Sanity (`docs/plans/2026-07-14-case-study-index.md`)
+5. **Journal** — starts fresh after launch (article queries exist; no routes yet)
+6. **Redirect retargeting** — replace stopgap destinations once Philipp decides (e.g. `/de/kleinfoerdersysteme`, `/de/taktzeitberechnung`, `/de/nachhaltigkeit`)
+
+### Known wart
+
+`styled-components` and `@types/react*` look unused, and `src/` contains no React code — **but do not remove the React layer.** The embedded Studio at `/admin` needs it: `react`, `react-dom` and `styled-components` are peer dependencies of `sanity` and `@sanity/astro`, and the Studio route mounts with `client:only="react"`, which needs `@astrojs/react`. Public pages ship none of it.
+
+---
+
+## 2) Recommended target state (and why)
+
+**Keep the stack as-is.** Target:
+
+- Astro 6 static-first + Vercel — SSR only for `/preview` + `/api`
+- Sanity v5, embedded Studio, doc-level i18n — mirrors `/` + `/en/`, supports DE-first
+- `tokens.css` + `design-lint` gate — brand rules enforced mechanically
+- Self-hosted fonts, PortableText→HTML, PostHog (EU) behind consent, fallback data in queries
+- **No client-side JS framework on public pages** — interactivity stays vanilla inline scripts; React is confined to the Studio at `/admin`
+
+Removing the React layer was planned on 2026-08-25 and withdrawn: see `docs/plans/2026-08-25-remove-react-layer.md`.
+
+Optional / non-blocking: flip `useCdn: true` for the static fetch queries (less Sanity API load on rebuilds; preview is unaffected via the draft client), and add minimal tests for `queries.ts` projections + `src/lib/schema-org.ts` if coverage is ever wanted.
+
+---
+
+## 3) The delta
+
+| # | Current | Target | Action |
+|---|---|---|---|
+| 1 | README structure listed stale scaffolding | matches § 1 tree | done by this rewrite |
+| 2 | `useCdn: false` (optional) | `useCdn: true` for static queries | flip; confirm preview unaffected |
+| 3 | no tests (optional) | minimal query/schema-org tests | add if/when desired |
+
+---
 
 ## Commands
 
-| Command           | Action                                        |
-| :---------------- | :-------------------------------------------- |
-| `npm install`     | Install dependencies                          |
-| `npm run dev`     | Local dev server at `localhost:4321`          |
-| `npm run build`   | Build production output to `./dist/`          |
-| `npm run preview` | Preview the production build locally          |
+| Command | Action |
+| :--- | :--- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Local dev server at `localhost:4321` |
+| `npm run build` | Design-lint (`prebuild`) then production build to `./dist/` |
+| `npm run lint:design` | Run the design-token gate standalone |
+| `npm run preview` | Preview the production build locally |
 
 ## Environment variables
 
-Copy `.env.example` to `.env` and fill in values. For production these live in Vercel.
+Copy `.env.example` to `.env`; production values live in Vercel. Referenced keys (from code):
 
-- `SANITY_API_READ_TOKEN` — server-only; read-only token for fetching drafts (create at [sanity.io/manage/project/8075qdie/api](https://www.sanity.io/manage/project/8075qdie/api))
-- `SANITY_PREVIEW_SECRET` — server-only; guards `/api/preview` endpoint
-- `PUBLIC_PREVIEW_SECRET` — same value, exposed to Sanity Studio bundle so "Open preview" can sign URLs
+- `SANITY_API_READ_TOKEN` — server-only; read token for draft fetching
+- `SANITY_PREVIEW_SECRET` — server-only; signs the draft cookie. Never expose it through a `PUBLIC_` variable: `/admin` JS is public, only Studio data sits behind Sanity login
+- `PUBLIC_POSTHOG_KEY` / `PUBLIC_POSTHOG_HOST` — analytics (host defaults to `https://eu.i.posthog.com`); feature off when key absent
+- `N8N_CONTACT_WEBHOOK` — server-only; `/api/contact` relay target
 
 ## Content + preview workflow
 
-1. Editor opens [`/admin`](/admin), edits or creates a document, clicks Save (creates a draft)
-2. Clicks **Open preview** (three-dot menu or Ctrl+Alt+O) → opens `/api/preview?...` → redirects to `/preview/<slug>`
-3. Yellow banner "PREVIEW MODE — SHOWING DRAFT" appears above the page
-4. Editor reviews → back in Studio, clicks **Publish** → Sanity webhook triggers Vercel rebuild (after webhook setup)
+1. Editor opens `/admin`, edits/creates a doc, saves (draft)
+2. **Open preview** (three-dot menu / Ctrl+Alt+O) → `/api/preview?...` with a 1 h Sanity preview secret → `/preview/<slug>`. Getting a 401 on a long-open tab? Reload the Studio
+3. Yellow "PREVIEW MODE — SHOWING DRAFT" banner above the page
+4. Publish → Sanity webhook triggers Vercel rebuild
 
 ## i18n model
 
-- Document-level internationalization via `@sanity/document-internationalization`
-- Each document has a `language` field (`de` or `en`)
-- URL structure: DE at `/` (default), EN at `/en/`
-- Language switcher in header: path-based swap (works for mirrored URL structures)
+Document-level internationalization; each doc carries `language` (`de`/`en`). DE at `/`, EN at `/en/`; path-based language switch in the header. EN renders a "translation pending" banner until translated (DE-first launch). Schemas with translations: `page`, `siteSettings`, `product`, `productFamily`, `download`, `industry`, `service`, `caseStudy`, `article`.
 
 ## Deployment
 
-- Push to `main` → Vercel builds automatically via the connected GitHub integration
-- Preview mode routes are server-rendered as Vercel Functions; everything else is prerendered static HTML
-
-See `PHASE1-SCAFFOLDING.md` in the parent `website/` directory for the original plan and acceptance criteria.
+Push to `main` → Vercel builds automatically. Preview routes are server-rendered Vercel Functions; everything else is prerendered static HTML. Redirect map lives in `vercel.json` and ships with each deploy.

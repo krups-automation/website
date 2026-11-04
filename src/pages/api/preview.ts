@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
+import { validatePreviewUrl } from '@sanity/preview-url-secret';
 import { DRAFT_COOKIE, DRAFT_TTL_SECONDS, createDraftToken } from '../../lib/preview-auth';
+import { draftClient, hasDraftToken } from '../../sanity/draft-client';
 
 export const prerender = false;
 
@@ -9,12 +11,18 @@ const VALID_TYPES = new Set(['page', 'product', 'productFamily', 'industry', 'se
 
 export const GET: APIRoute = async ({ request, cookies, redirect }) => {
   const url = new URL(request.url);
-  const secret = url.searchParams.get('secret');
   const slug = url.searchParams.get('slug') ?? '';
   const lang = url.searchParams.get('lang') ?? 'de';
   const type = url.searchParams.get('type') ?? 'page';
 
-  if (!SECRET || secret !== SECRET) {
+  if (!SECRET || !hasDraftToken()) {
+    return new Response('Invalid preview secret', { status: 401 });
+  }
+
+  // The URL carries a short-lived secret the Studio minted in the dataset, so nothing
+  // long-lived has to reach the public Studio bundle.
+  const { isValid } = await validatePreviewUrl(draftClient, request.url);
+  if (!isValid) {
     return new Response('Invalid preview secret', { status: 401 });
   }
 
