@@ -1,6 +1,166 @@
 {
   "redirects": [
     {
+      "source": "/de/foerdersysteme/elektrisch-angetriebene-werkstuecktraeger/logo-mat-e-serie",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/foerdersysteme/friktionsrollenfoerderer/logo-mat-l-serie",
+      "destination": "/produkte/friktionsrollenfoerderer/l-serie",
+      "permanent": true
+    },
+    {
+      "source": "/de/foerdersysteme/friktionsrollenfoerderer/logo-mat-xl-serie",
+      "destination": "/produkte/friktionsrollenfoerderer/xl-serie",
+      "permanent": true
+    },
+    {
+      "source": "/de/foerdersysteme/friktionsrollenfoerderer/logo-mat-t-serie",
+      "destination": "/produkte/friktionsrollenfoerderer/t-serie",
+      "permanent": true
+    },
+    {
+      "source": "/de/unternehmen/unternehmen-uebersicht",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/conveyor-systems/electrically-driven-conveyor-systems/logo-mat-e-series",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/conveyor-systems/friction-roller-conveyors/logo-mat-l-series",
+      "destination": "/produkte/friktionsrollenfoerderer/l-serie",
+      "permanent": true
+    },
+    {
+      "source": "/en/conveyor-systems/friction-roller-conveyors/logo-mat-xl-series",
+      "destination": "/produkte/friktionsrollenfoerderer/xl-serie",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen",
+      "destination": "/leistungen",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/leistungen-uebersicht",
+      "destination": "/leistungen",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/konzept-beratung",
+      "destination": "/leistungen/beratung",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/layout-angebot",
+      "destination": "/leistungen",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/projektstart-steuerungsintegration",
+      "destination": "/leistungen/steuerungsintegration",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/fertigung-lieferung",
+      "destination": "/leistungen/fertigung",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/montage-inbetriebnahme",
+      "destination": "/leistungen/montage",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/fertigung/:sub",
+      "destination": "/leistungen/fertigung",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/beratung",
+      "destination": "/leistungen/beratung",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/projektierung",
+      "destination": "/leistungen/projektierung",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/fertigung",
+      "destination": "/leistungen/fertigung",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/montage",
+      "destination": "/leistungen/montage",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/steuerungsintegration",
+      "destination": "/leistungen/steuerungsintegration",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/service",
+      "destination": "/leistungen/service",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/:path*",
+      "destination": "/leistungen",
+      "permanent": true
+    },
+    {
+      "source": "/en",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/services",
+      "destination": "/leistungen",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/range-of-services",
+      "destination": "/leistungen",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/concept-consulting",
+      "destination": "/leistungen/beratung",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/layout-quotation",
+      "destination": "/leistungen",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/project-start-controls-integration",
+      "destination": "/leistungen/steuerungsintegration",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/manufacturing-delivery",
+      "destination": "/leistungen/fertigung",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/installation-commissioning",
+      "destination": "/leistungen/montage",
+      "permanent": true
+    },
+    {
+      "source": "/en/services/manufacturing/:sub",
+      "destination": "/leistungen/fertigung",
+      "permanent": true
+    },
+    {
       "source": "/produkte/ecart/ecart",
       "destination": "/produkte/ecart",
       "permanent": true
@@ -28,11 +188,6 @@
     {
       "source": "/de/cookie-richtlinien",
       "destination": "/cookie-richtlinien",
-      "permanent": true
-    },
-    {
-      "source": "/de/leistungen/:slug",
-      "destination": "/leistungen/:slug",
       "permanent": true
     },
     {
