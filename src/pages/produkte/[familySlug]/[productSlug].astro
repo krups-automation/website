@@ -48,7 +48,10 @@ const jsonLd = [
     description: product.metaDescription ?? product.tagline,
     url: pageUrl,
     category: 'Fördersystem',
-    specs: product.specs?.map((s) => ({ label: s.label, value: s.value, unit: s.unit })),
+    // rows without a value carry nothing for JSON-LD
+    specs: product.specs?.flatMap((s) =>
+      s.value ? [{ label: s.label, value: s.value, unit: s.unit }] : []
+    ),
   }),
   ...(product.faq && product.faq.length > 0 ? [faqSchema(product.faq)] : []),
 ];

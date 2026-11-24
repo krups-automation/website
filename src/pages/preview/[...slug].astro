@@ -26,23 +26,26 @@ const type = slashIdx === -1 ? path : path.slice(0, slashIdx);
 const slug = slashIdx === -1 ? '' : path.slice(slashIdx + 1);
 
 type AnyDoc = Record<string, unknown> & { _type?: string };
+// The typed query results are interfaces, which TypeScript will not treat as an
+// index-signature record; this page reads fields generically, so widen once here.
+const asDoc = (d: unknown) => d as AnyDoc | null;
 let doc: AnyDoc | null = null;
 
 switch (type) {
   case 'product':
-    doc = await getProductBySlug(slug, 'de', { draft: true });
+    doc = asDoc(await getProductBySlug(slug, 'de', { draft: true }));
     break;
   case 'productFamily':
-    doc = await getProductFamilyBySlug(slug, 'de', { draft: true });
+    doc = asDoc(await getProductFamilyBySlug(slug, 'de', { draft: true }));
     break;
   case 'industry':
-    doc = await getIndustryBySlug(slug, 'de', { draft: true });
+    doc = asDoc(await getIndustryBySlug(slug, 'de', { draft: true }));
     break;
   case 'service':
-    doc = await getServiceBySlug(slug, 'de', { draft: true });
+    doc = asDoc(await getServiceBySlug(slug, 'de', { draft: true }));
     break;
   default:
-    doc = await getPageBySlug(slug, 'de', { draft: true });
+    doc = asDoc(await getPageBySlug(slug, 'de', { draft: true }));
 }
 
 if (!doc) {

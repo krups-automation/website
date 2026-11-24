@@ -49,7 +49,6 @@ export default defineConfig({
       useCdn: false,
       studioBasePath: '/admin',
       studioRouterHistory: 'hash',
-      logClientRequests: 'dev',
     }),
     react(),
   ],

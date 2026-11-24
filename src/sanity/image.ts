@@ -1,8 +1,10 @@
-import imageUrlBuilder from '@sanity/image-url';
-import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import {
+  createImageUrlBuilder,
+  type ImageUrlBuilder,
+  type SanityImageSource,
+} from '@sanity/image-url';
 
-const builder = imageUrlBuilder({
+const builder = createImageUrlBuilder({
   projectId: '8075qdie',
   dataset: 'production',
 });
@@ -17,8 +19,9 @@ export const DEFAULT_WIDTHS = [400, 640, 800, 1024, 1280, 1600, 2000, 2560];
 
 interface SrcSetOptions {
   widths?: number[];
-  /** 'webp' | 'jpg' | 'avif' | 'png' — defaults to 'webp' for broad support + small files. */
-  format?: 'webp' | 'jpg' | 'avif' | 'png';
+  /** 'webp' | 'jpg' | 'png' — defaults to 'webp' for broad support + small files.
+   *  (No 'avif': @sanity/image-url's ImageFormat type does not accept it.) */
+  format?: 'webp' | 'jpg' | 'png';
   /** 0-100. Sanity default ~75. */
   quality?: number;
   /** Cap the max dimension; useful when the image is rendered at ≤1280px regardless of viewport. */
@@ -41,7 +44,7 @@ export function imageSrcSet(source: SanityImageSource, opts: SrcSetOptions = {})
 }
 
 /** Convenience: a single URL at a target width, auto format, default quality. */
-export function imageUrl(source: SanityImageSource, width: number, format: 'webp' | 'jpg' | 'avif' = 'webp'): string {
+export function imageUrl(source: SanityImageSource, width: number, format: 'webp' | 'jpg' = 'webp'): string {
   return urlFor(source).width(width).format(format).quality(80).url();
 }
 

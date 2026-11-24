@@ -1,6 +1,6 @@
 ---
 import { imageSrcSet, imageUrl, lqipUrl, assetLqip } from '../sanity/image';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import type { SanityImageSource } from '@sanity/image-url';
 
 interface Props {
   source: SanityImageSource;
@@ -18,7 +18,7 @@ interface Props {
   /** Optional className passthrough. */
   class?: string;
   /** Format for the rendered <img> srcset. */
-  format?: 'webp' | 'jpg' | 'avif';
+  format?: 'webp' | 'jpg';
 }
 
 const {
