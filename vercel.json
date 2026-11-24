@@ -101,6 +101,356 @@
       "permanent": true
     },
     {
+      "source": "/de/news/2021highlights",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/ahte-2024-rueckblick",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/ahte-2025-intelligente-automatisierungsloesungen-in-produktion",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/ahte-shanghai-automatica-muenchen-2025-wir-sagen-danke",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/automatica-2025",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/automatica-22-rueckblick",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/automatica-23-rueckblick",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/automatisierung-in-koeln-zukunft-der-batterieproduktion",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/azubi-power-bei-krups-ausbildungs-auftakt",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/batteriemontagen-in-der-e-mobility",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/baubeginn-neue-halle",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/bericht-vom-smart-trend-profitieren",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/die-krups-group-stellt-sich-vor-unternehmen-im-fokus",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/die-neue-generation-logo-mat-ecart-drehmodule",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/die-neue-heavy-ausfuehrung-ecart700-heavy",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/dreiphasenleuchte-fur-zustandsmeldungen-des-ecarts",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/e-autos-und-ladestationen-fuer-krups-mitarbeiter",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/ecart-energiesparen",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/einfach-preiswert-flexibel-die-neue-logo-mat-t-serie",
+      "destination": "/produkte/friktionsrollenfoerderer/t-serie",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/einsparpotenzial-beim-ecart-v2",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/elektrisches-ecart-liftgate",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/genau-die-richtige-entscheidung",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/haake-technik-krups-automation",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/intelligente-automatisierung-bei-mtu-aero-engines-mit-unserem-logo-mat-ecart",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/jetzt-optional-erhaeltlich-fremdkoerperabweiser-fuer-die-logo-mat-e-serie",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/krups-anwenderbericht",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/krups-anwenderbericht-dhf-intralogistics",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/krups-auf-der-automatica-im-juni-2022",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/krups-auf-der-nacht-der-technik-2025",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/krups-automation-auf-der-re-fact-25",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/krups-automation-im-maschinenmarkt",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/krups-automation-im-maschinenmarkt-2",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/krups-automation-partner-fuer-die-zukunft-der-elektromobilitaet",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/krups-automation-unterstuetzt-den-solarcars-cup-2025",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/landrat-achim-hallerbach-zu-gast-bei-der-krups-automation",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/logopart-investiert-weiter-in-modernen-maschinenpark",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/manuelles-ecart-liftgate",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/maximale-flexibilitaet-auf-kleinstem-raum",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/motek-2020",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/neu-logomat-ecart-700plus",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/neue-ecart-videoreihe-ab-sofort-verfuegbar",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/neue-in-house-cnc-fertigung",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/neue-ladestationen-fuer-elektrische-fahrzeuge",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/neue-spurbreiten-im-kf-bereich",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/neuer-imagefilm-ab-sofort-verfuegbar",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/neuer-logomat-imagefilm",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/neues-krups-automation-innovationszentrum",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/partner-von-tesvolt-gmbh",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/pneumatik-vs-elektrik-in-der-foerdertechnik",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/produktionskapazitaeten-an-unserem-chinesischen-standort-wachsen-weiter",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/produktkosten-ganzheitlich-denken-zeit-und-effizienz-als-wettbewerbsvorteil",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/qualitaet-und-quantitaet-genau-wenn-sie-es-brauchen",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/re-fact-25-recap-zwei-tage-innovation-kreislaufwirtschaft",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/rueckblickend-auf-unseren-kommunikationsworkshop",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/schneller-werkstuecktraegerwechsel-effizient-platzsparend-und-flexibel",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/sicherer-ueberstieg-flexibel-stabil-und-schnell-verfuegbar",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/starte-deine-karriere-bei-krups",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/taktwechselzeiten-jetzt-wieder-online-berechnen",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/tomorrow-in-e-motion-at-paeegreendays-mit-krups-automation",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/traweba-trendsetter-batterie-mit-krups-automation",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/unser-ecart-system-in-der-batteriepackfertigung-bei-einem-europaeischen-automobilhersteller",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/unser-logo-mat-ecart-im-direkten-vergleich",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/unsere-produktneuheit-logo-mat-ecart-hubplattform",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/unternehmen-im-fokus-krups-automation",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/unternehmen-im-fokus-loft",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/unternehmen-im-fokus-logomat",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/unternehmen-im-fokus-logomat-qingdao",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/unternehmen-im-fokus-logopart",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/vorzugsreihen-kf",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/de/news/werkstuecktraegersysteme-fuer-batterie-und-brennstoffzellen",
+      "destination": "/produkte/friktionsrollenfoerderer",
+      "permanent": true
+    },
+    {
       "source": "/de/news/:path*",
       "destination": "/",
       "permanent": true
@@ -223,6 +573,246 @@
     {
       "source": "/en/company/:path*",
       "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/ahte-2024-intelligent-automation-solutions-in-production-and-assembly",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/ahte-2024-review",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/ahte-shanghai-automatica-munich-2025-thank-you",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/automate-show-2023-from-22-to-25-may",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/automatica-2023-count-us-in",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/automatica-2025",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/automation-in-cologne-the-future-of-battery-production",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/battery-mounting-in-e-mobility",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/best-practice-roller-timeout-for-energy-savings",
+      "destination": "/produkte/friktionsrollenfoerderer",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/calculate-takt-times-online-again",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/company-in-focus-automation",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/company-in-focus-loft",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/company-in-focus-logomat",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/company-in-focus-logomat-qingdao",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/company-in-focus-logopart",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/ecart-energy-saving-potential",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/electric-vehicles-and-providing-charging-stations-for-our-employees",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/fast-pallet-exchange-efficient-compact-and-flexible",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/highlights-2021",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/intelligent-automation-at-mtu-aero-engines-with-our-logo-mat-ecart",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/kmodular-and-compact-turn-units",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/krups-at-the-automatica-in-june-2022",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/krups-at-the-night-of-technology-2025",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/krups-automation-at-re-fact-25",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/krups-automation-partner-for-the-future-of-e-mobility",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/krups-automation-supports-the-solarcars-cup-2025",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/logo-mat-ecart-700",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/logo-mat-ecart-scissor-lift",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/main-products-of-small-conveyor-systems",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/motek-2020",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/new-charging-stations-for-electric-vehicles",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/new-ecart-video-series-now-available",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/new-in-house-cnc-manufacturing",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/new-logomat-promo-video",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/new-promo-video-now-available",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/now-optionally-available-foreign-object-deflectors-for-the-logo-mat-e-series",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/production-capacities-at-our-chinese-site-continue-to-grow",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/re-fact-25-recap-two-days-of-innovation-circular-economy",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/report-profit-from-the-smart-trend",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/safe-transition-flexible-stable-and-available-quickly",
+      "destination": "/produkte",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/stack-lights-for-monitoring-the-status-of-ecarts",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/start-of-construction",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/take-a-holistic-view-of-product-costs-time-and-efficiency-as-a-competitive-advantage",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/the-krups-group-introduces-itself-company-in-focus",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/the-new-generation-logo-mat-ecart-track-rotates",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/the-new-heavy-version-ecart700-heavy",
+      "destination": "/produkte/ecart",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/tomorrow-in-e-motion-at-paeegreendays-with-krups-automation",
+      "destination": "/branchen/batteriemontage",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/traweba-battery-trendsetter-with-krups-automation",
+      "destination": "/branchen/batteriemontage",
       "permanent": true
     },
     {
