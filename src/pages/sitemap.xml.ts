@@ -55,7 +55,7 @@ export const GET: APIRoute = async () => {
   const enPageSlugs = new Set(enPages.map((p) => p.slug));
 
   const staticUrls = [
-    urlEntry('/', '1.0', 'weekly', '/en/'),
+    urlEntry('/', '1.0', 'weekly'), // no English home yet: /en redirects to /
     urlEntry('/produkte', '0.9', 'weekly'),
     urlEntry('/leistungen', '0.8', 'weekly'),
     urlEntry('/branchen', '0.8', 'weekly'),

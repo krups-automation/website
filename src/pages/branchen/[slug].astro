@@ -4,7 +4,7 @@ import { toHTML } from '@portabletext/to-html';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Section from '../../components/Section.astro';
-import { getAllIndustrySlugs, getIndustryBySlug } from '../../sanity/queries';
+import { getAllIndustrySlugs, getIndustryBySlug, getSingleMemberFamilySlugs } from '../../sanity/queries';
 import { faqSchema } from '../../lib/schema-org';
 
 export const getStaticPaths = (async () => {
@@ -19,6 +19,15 @@ if (!industry) {
   // Paths come from getStaticPaths, so a miss means CMS/data drift: fail the build
   // instead of emitting a redirect page that crawlers treat as a soft 404.
   throw new Error(`No industry found for ${Astro.url.pathname}`);
+}
+
+// A family with one product has no separate product page: the family page
+// carries the product (e.g. /produkte/ecart, not /produkte/ecart/ecart).
+const singleMemberFamilies = await getSingleMemberFamilySlugs('de');
+function productHref(p: { slug?: { current?: string }; productFamily?: { slug?: { current?: string } } }): string {
+  const family = p.productFamily?.slug?.current ?? '';
+  const product = p.slug?.current ?? '';
+  return singleMemberFamilies.includes(family) ? `/produkte/${family}` : `/produkte/${family}/${product}`;
 }
 
 const whatMovesHtml = industry.whatMoves ? toHTML(industry.whatMoves as any) : '';
@@ -112,7 +121,7 @@ const breadcrumbs = [
         <h2>Empfohlene Systeme</h2>
         <div class="product-list">
           {industry.recommendedProducts.map((p: any) => (
-            <a class="product-card" href={`/produkte/${p.productFamily?.slug?.current ?? ''}/${p.slug?.current ?? ''}`}>
+            <a class="product-card" href={productHref(p)}>
               <h3>{p.name}</h3>
               {p.tagline && <p>{p.tagline}</p>}
             </a>

@@ -5,29 +5,17 @@ interface Props {
   settings: SiteSettings;
   locale: Locale;
   currentPath: string;
+  /** Path of this page in the other language. The switch is only shown when it is set. */
+  alternatePath?: string;
 }
 
-const { settings, locale, currentPath } = Astro.props;
+const { settings, locale, alternatePath } = Astro.props;
 const otherLocale: Locale = locale === 'de' ? 'en' : 'de';
 const otherLocaleLabel = otherLocale.toUpperCase();
 const currentLocaleLabel = locale.toUpperCase();
 
-// Path-based locale swap. If current has `/en/` prefix, strip it. Otherwise prepend.
-// Translation mapping (if slug differs across locales) is a Phase 2 concern.
-function swapLocale(path: string, from: Locale, to: Locale): string {
-  if (from === 'en' && path.startsWith('/en/')) {
-    const stripped = path.replace(/^\/en/, '') || '/';
-    return stripped;
-  }
-  if (from === 'en' && path === '/en') return '/';
-  if (from === 'de' && to === 'en') {
-    if (path === '/') return '/en/';
-    return `/en${path.startsWith('/') ? path : `/${path}`}`;
-  }
-  return path;
-}
-
-const otherLocaleHref = swapLocale(currentPath, locale, otherLocale);
+// The switch used to prepend /en to any path, which linked 29 German pages to
+// English pages that do not exist. It now needs an explicit alternatePath.
 const homeHref = locale === 'en' ? '/en/' : '/';
 ---
 
@@ -51,11 +39,13 @@ const homeHref = locale === 'en' ? '/en/' : '/';
     )}
 
     <div class="nav-right">
-      <a href={otherLocaleHref} class="lang-switch" aria-label={`Switch to ${otherLocale === 'de' ? 'German' : 'English'}`}>
-        <span class="current">{currentLocaleLabel}</span>
-        <span class="sep">/</span>
-        <span class="other">{otherLocaleLabel}</span>
-      </a>
+      {alternatePath && (
+        <a href={alternatePath} class="lang-switch" aria-label={`Switch to ${otherLocale === 'de' ? 'German' : 'English'}`}>
+          <span class="current">{currentLocaleLabel}</span>
+          <span class="sep">/</span>
+          <span class="other">{otherLocaleLabel}</span>
+        </a>
+      )}
 
       {settings.ctaLabel && settings.ctaHref && (
         <a href={settings.ctaHref} class="cta">{settings.ctaLabel}</a>

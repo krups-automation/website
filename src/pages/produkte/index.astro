@@ -157,7 +157,7 @@ const sortedFamilies = [...families].sort(
 <style>
   .family-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
   }
   /* Cards on clay section — use --color-bg so they read lighter than the surface */
@@ -269,6 +269,10 @@ const sortedFamilies = [...families].sort(
   }
   .empty-state a { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 4px; }
   @media (max-width: 768px) {
-    .family-grid { grid-template-columns: 1fr; }
+    /* minmax(0, …) lets the card shrink; a bare 1fr let the spec rows push the
+       page 17px wider than a phone screen */
+    .family-grid { grid-template-columns: minmax(0, 1fr); }
+    .family-card { padding: var(--space-8) var(--space-6); }
+    .card-visual { margin: var(--space-6) calc(-1 * var(--space-6)) calc(-1 * var(--space-8)); }
   }
 </style>
