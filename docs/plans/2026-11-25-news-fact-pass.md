@@ -1,6 +1,6 @@
 # News batch 1: fact pass
 
-**Date:** 2026-11-25 · **Status:** proposals, waiting for Carlo's decisions. Nothing changed in Sanity yet.
+**Date:** 2026-11-25 · **Status:** applied to the 10 drafts on 2026-11-25 after Carlo's decisions (below). Ready for review and publishing.
 
 Reference: fact sheet v0.2 (`../ai-visibility-monitor/dossier-krups-group/artifacts/fact-sheet.md`). Text of each draft read in full.
 
@@ -80,3 +80,12 @@ Legend: **F** = fact or claim · **D** = date · **T** = title · **E** = editor
 | 5 | Vergleich: link the PDF directly | Carlo | Yes |
 | 6 | All titles as listed above | Carlo | Yes |
 | 7 | Editorial fixes (E) without further asking | Carlo | Yes |
+
+## Outcome (2026-11-25)
+
+Carlo: 1 yes, 2 unknown, 3 both still offered, 4–7 yes. Applied to all 10 drafts.
+
+- **Signal light (2):** unknown, so the 2024 announcement ("Aktuell arbeiten wir an einer integrierten Signalleuchte") is removed. Open question for Philipp; if it is available, add one sentence.
+- **Heavy banner:** not a copy of the headline but a slogan strip ("Mehr Last · Gleiche Leistung · Gleiche Sicherheit"). Kept, with that as alt text.
+- **Vergleich:** the PDF is uploaded to Sanity and linked directly.
+- Dates in `2026-11-25-news-dates.csv` updated for Drehmodule (2024) and Hubplattform (2021), DE and EN.
