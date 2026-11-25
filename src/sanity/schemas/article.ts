@@ -137,9 +137,15 @@ export const article = defineType({
       subtitle: 'author.name',
       media: 'heroImage',
       publishedAt: 'publishedAt',
+      precision: 'publishedAtPrecision',
     },
-    prepare({ title, subtitle, media, publishedAt }) {
-      const date = publishedAt ? new Date(publishedAt).toLocaleDateString() : '';
+    prepare({ title, subtitle, media, publishedAt, precision }) {
+      // a date known only by year shows as the year, as on the website
+      const date = !publishedAt
+        ? ''
+        : precision === 'year'
+          ? publishedAt.slice(0, 4)
+          : new Date(publishedAt).toLocaleDateString('de-DE', { timeZone: 'UTC' });
       return {
         title,
         subtitle: [date, subtitle].filter(Boolean).join(' · '),

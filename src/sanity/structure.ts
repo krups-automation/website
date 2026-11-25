@@ -47,7 +47,13 @@ export const deskStructure: StructureResolver = (S) =>
           S.list()
             .title('Journal')
             .items([
-              S.documentTypeListItem('article').title('Articles'),
+              S.documentTypeListItem('article')
+                .title('Articles')
+                .child(
+                  S.documentTypeList('article')
+                    .title('Articles')
+                    .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+                ),
               S.documentTypeListItem('author').title('Authors'),
               S.documentTypeListItem('pillar').title('Pillars'),
               S.documentTypeListItem('tag').title('Tags'),
