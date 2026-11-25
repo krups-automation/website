@@ -160,6 +160,6 @@ Rough total for Phases 0–2: 12–15 working days. Phase 3 adds 3–5. These ar
 | D3 | Joomla API token for the importer | Carlo | 0.3 (fallback: public HTML, no dates) |
 | D4 | Kleinfördersysteme stays on the site | Philipp | 1.4 |
 | D5 | Takt-time tool stays | Philipp | 1.6 |
-| D6 | Any gated downloads? | Carlo | 1.5 |
+| D6 | Any gated downloads? DECIDED 2026-11-25: no gating for now; all files open and indexable, leads come through the quote request | Carlo | 1.5 |
 | D7 | US or British English; English at launch or later | Carlo, Philipp | Phase 3 |
 | D8 | News: first batch, MTU naming | Carlo, Philipp | 1.7 |
