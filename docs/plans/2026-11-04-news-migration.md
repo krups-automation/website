@@ -30,7 +30,11 @@
 
 ## Blockers
 
-1. **Dates.** No article has a publish date in its visible page, meta tags or JSON-LD. Dated image paths cover 36 of 70 DE items, and only by year. The prev/next chain gives an order but no dates. `publishedAt` is the freshness signal this work exists for, so it should come from Joomla's `created` field.
+1. **Dates. RESOLVED 2026-11-25:** `2026-11-25-news-dates.csv` has a date for all 118 URLs. Source: two exports of the Joomla admin article list (sorted by created and by publish start). The API is not reachable (see parity plan D3).
+   - Joomla's dates are unreliable in clusters: 2020-05-04 (site move, 45 items) and 2022-09-22/26 (articles copied with "save as copy", e.g. `automatica-2025`). Those are treated as unknown.
+   - `published_at` takes `created`, else `publish_up`, else the paired translation's date, else the date or year in the article's image path. `date_source` says which.
+   - 35 items have a year only (`image year`). Show only the year for those, and store 1 January with the source kept, so nothing claims a precise date it does not have.
+   - Doubtful: the 2020-10-29 group (5 items, among them the Hubplattform via EN) and the 2021-06-29 group (4). Plausible, but check against the article text in the fact pass.
 2. **Stale facts in keepers.** Every migrated item needs a fact pass. Known so far:
    - `haake-technik-krups-automation`: "Startup" wording and 1.360 kg (fact sheet: 1,350 kg).
    - Three items use the old "eCart V2" name.
