@@ -58,7 +58,7 @@ Joomla's eCart family page has 1,705 words plus 659 on the E-Serie page; the fri
 |---|---|---|---|
 | 0.1 | Parity check in the repo | Script that reads the inventory CSV, applies `vercel.json` and the built routes, and prints the table from section 1. This number is the progress bar and later the launch gate | fix-order step 3 |
 | 0.2 | Locale-aware routing | One template set for DE and EN (fix-order step 7) | fix-order steps 2, 3 |
-| 0.3 | Import pipeline from Joomla | One re-runnable importer instead of hand-porting. Preferred source: Joomla's web services API (raw article HTML, `created` and `modified` dates, language associations, meta description). Fallback: the public HTML. Output: Sanity documents with deterministic IDs, so a re-run updates in place, plus a JSON snapshot per page in git so every re-import shows as a diff | D1 (who edits); an API token from Carlo |
+| 0.3 | Import pipeline from Joomla | One re-runnable importer instead of hand-porting. Preferred source: Joomla's web services API (raw article HTML, `created` and `modified` dates, language associations, meta description). Fallback: the public HTML. Output: Sanity documents with deterministic IDs, so a re-run updates in place, plus a JSON snapshot per page in git so every re-import shows as a diff | D1 (decided: importer runs until cutover only, then Sanity is the source); an API token from Carlo |
 | 0.4 | Drift report | Weekly job (n8n fits) that hashes each Joomla page's main content and meta description and lists what changed since the last import. Replaces a manual "to port" list | 0.3 |
 | 0.5 | Image pipeline | Bring the real photo set from Joomla into Sanity assets. The Astro build currently uses none of it | 0.3 |
 
@@ -155,7 +155,7 @@ Rough total for Phases 0–2: 12–15 working days. Phase 3 adds 3–5. These ar
 
 | # | Decision | Owner | Blocks |
 |---|---|---|---|
-| D1 | Who edits content after launch? | Carlo | 0.3 design, preview feature |
+| D1 | Who edits content after launch? DECIDED 2026-11-25: Carlo at first, then Julia; see fix-order "Editor handover" | Carlo | 0.3 design, preview feature |
 | D2 | Fact sheet v0.2 sign-off | Philipp | disputed facts |
 | D3 | Joomla API token for the importer | Carlo | 0.3 (fallback: public HTML, no dates) |
 | D4 | Kleinfördersysteme stays on the site | Philipp | 1.4 |
