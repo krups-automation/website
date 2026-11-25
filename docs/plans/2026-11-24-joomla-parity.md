@@ -157,7 +157,7 @@ Rough total for Phases 0–2: 12–15 working days. Phase 3 adds 3–5. These ar
 |---|---|---|---|
 | D1 | Who edits content after launch? DECIDED 2026-11-25: Carlo at first, then Julia; see fix-order "Editor handover" | Carlo | 0.3 design, preview feature |
 | D2 | Fact sheet v0.2 sign-off | Philipp | disputed facts |
-| D3 | Joomla API token for the importer | Carlo | 0.3 (fallback: public HTML, no dates) |
+| D3 | Joomla API token for the importer. DECIDED 2026-11-25: no API. Joomla 6.2.1 and the token work, but nginx on the server does not pass `/api/index.php/...` to PHP, and there is no easy server access. Fallback: dates from an export of the admin article list, text from the public HTML | Carlo | 0.3 |
 | D4 | Kleinfördersysteme stays on the site | Philipp | 1.4 |
 | D5 | Takt-time tool stays | Philipp | 1.6 |
 | D6 | Any gated downloads? DECIDED 2026-11-25: no gating for now; all files open and indexable, leads come through the quote request | Carlo | 1.5 |
