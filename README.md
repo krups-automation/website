@@ -73,7 +73,7 @@ Source code for the [krups-automation.com](https://krups-automation.com) rebuild
 
 Removing the React layer was planned on 2026-08-25 and withdrawn: see `docs/plans/2026-08-25-remove-react-layer.md`.
 
-Optional / non-blocking: flip `useCdn: true` for the static fetch queries (less Sanity API load on rebuilds; preview is unaffected via the draft client), and add minimal tests for `queries.ts` projections + `src/lib/schema-org.ts` if coverage is ever wanted.
+`useCdn` stays `false`. The site is built when content is published, and the Sanity CDN can still serve the previous version at that moment, so a rebuild could ship old text. Optional: minimal tests for `queries.ts` projections and `src/lib/schema-org.ts` if coverage is ever wanted.
 
 ---
 
@@ -82,7 +82,7 @@ Optional / non-blocking: flip `useCdn: true` for the static fetch queries (less 
 | # | Current | Target | Action |
 |---|---|---|---|
 | 1 | README structure listed stale scaffolding | matches § 1 tree | done by this rewrite |
-| 2 | `useCdn: false` (optional) | `useCdn: true` for static queries | flip; confirm preview unaffected |
+| 2 | `useCdn: false` | `useCdn: false` | keep: the CDN can serve stale content to a publish-triggered build |
 | 3 | no tests (optional) | minimal query/schema-org tests | add if/when desired |
 
 ---
