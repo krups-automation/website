@@ -150,3 +150,16 @@ details[open].faq-item > summary::after {
   line-height: var(--line-height-lede);
   color: var(--color-muted);
 }
+
+/* Index-page header band: the PageHeader carries its own hairline, so the band
+   closes sooner instead of leaving a half-screen of empty paper under it. */
+.section.section-paper:has(.page-header) {
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-16);
+}
+@media (max-width: 900px) {
+  .section.section-paper:has(.page-header) {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-10);
+  }
+}

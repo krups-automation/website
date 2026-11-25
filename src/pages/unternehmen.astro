@@ -242,8 +242,8 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
     display: flex;
     align-items: center;
     gap: var(--space-8);
-    padding: var(--space-8) 0 var(--space-6);
-    border-top: 1px solid var(--color-border);
+    /* the PageHeader above already draws the hairline */
+    padding: var(--space-8) 0 0;
     flex-wrap: wrap;
   }
   .stat-item { display: flex; flex-direction: column; gap: var(--space-1); }
@@ -268,7 +268,16 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   h2 {
     margin-bottom: var(--space-6);
   }
-  .text-block { max-width: 880px; }
+  /* heading left, copy right: the block spans the content width */
+  .text-block {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--space-16);
+    align-items: start;
+  }
+  .text-block > .section-eyebrow { grid-column: 1 / -1; }
+  .text-block > h2 { grid-column: 1; margin-bottom: 0; text-wrap: balance; }
+  .text-block > .text-cols { grid-column: 2; padding-top: var(--space-2); }
   .text-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -448,6 +457,8 @@ const customerNames = customers.length > 0 ? customers.map((c) => c.name) : fall
   /* ── Responsive ── */
   @media (max-width: 900px) {
     .text-cols { grid-template-columns: 1fr; gap: var(--space-5); }
+    .text-block { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-5); }
+    .text-block > .text-cols { grid-column: 1; padding-top: 0; }
     .product-cols { grid-template-columns: 1fr; }
     .mfg-grid { grid-template-columns: 1fr; gap: var(--space-10); }
     .location-grid { grid-template-columns: 1fr; }

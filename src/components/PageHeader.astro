@@ -11,24 +11,53 @@ interface Props {
 }
 
 const { title, eyebrow, lede, class: className } = Astro.props;
+const hasExtra = Astro.slots.has('default');
 ---
 
-<header class={['page-header', className].filter(Boolean).join(' ')}>
+<header class={['page-header', lede && 'has-lede', className].filter(Boolean).join(' ')}>
   {eyebrow && <div class="eyebrow">{eyebrow}</div>}
   <h1>{title ?? <slot name="title" />}</h1>
   {lede && <p class="lede">{lede}</p>}
-  <slot />
+  {hasExtra && <div class="page-header-extra"><slot /></div>}
 </header>
 
 <style>
+  /* Title left, lede right on one baseline: the header fills the content width
+     instead of leaving the right half empty. Stacks below 900px. */
   .page-header {
-    margin: var(--space-6) 0 var(--space-4);
-    max-width: 720px;
+    margin: var(--space-6) 0 0;
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--space-16);
+    align-items: end;
+    padding-bottom: var(--space-10);
+    border-bottom: var(--border-hairline);
   }
 
+  .page-header .eyebrow { grid-column: 1 / -1; }
+
   .page-header h1 {
+    grid-column: 1 / -1;
     font-size: var(--font-size-h1);
     line-height: var(--line-height-h1);
-    margin-bottom: var(--space-4);
+    text-wrap: balance;
+  }
+
+  .page-header.has-lede h1 { grid-column: 1; }
+
+  .page-header .lede {
+    grid-column: 2;
+    padding-bottom: var(--space-1);
+  }
+
+  .page-header-extra {
+    grid-column: 1 / -1;
+    margin-top: var(--space-8);
+  }
+
+  @media (max-width: 900px) {
+    .page-header { grid-template-columns: minmax(0, 1fr); padding-bottom: var(--space-8); }
+    .page-header.has-lede h1 { margin-bottom: var(--space-4); }
+    .page-header .lede { grid-column: 1; padding-bottom: 0; }
   }
 </style>

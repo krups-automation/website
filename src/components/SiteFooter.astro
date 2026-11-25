@@ -163,8 +163,9 @@ const description = locale === 'de'
   .footer-col ul {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0;
   }
+
 
   .footer-col ul a {
     font-size: var(--font-size-label);
@@ -179,6 +180,15 @@ const description = locale === 'de'
   .footer-col ul a:hover,
   .footer-col ul a:focus-visible {
     color: var(--color-dark-text);
+  }
+
+  /* 44px touch targets stay on touch devices; pointer devices get a tight list */
+  @media (hover: hover) and (pointer: fine) {
+    .footer-col ul a {
+      min-height: 0;
+      padding: var(--space-1) 0;
+    }
+    .footer-col ul { gap: var(--space-1); }
   }
 
   .footer-bottom {

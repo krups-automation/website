@@ -19,15 +19,6 @@ import Button from '../components/Button.astro';
         <Button href="#systems" variant="primary">Unsere Systeme →</Button>
         <Button href="/kontakt" variant="ghost-light">Experten kontaktieren</Button>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><span class="val">500+</span><span class="lbl">Anlagen</span></div>
-        <div class="hero-stat-sep"></div>
-        <div class="hero-stat"><span class="val">300 – 2.000 kg</span><span class="lbl">Traglastbereich</span></div>
-        <div class="hero-stat-sep"></div>
-        <div class="hero-stat"><span class="val">±0,1 mm</span><span class="lbl">Positionsgenauigkeit</span></div>
-        <div class="hero-stat-sep"></div>
-        <div class="hero-stat"><span class="val">40+</span><span class="lbl">Jahre</span></div>
-      </div>
     </div>
   </section>
 
@@ -72,12 +63,14 @@ import Button from '../components/Button.astro';
 
       <div class="proof-alt-bottom" data-reveal>
         <h2 class="proof-headline">Vierzig Jahre Montagelinientechnik.</h2>
+        <div class="proof-copy">
         <p class="proof-body">
           Seit 1985 entwickelt, fertigt und nimmt KRUPS Automation Fördersysteme
           für die anspruchsvollsten Montageumgebungen in der Automobil- und
           Industrieproduktion in Betrieb.
         </p>
         <Button href="/unternehmen" variant="ghost">Über das Unternehmen →</Button>
+        </div>
       </div>
     </div>
   </section>
@@ -113,6 +106,7 @@ import Button from '../components/Button.astro';
             <span class="spec-chip">Kein WLAN</span>
             <span class="spec-chip">Aktive Bremse</span>
           </div>
+          <span class="card-link card-link-featured">LOGO!MAT eCart entdecken <span class="card-arrow">→</span></span>
           <div class="card-visual">
             <svg class="card-track-svg" viewBox="0 0 600 260" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -166,7 +160,6 @@ import Button from '../components/Button.astro';
             </svg>
             <span class="card-visual-label">eCart V3 — Rail system schematic</span>
           </div>
-          <span class="card-link">LOGO!MAT eCart entdecken <span class="card-arrow">→</span></span>
         </a>
 
         <a class="product-card" href="/produkte/friktionsrollenfoerderer" data-reveal data-delay="1">
@@ -440,13 +433,26 @@ import Button from '../components/Button.astro';
   }
   .hero-bg {
     position: absolute;
-    inset: 0;
-    /* blueprint scene at native pixel scale, pinned right; the surrounding
-       surface is the same paper color, so margins are seamless. Left fade
-       is baked into the alpha. */
+    /* blueprint scene at native pixel scale (1024 x 839), pinned right and
+       centred. The layer is boxed to the image so the sheet frame on its top,
+       right and bottom edges can be feathered out; the left fade is baked
+       into the alpha. */
+    top: 50%;
+    right: 0;
+    width: 1024px;
+    height: 839px;
+    transform: translateY(-50%);
     background: url('/images/hero-blueprint.webp') right center / auto no-repeat;
     opacity: 0.9;
     pointer-events: none;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent, black 9%, black 88%, transparent),
+      linear-gradient(to left, transparent, black 7%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to bottom, transparent, black 9%, black 88%, transparent),
+      linear-gradient(to left, transparent, black 7%);
+    mask-composite: intersect;
   }
   .hero-fade {
     position: absolute;
@@ -509,7 +515,7 @@ import Button from '../components/Button.astro';
     line-height: 1.65;
     margin-bottom: var(--space-10);
   }
-  .hero-ctas { display: flex; gap: var(--space-3); margin-bottom: var(--space-16); flex-wrap: wrap; }
+  .hero-ctas { display: flex; gap: var(--space-3); flex-wrap: wrap; }
   .hero-stats {
     display: flex;
     gap: var(--space-8);
@@ -571,7 +577,7 @@ import Button from '../components/Button.astro';
   .trust-logo:hover { opacity: 0.55; }
 
   /* ───── 3. PROOF ───── */
-  .proof-alt { background: var(--color-bg); padding: 160px 0; }
+  .proof-alt { background: var(--color-bg); padding: var(--space-32) 0; }
   .proof-alt-strip {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -605,13 +611,18 @@ import Button from '../components/Button.astro';
     color: var(--color-muted);
     line-height: 1.5;
   }
-  .proof-alt-bottom { max-width: 760px; }
+  .proof-alt-bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--space-16);
+    align-items: start;
+  }
   .proof-headline {
     font-family: var(--font-heading);
     font-size: clamp(36px, 3.5vw, 52px);
     font-weight: 600;
     line-height: 1.05;
-    margin-bottom: var(--space-5);
+    text-wrap: balance;
   }
   .proof-body {
     font-size: var(--font-size-body-sm);
@@ -621,7 +632,7 @@ import Button from '../components/Button.astro';
   }
 
   /* ───── 4. PRODUCTS ───── */
-  .products { background: var(--color-surface); padding: 160px 0; }
+  .products { background: var(--color-surface); padding: var(--space-32) 0; }
   .products-header {
     display: flex;
     justify-content: space-between;
@@ -670,7 +681,7 @@ import Button from '../components/Button.astro';
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
-  .product-card.featured { grid-row: span 2; display: flex; flex-direction: column; }
+  .product-card.featured { grid-row: span 2; display: flex; flex-direction: column; padding-bottom: 0; }
   .card-tag {
     font-size: var(--font-size-eyebrow);
     font-weight: 700;
@@ -731,11 +742,12 @@ import Button from '../components/Button.astro';
     padding-top: var(--space-5);
   }
   .card-arrow { transition: transform var(--duration-short) ease; display: inline-block; }
+  .card-link-featured { margin-top: 0; }
   .product-card:hover .card-arrow { transform: translateX(8px); }
   .card-visual {
     flex: 1;
-    min-height: 180px;
-    margin: var(--space-6) -44px -44px;
+    min-height: 240px;
+    margin: var(--space-6) -44px 0;
     background: linear-gradient(160deg, var(--color-surface) 0%, var(--color-border) 100%);
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     position: relative;
@@ -764,7 +776,7 @@ import Button from '../components/Button.astro';
   }
 
   /* ───── 4b. PLAN · BUILD · RUN ───── */
-  .lifecycle { background: var(--color-bg); padding: 160px 0; }
+  .lifecycle { background: var(--color-bg); padding: var(--space-32) 0; }
   .lifecycle-header { margin-bottom: var(--space-16); max-width: 720px; }
   .lifecycle-eyebrow {
     font-family: var(--font-mono);
@@ -923,7 +935,7 @@ import Button from '../components/Button.astro';
   .why-detail strong { color: var(--dark-text-strong); font-weight: 600; }
 
   /* ───── 6. INDUSTRIES ───── */
-  .industries { background: var(--color-bg); padding: 160px 0; }
+  .industries { background: var(--color-bg); padding: var(--space-32) 0; }
   .industries-header { margin-bottom: var(--space-16); }
   .industries-header h2 {
     font-family: var(--font-heading);
@@ -994,7 +1006,7 @@ import Button from '../components/Button.astro';
   .industry-row.featured:hover .industry-num { color: var(--color-accent); }
 
   /* ───── 7. TECH ───── */
-  .tech-band { background: var(--color-surface); padding: 160px 0; }
+  .tech-band { background: var(--color-surface); padding: var(--space-32) 0; }
   .tech-band-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1112,6 +1124,7 @@ import Button from '../components/Button.astro';
     .tech-comparison { overflow-x: auto; }
     .comparison-header, .comparison-row { min-width: 460px; }
     .proof-alt-strip { grid-template-columns: 1fr 1fr; gap: var(--space-10) 0; }
+    .proof-alt-bottom { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-5); }
     .proof-alt-item:nth-child(2) { border-right: none; }
     .proof-alt-item:nth-child(3),
     .proof-alt-item:nth-child(4) { border-top: 1px solid var(--color-border); padding-top: var(--space-8); }
