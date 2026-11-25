@@ -133,6 +133,37 @@ export interface FAQ {
   answer: string;
 }
 
+/** Article JSON-LD. A date known only by year is emitted as the year (ISO 8601 reduced
+ * precision), so the markup never claims a day nobody knows. */
+export function articleSchema(a: {
+  title: string;
+  path: string;
+  description?: string;
+  publishedAt?: string;
+  publishedAtPrecision?: 'day' | 'year';
+  image?: string;
+  locale: Locale;
+}) {
+  const date = a.publishedAt
+    ? a.publishedAtPrecision === 'year'
+      ? a.publishedAt.slice(0, 4)
+      : a.publishedAt.slice(0, 10)
+    : undefined;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${CANONICAL_URL}${a.path}#article`,
+    headline: a.title,
+    ...(a.description ? { description: a.description } : {}),
+    ...(date ? { datePublished: date } : {}),
+    ...(a.image ? { image: a.image } : {}),
+    inLanguage: a.locale,
+    mainEntityOfPage: `${CANONICAL_URL}${a.path}`,
+    author: { '@id': `${CANONICAL_URL}/#organization` },
+    publisher: { '@id': `${CANONICAL_URL}/#organization` },
+  };
+}
+
 export function faqSchema(items: FAQ[]) {
   return {
     '@context': 'https://schema.org',

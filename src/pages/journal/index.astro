@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SanityImage from '../../components/SanityImage.astro';
+import { getAllArticles } from '../../sanity/queries';
+import { formatArticleDate, articleDateAttr } from '../../lib/article';
+
+const articles = await getAllArticles('de');
+const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Journal' }];
+---
+
+<BaseLayout
+  title="Journal — KRUPS Automation"
+  description="Produktneuheiten und Technik rund um LOGO!MAT eCart und schienengeführte Fördersysteme von KRUPS Automation."
+  locale="de"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <PageHeader
+      title="Journal"
+      lede="Produktneuheiten, Komponenten und Technik aus der Entwicklung von LOGO!MAT eCart und unseren Fördersystemen."
+    />
+
+    {articles.length === 0 ? (
+      <div class="empty-state">
+        <p>Die ersten Beiträge werden derzeit vorbereitet. <a href="/kontakt">Kontakt</a></p>
+      </div>
+    ) : (
+      <ol class="article-list">
+        {articles.map((a) => (
+          <li>
+            <a class="article-row" href={`/journal/${a.slug.current}`}>
+              <time class="article-date" datetime={articleDateAttr(a.publishedAt, a.publishedAtPrecision)}>
+                {formatArticleDate(a.publishedAt, a.publishedAtPrecision)}
+              </time>
+              <div class="article-text">
+                <h2>{a.title}</h2>
+                {a.summary && <p>{a.summary}</p>}
+              </div>
+              {a.heroImage?.asset && (
+                <SanityImage
+                  source={a.heroImage}
+                  alt=""
+                  width={240}
+                  height={160}
+                  sizes="240px"
+                  class="article-thumb"
+                />
+              )}
+            </a>
+          </li>
+        ))}
+      </ol>
+    )}
+  </Section>
+</BaseLayout>
+
+<style>
+  .article-list { list-style: none; padding: 0; margin-top: var(--space-10); }
+  .article-row {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr) 240px;
+    gap: var(--space-10);
+    padding: var(--space-8) 0;
+    border-bottom: var(--border-hairline);
+    color: var(--color-text);
+    align-items: start;
+  }
+  .article-row:hover h2 { color: var(--color-accent); }
+  .article-date {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-label);
+    color: var(--color-muted);
+    padding-top: var(--space-1);
+  }
+  .article-text h2 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-card-title);
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: var(--space-2);
+    transition: color var(--duration-short);
+  }
+  .article-text p {
+    font-size: var(--font-size-specs);
+    color: var(--color-muted);
+    line-height: 1.6;
+    max-width: 62ch;
+  }
+  .article-row :global(.article-thumb) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+  .empty-state {
+    margin-top: var(--space-10);
+    padding: var(--space-12);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-muted);
+    text-align: center;
+  }
+  .empty-state a { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 4px; }
+  @media (max-width: 900px) {
+    .article-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
+    .article-row :global(.article-thumb) { display: none; }
+  }
+</style>

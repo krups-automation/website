@@ -1,0 +1,159 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SanityImage from '../../components/SanityImage.astro';
+import Button from '../../components/Button.astro';
+import { getAllArticleSlugs, getArticleBySlug } from '../../sanity/queries';
+import { articleSchema } from '../../lib/schema-org';
+import { imageUrl } from '../../sanity/image';
+import { articleBodyHtml, formatArticleDate, articleDateAttr } from '../../lib/article';
+
+export const getStaticPaths = (async () => {
+  const articles = await getAllArticleSlugs('de');
+  return articles.map(({ slug }) => ({ params: { slug } }));
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const article = slug ? await getArticleBySlug(slug, 'de') : null;
+
+if (!article) {
+  // Paths come from getStaticPaths, so a miss means CMS/data drift: fail the build
+  // instead of emitting a redirect page that crawlers treat as a soft 404.
+  throw new Error(`No article found for ${Astro.url.pathname}`);
+}
+
+const path = `/journal/${article.slug.current}`;
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Journal', href: '/journal' },
+  { label: article.title },
+];
+const bodyHtml = articleBodyHtml(article.body);
+const description = article.metaDescription ?? article.summary;
+const jsonLd = [
+  articleSchema({
+    title: article.title,
+    path,
+    description,
+    publishedAt: article.publishedAt,
+    publishedAtPrecision: article.publishedAtPrecision,
+    image: article.heroImage?.asset ? imageUrl(article.heroImage, 1200, 'jpg') : undefined,
+    locale: 'de',
+  }),
+];
+---
+
+<BaseLayout
+  title={article.metaTitle ?? `${article.title} — KRUPS Automation`}
+  description={description}
+  locale="de"
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
+>
+  <div class="page-spacer"></div>
+
+  <Section surface="paper" narrow>
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="article-header">
+      {article.publishedAt && (
+        <time class="article-date" datetime={articleDateAttr(article.publishedAt, article.publishedAtPrecision)}>
+          {formatArticleDate(article.publishedAt, article.publishedAtPrecision)}
+        </time>
+      )}
+      <h1>{article.title}</h1>
+      {article.summary && <p class="lede">{article.summary}</p>}
+    </header>
+
+    {article.heroImage?.asset && (
+      <SanityImage
+        source={article.heroImage}
+        alt={article.heroImage.alt ?? ''}
+        width={960}
+        sizes="(min-width: 900px) 720px, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        class="article-hero"
+      />
+    )}
+
+    {bodyHtml && <div class="article-body" set:html={bodyHtml} />}
+
+    <footer class="article-footer">
+      <a class="back" href="/journal">← Alle Beiträge</a>
+      <Button href="/kontakt" variant="primary">Projekt besprechen →</Button>
+    </footer>
+  </Section>
+</BaseLayout>
+
+<style>
+  .article-header { margin: var(--space-6) 0 var(--space-8); }
+  .article-date {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-label);
+    color: var(--color-muted);
+    margin-bottom: var(--space-3);
+  }
+  .article-header h1 {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
+    text-wrap: balance;
+    margin-bottom: var(--space-4);
+  }
+  .article-header .lede { max-width: 62ch; }
+  :global(.article-hero) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-10);
+  }
+
+  .article-body { max-width: 68ch; }
+  .article-body :global(p) { margin-bottom: var(--space-4); line-height: 1.7; white-space: pre-line; }
+  .article-body :global(h2) { margin: var(--space-10) 0 var(--space-4); font-size: var(--font-size-h3); }
+  .article-body :global(h3) { margin: var(--space-8) 0 var(--space-3); font-size: var(--font-size-card-title); }
+  .article-body :global(ul),
+  .article-body :global(ol) { margin: 0 0 var(--space-6) var(--space-6); line-height: 1.7; }
+  .article-body :global(li) { margin-bottom: var(--space-1); }
+  .article-body :global(a) {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 4px;
+  }
+  .article-body :global(.article-figure) { margin: var(--space-8) 0; }
+  .article-body :global(.article-figure img) { width: 100%; height: auto; border-radius: var(--radius-md); }
+  .article-body :global(figcaption) { font-size: var(--font-size-label); color: var(--color-muted); margin-top: var(--space-2); }
+  .article-body :global(.callout) {
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    padding: var(--space-4) var(--space-6);
+    margin: 0 0 var(--space-8);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+  .article-body :global(.callout p) { margin-bottom: 0; }
+  .article-body :global(.callout-title) {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-eyebrow);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: var(--space-1) !important;
+  }
+
+  .article-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: var(--border-hairline);
+  }
+  .article-footer .back { color: var(--color-muted); }
+  .article-footer .back:hover { color: var(--color-text); }
+</style>

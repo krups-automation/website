@@ -507,13 +507,16 @@ export interface Article {
   heroImage?: SanityImage;
   author?: { _id: string; name: string; role?: string; photo?: SanityImage };
   publishedAt?: string;
+  publishedAtPrecision?: 'day' | 'year';
+  legacyUrl?: string;
   pillar?: { _id: string; name: string; slug: { current: string } };
   tags?: Array<{ _id: string; name: string; slug: { current: string } }>;
   body?: unknown[];
 }
 
 const ARTICLE_PROJECTION = `{
-  _id, title, slug, metaTitle, metaDescription, summary, heroImage, publishedAt, body,
+  _id, title, slug, metaTitle, metaDescription, summary, heroImage, publishedAt,
+  publishedAtPrecision, legacyUrl, body,
   "author": author->{_id, name, role, photo},
   "pillar": pillar->{_id, name, slug},
   "tags": tags[]->{_id, name, slug}

@@ -71,6 +71,32 @@ export const article = defineType({
       group: 'meta',
     }),
     defineField({
+      name: 'publishedAtPrecision',
+      title: 'Datumsgenauigkeit',
+      description:
+        'Tag: das Datum ist bekannt. Jahr: nur das Jahr ist bekannt (aus Joomla übernommen); die Seite zeigt dann nur das Jahr.',
+      type: 'string',
+      group: 'meta',
+      options: {
+        list: [
+          { title: 'Tag', value: 'day' },
+          { title: 'Nur Jahr', value: 'year' },
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'day',
+    }),
+    defineField({
+      name: 'legacyUrl',
+      title: 'Alte Joomla-URL',
+      description: 'Woher der Beitrag stammt. Die alte URL leitet auf diesen Beitrag um.',
+      type: 'string',
+      group: 'meta',
+      readOnly: true,
+      hidden: ({ value }) => !value,
+    }),
+    defineField({
       name: 'pillar',
       title: 'Content pillar',
       type: 'reference',

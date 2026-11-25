@@ -5,6 +5,7 @@ import {
   getAllIndustrySlugs,
   getAllServiceSlugs,
   getAllPageSlugs,
+  getAllArticleSlugs,
 } from '../sanity/queries';
 import { CANONICAL_URL } from '../lib/schema-org';
 
@@ -43,13 +44,14 @@ function enOnlyEntry(path: string, priority: string, changefreq: string): string
 }
 
 export const GET: APIRoute = async () => {
-  const [products, families, industries, services, dePages, enPages] = await Promise.all([
+  const [products, families, industries, services, dePages, enPages, articles] = await Promise.all([
     getAllProducts('de'),
     getAllProductFamilies('de'),
     getAllIndustrySlugs('de'),
     getAllServiceSlugs('de'),
     getAllPageSlugs('de'),
     getAllPageSlugs('en'),
+    getAllArticleSlugs('de'),
   ]);
 
   const enPageSlugs = new Set(enPages.map((p) => p.slug));
@@ -86,6 +88,11 @@ export const GET: APIRoute = async () => {
     .filter((s) => s.slug)
     .map((s) => urlEntry(`/leistungen/${s.slug}`, '0.7', 'monthly'));
 
+  // Journal: the index only once there is something in it
+  const articleUrls = articles.length
+    ? [urlEntry('/journal', '0.7', 'weekly'), ...articles.map((a) => urlEntry(`/journal/${a.slug}`, '0.6', 'yearly'))]
+    : [];
+
   // Generic CMS pages: pair DE+EN by slug if both exist, otherwise include each standalone
   const pairedDeSlugs = new Set<string>();
   const genericPageUrls: string[] = [];
@@ -109,7 +116,7 @@ export const GET: APIRoute = async () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${[...staticUrls, ...familyUrls, ...productUrls, ...industryUrls, ...serviceUrls, ...genericPageUrls].join('\n')}
+${[...staticUrls, ...familyUrls, ...productUrls, ...industryUrls, ...serviceUrls, ...articleUrls, ...genericPageUrls].join('\n')}
 </urlset>`;
 
   return new Response(xml, {
